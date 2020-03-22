@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-    {{form}}
+   <form method="post" action="{% url 'type:register' %}"  class="form-group">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p>there are error in form</p>
+        {% endif %}
+
+        {{form}}
+
+
+        <input type="submit" value="register" class="btn btn-success">
+
+    </form>
 </body>
 </html>

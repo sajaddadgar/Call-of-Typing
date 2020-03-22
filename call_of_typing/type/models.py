@@ -12,7 +12,7 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def update_profile(sender, instance, created, *args, **kwargs):
             if created:
-                Profile.objects.create(instance)
+                Profile.objects.create(user=instance)
 
             instance.profile.save()
 
