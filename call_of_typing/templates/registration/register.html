@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="../../static/css/register.css" />
     <!-- <title>Title</title> -->
 </head>
-<body>
     <h1> </h1>
     <!-- Sign up -->
     <div class="container register-form">
-        <div class="form">
+        <form method="post" action="{% url 'register' %}" class="form-group">
             <div class="note">
                 <p>Sign up</p>
             </div>
@@ -55,13 +54,14 @@
                             <input id="password_2" type="text" class="form-control" placeholder="Confirm Password *"
                                 value="" />
                         </div>
+
                     </div>
                 </div>
                 <center>
                     <button id="submit_btn" type="button" class="btnSubmit">Submit</button>
                 </center>
             </div>
-        </div>
+        </form>
     </div>
 
 </body>

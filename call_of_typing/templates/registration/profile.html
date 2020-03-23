@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <form method="post" action="{% url 'edit' %}">
+    <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         username:
         <input type="text" value="{{ user.username }}" readonly>
@@ -20,7 +20,7 @@
         email:
         <input type="text" value="{{ user.email }}" readonly>
         <br>
-        <input type="submit" value="edit">
+        <input type="submit" value="{{next}}">
     </form>
 
 </body>
