@@ -1,0 +1,21 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>log</title>
+</head>
+<body>
+
+    <form method="post" action="{% url 'signin' %}">
+        {% csrf_token %}
+        username:
+        <input type="text" name="username">
+        <br>
+        password:
+        <input type="password" name="passw">
+        <br>
+        <input type="submit" value="login">
+    </form>
+
+</body>
+</html>
