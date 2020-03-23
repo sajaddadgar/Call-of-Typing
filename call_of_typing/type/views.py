@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from .form import RegisterForm
-
+from django.contrib.auth.models import User
 # Create your views here.
+
+# Get authenticated user: request.user
+# Get profile of user: request.user.profile.max_point
 
 
 def home(request):
@@ -30,4 +33,19 @@ def log_out(request):
         logout(request)
 
     return redirect('/')
+
+
+def user_profile(request):
+    stuff_for_front = {
+        'user': request.user
+    }
+    return render(request, 'registration/profile.html', stuff_for_front)
+
+
+def edit_profile(request):
+    user = request.user
+    user.first_name = request.POST['firstName']
+    user.last_name = request.POST['lastName']
+    user.save()
+    return redirect('profile')
 

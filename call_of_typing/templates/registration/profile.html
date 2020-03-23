@@ -1,0 +1,27 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+</head>
+<body>
+
+    <form method="post" action="{% url 'edit' %}">
+        {% csrf_token %}
+        username:
+        <input type="text" value="{{ user.username }}" readonly>
+        <br>
+        first name:
+        <input type="text" value="{{ user.first_name }}" name="firstName">
+        <br>
+        last name:
+        <input type="text" value="{{ user.last_name }}" name="lastName">
+        <br>
+        email:
+        <input type="text" value="{{ user.email }}" readonly>
+        <br>
+        <input type="submit" value="edit">
+    </form>
+
+</body>
+</html>

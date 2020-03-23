@@ -19,9 +19,16 @@
 <body>
 
 
-
+{% if user.is_authenticated %}
+<a href="{% url 'profile' %}">profile</a>
+<br>
+<a href="{% url 'logout' %}">logout</a>
+{% else %}
 <a href="{% url 'login' %}">login</a>
-<a href="{% url 'type:register' %}">sign up</a>
+<br>
+<a href="{% url 'register' %}">sign up</a>
+{% endif %}
+
 
 </body>
 
