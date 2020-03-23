@@ -2,20 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/register.css" />
+    <!-- <title>Title</title> -->
 </head>
 <body>
-   <form method="post" action="{% url 'type:register' %}"  class="form-group">
-        {% csrf_token %}
-        {% if form.errors %}
-            <p>there are error in form</p>
-        {% endif %}
+    <h1> </h1>
+    <!-- Sign up -->
+    <div class="container register-form">
+        <div class="form">
+            <div class="note">
+                <p>Sign up</p>
+            </div>
 
-        {{form}}
+            <div class="form-content">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <input id="first_name" type="text" class="form-control" placeholder="First Name *"
+                                value="" />
+                        </div>
+
+                        <div class="form-group">
+                            <input id="email_add" type="text" class="form-control" placeholder="Email address *"
+                                value="" />
+                        </div>
+                        <div class="form-group">
+                            <input id="password_1" type="text" class="form-control" placeholder="Your Password *"
+                                value="" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
 
 
-        <input type="submit" value="register" class="btn btn-success">
+                        <div class="form-group">
+                            <input id="last_name" type="text" class="form-control" placeholder="Last Name *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input id="username" type="text" class="form-control" placeholder="Username *" value="" />
+                        </div>
 
-    </form>
+                        <div class="form-group">
+                            <input id="password_2" type="text" class="form-control" placeholder="Confirm Password *"
+                                value="" />
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <button id="submit_btn" type="button" class="btnSubmit">Submit</button>
+                </center>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
