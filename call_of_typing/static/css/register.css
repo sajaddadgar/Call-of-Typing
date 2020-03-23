@@ -1,17 +1,22 @@
 .note
 {
+    margin-top: 5%;
     text-align: center;
     height: 80px;
-    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    background: #3405db;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     color: #fff;
     font-weight: bold;
     line-height: 80px;
 }
 .form-content
 {
+    
     padding: 5%;
     border: 1px solid #ced4da;
     margin-bottom: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    background: -webkit-linear-gradient(bottom, #08d7e6, #3405db);
 }
 .form-control{
     border-radius:1.5rem;
