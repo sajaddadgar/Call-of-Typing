@@ -60,6 +60,10 @@ def signin(request):
     username = request.POST['username']
     passw = request.POST['passw']
     user = authenticate(username=username, password=passw)
+    if user is None:
+        stuff_for_front = {'error': "error is occurred"}
+        return render(request, 'registration/newLogin.html', stuff_for_front)
+
     login(request, user)
-    return HttpResponseRedirect(reverse('type:home'))
+    return redirect('/')
 

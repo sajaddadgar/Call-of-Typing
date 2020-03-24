@@ -6,8 +6,11 @@
 </head>
 <body>
 
+    {% if error %}
+        <p> sth is wrong</p>
+    {% endif %}
     <form method="post" action="{% url 'signin' %}">
-        {% csrf_token %}
+       {% csrf_token %}
         username:
         <input type="text" name="username">
         <br>
