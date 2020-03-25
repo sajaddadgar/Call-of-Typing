@@ -58,8 +58,8 @@ def user_auth(request):
 
 def signin(request):
     username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
+    passw = request.POST['passw']
+    user = authenticate(username=username, password=passw)
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
 

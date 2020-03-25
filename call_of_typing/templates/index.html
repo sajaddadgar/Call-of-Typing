@@ -20,7 +20,7 @@
 <header>
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand myHover" href="#">Call Of Typing</a>
+            <a class="navbar-brand myHover" href="{% url 'type:home' %}">Call Of Typing</a>
             {% if user.is_authenticated %}
             <div style="color:white">@{{user.username}}</div>
             {% endif %}
