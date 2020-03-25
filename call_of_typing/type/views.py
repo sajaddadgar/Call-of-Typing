@@ -53,13 +53,13 @@ def edit_profile(request):
 
 
 def user_auth(request):
-    return render(request, 'registration/newLogin.html')
+    return render(request, 'registration/login.html')
 
 
 def signin(request):
     username = request.POST['username']
-    passw = request.POST['passw']
-    user = authenticate(username=username, password=passw)
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
 
