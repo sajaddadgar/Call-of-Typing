@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Acme|Lobster|Patua+One|Rubik|Sniglet");
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -369,4 +371,8 @@ footer .column i + i {
 
 .myHover:hover {
     color: #1a1a3a;
+}
+
+.centerButton{
+  margin-top: 200px;
 }
