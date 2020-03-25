@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
+from .models import Profile
 # Create your views here.
 
 # Get authenticated user: request.user
