@@ -1,7 +1,7 @@
 .login-container{
     margin-top: 5%;
     margin-bottom: 5%;
-    margin-left: 30%;
+    
 }
 
 
@@ -9,6 +9,7 @@
     padding: 5%;
     background: -webkit-linear-gradient(bottom, #08d7e6, #3405db);
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 23%;
 }
 .login-form-2 h3{
     text-align: center;
