@@ -58,9 +58,11 @@ def change_password_page(request):
 
 def edit_password(request):
     user = request.user
-    user.password = handler.hash(request.POST['newpass'])
-    user.save()
-    return HttpResponseRedirect(reverse('type:home'))
+    if handler.verify(request.POST['oldpass'], user.password):
+        if request.POST['newpass'] == request.POST['confirmpass']:
+            user.password = handler.hash(request.POST['newpass'])
+            user.save()
+            return HttpResponseRedirect(reverse('type:home'))
 
 def user_auth(request):
     return render(request, 'registration/login.html')
