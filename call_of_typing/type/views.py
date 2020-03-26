@@ -75,6 +75,7 @@ def edit_password(request):
         stuff_for_front = {'error': 'Error occurred'}
         return render(request, 'registration/ChangePassword.html', stuff_for_front)
 
+
 def user_auth(request):
     return render(request, 'registration/login.html')
 
@@ -89,3 +90,5 @@ def signin(request):
 
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
+
+

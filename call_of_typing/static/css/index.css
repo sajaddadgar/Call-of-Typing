@@ -23,7 +23,8 @@ section {
 
 header a {
     font-family: var(--Sniglet-font);
-    font-size: 0.9em;
+    font-size: 1em;
+    font-weight: bold;
     color: whitesmoke;
 }
 
