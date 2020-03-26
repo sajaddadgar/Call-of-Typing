@@ -5,6 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
 from passlib.hash import django_pbkdf2_sha256 as handler
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -18,17 +19,19 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
+        password = request.POST['pass'].lower()
+        if request.POST['pass'] == request.POST['confpass'] and len(request.POST['pass']) > 7\
+                and request.POST['firstname'] != "" and request.POST['lastname'] != "" and request.POST['email'] != ""\
+                and request.POST['username'] != "" and password.islower():
+            User.objects.create_user(username=request.POST['username'], password=request.POST['pass'],
+                                 first_name=request.POST['firstname'], last_name=request.POST['lastname'],
+                                  email=request.POST['email'])
+            return redirect('/')
+        else:
+            stuff_for_front = {'error': 'Error occurred'}
+            return render(request, 'registration/register.html', stuff_for_front)
 
-        return redirect('/')
-    else:
-        form = RegisterForm()
-    stuff_for_front = {
-        'form': form
-    }
-    return render(request, 'registration/register.html', stuff_for_front)
+    return render(request, 'registration/register.html')
 
 
 def log_out(request):
@@ -58,11 +61,19 @@ def change_password_page(request):
 
 def edit_password(request):
     user = request.user
+    password = request.POST['newpass'].lower
     if handler.verify(request.POST['oldpass'], user.password):
-        if request.POST['newpass'] == request.POST['confirmpass']:
+        if request.POST['newpass'] == request.POST['confirmpass'] and len(password) > 7\
+                and password.islower():
             user.password = handler.hash(request.POST['newpass'])
             user.save()
             return HttpResponseRedirect(reverse('type:home'))
+        else:
+            stuff_for_front = {'error': 'Error occurred'}
+            return render(request, 'registration/ChangePassword.html', stuff_for_front)
+    else:
+        stuff_for_front = {'error': 'Error occurred'}
+        return render(request, 'registration/ChangePassword.html', stuff_for_front)
 
 def user_auth(request):
     return render(request, 'registration/login.html')

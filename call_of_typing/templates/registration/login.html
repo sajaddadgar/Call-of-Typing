@@ -23,7 +23,7 @@
         <div class="col-md-6 login-form-2">
             <h3>Login</h3>
             {% if error %}
-            <h2> sth is wrong </h2>
+                <script> alert('sth is wrong') </script>
             {% endif %}
 
             <form method="post" action="{% url 'signin' %}">

@@ -13,57 +13,62 @@
     <!-- <title>Title</title> -->
 </head>
 <h1></h1>
+{% if error %}
+            <script> alert('sth is wrong') </script>
+{% endif %}
+<script>alert('your password must contain at least 8 characters, letters included')</script>
 <!-- Sign up -->
 <div class="container register-form">
     <form method="post" action="{% url 'register' %}" class="form-group">
         {% csrf_token %}
 
-        {{ form }}
-        <!--<div class="note">-->
-        <!--<p>Sign up</p>-->
-        <!--</div>-->
+<!--        {{ form }}-->
 
-        <!--<div class="form-content">-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-6">-->
+        <div class="note">
+        <p>Sign up</p>
+        </div>
 
-        <!--<div class="form-group">-->
-        <!--<input id="first_name" type="text" class="form-control" placeholder="First Name *"-->
-        <!--value="" />-->
-        <!--</div>-->
+        <div class="form-content">
+        <div class="row">
+        <div class="col-md-6">
 
-        <!--<div class="form-group">-->
-        <!--<input id="email_add" type="text" class="form-control" placeholder="Email address *"-->
-        <!--value="" />-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-        <!--<input id="password_1" type="text" class="form-control" placeholder="Your Password *"-->
-        <!--value="" />-->
-        <!--</div>-->
+        <div class="form-group">
+        <input id="first_name" type="text" class="form-control" placeholder="First Name *"
+        value="" name="firstname" />
+        </div>
 
-        <!--</div>-->
+        <div class="form-group">
+        <input id="username" type="text" class="form-control" placeholder="Username *"
+        value="" name="username"/>
+        </div>
+        <div class="form-group">
+        <input id="password_1" type="password" class="form-control" placeholder="Your Password *"
+        value="" name="pass"/>
+        </div>
 
-        <!--<div class="col-md-6">-->
+        </div>
+
+        <div class="col-md-6">
 
 
-        <!--<div class="form-group">-->
-        <!--<input id="last_name" type="text" class="form-control" placeholder="Last Name *" value="" />-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-        <!--<input id="username" type="text" class="form-control" placeholder="Username *" value="" />-->
-        <!--</div>-->
+        <div class="form-group">
+        <input id="last_name" type="text" class="form-control" placeholder="Last Name *" value="" name="lastname"/>
+        </div>
+        <div class="form-group">
+        <input id="email" type="text" class="form-control" placeholder="email *" value="" name="email"/>
+        </div>
 
-        <!--<div class="form-group">-->
-        <!--<input id="password_2" type="text" class="form-control" placeholder="Confirm Password *"-->
-        <!--value="" />-->
-        <!--</div>-->
+        <div class="form-group">
+        <input id="password_2" type="password" class="form-control" placeholder="Confirm Password *"
+        value="" name="confpass"/>
+        </div>
 
-        <!--</div>-->
-        <!--</div>-->
+        </div>
+        </div>
         <center>
             <button id="submit_btn" type="submit" class="btnSubmit">Submit</button>
         </center>
-        <!--</div>-->
+        </div>
     </form>
 </div>
 
