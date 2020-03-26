@@ -23,7 +23,6 @@ urlpatterns = [
     path('accounts/logout/', V.log_out, name='logout'),
     path('accounts/register/', V.register, name='register'),
     path('accounts/profile/', V.user_profile, name='profile'),
-    path('accounts/profile/', V.edit_profile, name='EditProfile'),
     path('accounts/edit/', V.edit_profile, name='edit'),
     path('accounts/authentication/', V.user_auth, name='user_auth'),
     path('accounts/signin/', V.signin, name='signin'),
