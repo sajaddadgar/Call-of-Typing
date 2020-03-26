@@ -61,7 +61,7 @@ def change_password_page(request):
 
 def edit_password(request):
     user = request.user
-    password = request.POST['newpass'].lower
+    password = str(request.POST['newpass']).lower()
     if handler.verify(request.POST['oldpass'], user.password):
         if request.POST['newpass'] == request.POST['confirmpass'] and len(password) > 7\
                 and password.islower():
