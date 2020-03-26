@@ -50,8 +50,9 @@ def edit_profile(request):
     user = request.user
     user.first_name = request.POST['firstName']
     user.last_name = request.POST['lastName']
+    user.password = request.POST['password']
     user.save()
-    return redirect('profile')
+    return HttpResponseRedirect(reverse('type:home'))
 
 
 def user_auth(request):

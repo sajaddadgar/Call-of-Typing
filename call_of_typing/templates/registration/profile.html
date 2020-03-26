@@ -5,11 +5,27 @@
     <meta charset="UTF-8">
     <title>profile</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="../../static/css/profile.css" />
 </head>
+
+<header>
+          <div align="right">
+                        <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی</a>
+          </div>
+          <div align="right">
+                        <a class="nav-link" href="{% url 'logout' %}">خروج</a>
+          </div>
+
+</header>
 <body>
 
 <!--    <form method="post" action="{% url 'edit' %}">-->
@@ -105,6 +121,14 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <input type="text" value="{{ user.last_name }}" name="lastName">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Password</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" value="{{ user.password }}" name="password">
                                             </div>
                                         </div>
                                         <div class="row">
