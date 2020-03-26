@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
-from .models import Profile
+
+
 # Create your views here.
 
 # Get authenticated user: request.user
@@ -61,6 +62,9 @@ def signin(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
+    if user is None:
+        stuff_for_front = {'error': 'Error occurred'}
+        return render(request, 'registration/login.html', stuff_for_front)
+
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
-
