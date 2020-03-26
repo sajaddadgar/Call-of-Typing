@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
-from passlib.hash import pbkdf2_sha256
+from passlib.hash import django_pbkdf2_sha256 as handler
 
 
 # Create your views here.
@@ -51,10 +51,11 @@ def edit_profile(request):
     user = request.user
     user.first_name = request.POST['firstName']
     user.last_name = request.POST['lastName']
-    user.password = request.POST['password']
-    user.password = pbkdf2_sha256.encrypt('user.password',rounds = 12000, salt_size = 32)
+    user.password = handler.hash(request.POST['newpass'])
+    # ba in mituni check koni ke password encrypt shode ba string, yekie ya na
+    # print(handler.verify('123', h))
     user.save()
-    return HttpResponseRedirect(reverse('type:home'))
+    return render(request, 'registration/profile.html')
 
 
 def user_auth(request):

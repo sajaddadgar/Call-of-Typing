@@ -26,6 +26,5 @@ urlpatterns = [
     path('accounts/edit/', V.edit_profile, name='edit'),
     path('accounts/authentication/', V.user_auth, name='user_auth'),
     path('accounts/signin/', V.signin, name='signin'),
-    #path('accounts/', include('django.contrib.auth.urls')),
 
 ]
