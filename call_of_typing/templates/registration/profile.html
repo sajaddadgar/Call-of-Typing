@@ -20,6 +20,8 @@
 <header>
           <div align="right">
                         <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+                        {% csrf_token %}
+                        <a class="nav-link" href="{% url 'change_password'%}" style="color: white">تغییر رمز</a>
           </div>
 
 </header>
@@ -120,14 +122,14 @@
                                                 <input type="text" value="{{ user.last_name }}" name="lastName">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Password</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="password" placeholder="new password" name="newpass">
-                                            </div>
-                                        </div>
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-md-6">-->
+<!--                                                <label>Change Password</label>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-md-6">-->
+<!--                                                <input type="password" value="" name="password">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Email</label>
@@ -205,6 +207,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
 
 </body>

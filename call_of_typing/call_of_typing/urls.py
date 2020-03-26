@@ -24,6 +24,8 @@ urlpatterns = [
     path('accounts/register/', V.register, name='register'),
     path('accounts/profile/', V.user_profile, name='profile'),
     path('accounts/edit/', V.edit_profile, name='edit'),
+    path('accounts/editpassword/', V.edit_password, name='edit_password'),
+    path('accounts/changepassword/', V.change_password_page, name='change_password'),
     path('accounts/authentication/', V.user_auth, name='user_auth'),
     path('accounts/signin/', V.signin, name='signin'),
 

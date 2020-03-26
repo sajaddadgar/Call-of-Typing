@@ -6,7 +6,6 @@ from .form import RegisterForm
 from django.contrib.auth.models import User
 from passlib.hash import django_pbkdf2_sha256 as handler
 
-
 # Create your views here.
 
 # Get authenticated user: request.user
@@ -51,12 +50,17 @@ def edit_profile(request):
     user = request.user
     user.first_name = request.POST['firstName']
     user.last_name = request.POST['lastName']
-    user.password = handler.hash(request.POST['newpass'])
-    # ba in mituni check koni ke password encrypt shode ba string, yekie ya na
-    # print(handler.verify('123', h))
     user.save()
-    return render(request, 'registration/profile.html')
+    return HttpResponseRedirect(reverse('type:home'))
 
+def change_password_page(request):
+    return render(request, 'registration/ChangePassword.html')
+
+def edit_password(request):
+    user = request.user
+    user.password = handler.hash(request.POST['newpass'])
+    user.save()
+    return HttpResponseRedirect(reverse('type:home'))
 
 def user_auth(request):
     return render(request, 'registration/login.html')
