@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
+from passlib.hash import pbkdf2_sha256
 
 
 # Create your views here.
@@ -51,6 +52,7 @@ def edit_profile(request):
     user.first_name = request.POST['firstName']
     user.last_name = request.POST['lastName']
     user.password = request.POST['password']
+    user.password = pbkdf2_sha256.encrypt('user.password',rounds = 12000, salt_size = 32)
     user.save()
     return HttpResponseRedirect(reverse('type:home'))
 
