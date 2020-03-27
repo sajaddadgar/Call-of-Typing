@@ -4,53 +4,48 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/login.css"/>
+    <link rel="stylesheet" href="../../static/css/login.css" />
 
     <title>login</title>
 </head>
 
 <body>
 
-<div class="container login-container">
-    <div class="row">
+    <div class="container login-container">
+        <div class="row">
+            <div class="col-md-6 login-form-2">
+                <h3>Login</h3>
+                <form method="post" action="{% url 'signin' %}">
+                    {% csrf_token %}
+                    {% if error %}
+                    <div class="form-control alert alert-danger" role="alert">
+                        <center style="color: red;"> Username or password is incorrect, please try again</center>
+                    </div>
+                    <!-- <p style="margin-left:6px; color: red "> Username or password not correct</p> -->
+                    {% endif %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="">
+                    </div>
 
-        <div class="col-md-6 login-form-2">
-            <h3>Login</h3>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password" value="">
+                    </div>
 
+                    <div class="form-group">
+                        <center><input type="submit" class="btnSubmit" value="Login"></center>
+                    </div>
+                    <center><a href="{% url 'reset_password' %}" style="color: white">forget password?</a></center>
 
-            <form method="post" action="{% url 'signin' %}">
-                {% csrf_token %}
-                {% if error %}
-                <p style="margin-left:6px; color: red "> Username or password not correct</p>
-                {% endif %}
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" name="username" value="">
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="password" value="">
-                </div>
-
-                <div class="form-group">
-                    <center><input type="submit" class="btnSubmit" value="Login"></center>
-                </div>
-                <a href="{% url 'reset_password' %}" style="color: white">forget password?</a>
-            </form>
-
-
-
+                </form>
+            </div>
         </div>
-
     </div>
-
-</div>
-
 
 </body>
 
