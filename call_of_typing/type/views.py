@@ -16,6 +16,9 @@ from django.contrib.auth.models import User
 def home(request):
     return render(request, 'index.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -96,5 +99,6 @@ def signin(request):
 
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
+
 
 

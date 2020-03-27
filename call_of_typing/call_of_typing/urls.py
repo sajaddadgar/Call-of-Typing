@@ -29,6 +29,7 @@ urlpatterns = [
     path('accounts/changepassword/', V.change_password_page, name='change_password'),
     path('accounts/authentication/', V.user_auth, name='user_auth'),
     path('accounts/signin/', V.signin, name='signin'),
+    path('about/', V.about, name='about'),
 
     path('reset_password/',
          auth_views.PasswordResetView.as_view(template_name="registration/password_reset.html"),
