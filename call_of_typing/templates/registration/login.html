@@ -15,6 +15,12 @@
     <title>login</title>
 </head>
 
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+    </div>
+</header>
+
 <body>
 
     <div class="container login-container">
@@ -27,7 +33,6 @@
                     <div class="form-control alert alert-danger" role="alert">
                         <center style="color: red;"> Username or password is incorrect, please try again</center>
                     </div>
-                    <!-- <p style="margin-left:6px; color: red "> Username or password not correct</p> -->
                     {% endif %}
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Username" name="username" value="">

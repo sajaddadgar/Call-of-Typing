@@ -16,6 +16,13 @@
     <title>Register</title>
 </head>
 
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+    </div>
+</header>
+
 <div class="container register-form">
     <form method="post" action="{% url 'register' %}" class="form-group">
         {% csrf_token %}
@@ -25,6 +32,7 @@
 
         <div class=" col-md-6 form-content">
             <div class="row">
+
                 {% if error %}
                 <div class="form-control alert alert-danger" role="alert">
                     <center style="color: red;">Something went wrong, please try again</center>
