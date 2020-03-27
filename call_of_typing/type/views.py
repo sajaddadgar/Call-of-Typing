@@ -1,9 +1,11 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import RegisterForm
 from django.contrib.auth.models import User
+from .models import is_email_unique
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 
@@ -24,13 +26,17 @@ def register(request):
     if request.method == 'POST':
         password = request.POST['pass'].lower()
 
+
         if request.POST['pass'] == request.POST['confpass'] and len(request.POST['pass']) > 7\
                 and request.POST['firstname'] != "" and request.POST['lastname'] != "" and request.POST['email'] != ""\
                 and request.POST['username'] != "" and password.islower():
+            if is_email_unique(request.POST['email']):
+                User.objects.create_user(username=request.POST['username'], password=request.POST['pass'],
+                                         first_name=request.POST['firstname'], last_name=request.POST['lastname'],
+                                         email=request.POST['email'])
+            else:
+                raise ValidationError("Email already exists")
 
-            User.objects.create_user(username=request.POST['username'], password=request.POST['pass'],
-                                 first_name=request.POST['firstname'], last_name=request.POST['lastname'],
-                                  email=request.POST['email'])
             return redirect('/')
 
         else:
@@ -99,6 +105,12 @@ def signin(request):
 
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
+
+
+def test(request):
+    email = 'sajad.dadgar98@gmail.com'
+
+    print(RegisterForm.clean_email())
 
 
 

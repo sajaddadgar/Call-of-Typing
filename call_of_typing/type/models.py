@@ -18,9 +18,21 @@ class Profile(models.Model):
 
         instance.profile.save()
 
+
     def __str__(self):
         return self.user.username
 
 
+
+
 class OrdinaryText(models.Model):
     pass
+
+
+
+def is_email_unique(email):
+    email = email.lower()
+    for person in Profile.objects.all():
+        if person.user.email == email:
+            return False
+    return True
