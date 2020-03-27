@@ -22,13 +22,13 @@
 
         <div class="col-md-6 login-form-2">
             <h3>Login</h3>
-            {% if error %}
-                <script> alert('sth is wrong') </script>
-            {% endif %}
+
 
             <form method="post" action="{% url 'signin' %}">
                 {% csrf_token %}
-
+                {% if error %}
+                <p style="margin-left:6px; color: red "> Username or password not correct</p>
+                {% endif %}
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username" name="username" value="">
                 </div>
@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <center><input type="submit" class="btnSubmit" value="Login"></center>
                 </div>
-                <a href="{% url 'reset_password' %}">forget password?</a>
+                <a href="{% url 'reset_password' %}" style="color: white">forget password?</a>
             </form>
 
 
