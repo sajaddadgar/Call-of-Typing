@@ -16,6 +16,7 @@
     margin-bottom: 2%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     background: -webkit-linear-gradient(bottom, #08d7e6, #3405db);
+    
 }
 
 .form-control {
@@ -27,8 +28,13 @@
     border-radius: 1.5rem;
     padding: 1%;
     width: 20%;
-    /* justify-content: space-evenly; */
     cursor: pointer;
-    background: #fff;
-    color: #0062cc;
+    background: #0062cc ;
+     color:#fff;
+}
+.col-md-6 {
+    margin-left: 24%;
+}
+.alter-danger{
+    margin-top: 2%;
 }
