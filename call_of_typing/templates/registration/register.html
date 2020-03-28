@@ -24,10 +24,10 @@
 </header>
 
 <div class="container register-form">
-    <form method="post" action="{% url 'register' %}" class="form-group">
+    <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
-            <p>Sign up</p>
+            <p>ثبت نام</p>
         </div>
 
         <div class=" col-md-6 form-content">
@@ -35,41 +35,38 @@
 
                 {% if error %}
                 <div class="form-control alert alert-danger" role="alert">
-                    <center style="color: red;">Something went wrong, please try again</center>
+                    <center style="color: red;">خطایی وجود دارد</center>
                 </div>
                 {% endif %}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input id="first_name" type="text" class="form-control" placeholder="First Name *" value=""
+                        <input id="first_name" type="text" class="form-control" placeholder="* نام" value=""
                             name="firstname" />
                     </div>
                     <div class="form-group">
-                        <input id="last_name" type="text" class="form-control" placeholder="Last Name *" value=""
+                        <input id="last_name" type="text" class="form-control" placeholder="* نام خانوادگی" value=""
                             name="lastname" />
                     </div>
                     <div class="form-group">
-                        <input id="email" type="text" class="form-control" placeholder="email *" value=""
+                        <input id="email" type="email" class="form-control" placeholder="* ایمیل" value=""
                             name="email" />
                     </div>
                     <div class="form-group">
-                        <input id="username" type="text" class="form-control" placeholder="Username *" value=""
+                        <input id="username" type="text" class="form-control" placeholder="* نام کاربری" value=""
                             name="username" />
                     </div>
                     <div class="form-group">
-                        <input id="password_1" type="password" class="form-control" placeholder="Your Password *"
-                            value="" name="pass" />
-                    </div>
-                    <div class="form-control alert alert-info" role="alert">
-                        your password must contain at least 8 characters, letters included
+                        <input id="password_1" type="password" class="form-control" placeholder="* رمز عبور"
+                            value="" name="pass"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه"/>
                     </div>
                     <div class="form-group">
-                        <input id="password_2" type="password" class="form-control" placeholder="Confirm Password *"
-                            value="" name="confpass" />
+                        <input id="password_2" type="password" class="form-control" placeholder="* تکرار رمز عبور"
+                            value="" name="confpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه"/>
                     </div>
                 </div>
             </div>
             <center>
-                <button id="submit_btn" type="submit" class="btnSubmit">Submit</button>
+                <button id="submit_btn" type="submit" class="btnSubmit">ایجاد اکانت</button>
             </center>
         </div>
     </form>

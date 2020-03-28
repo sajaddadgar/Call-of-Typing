@@ -26,26 +26,26 @@
     <div class="container login-container">
         <div class="row">
             <div class="col-md-6 login-form-2">
-                <h3>Login</h3>
-                <form method="post" action="{% url 'signin' %}">
+                <h3>!نام کاربری و رمز عبورتو وارد کن</h3>
+                <form method="post" action="{% url 'type:signin' %}">
                     {% csrf_token %}
                     {% if error %}
                     <div class="form-control alert alert-danger" role="alert">
-                        <center style="color: red;"> Username or password is incorrect, please try again</center>
+                        <center style="color: red;">نام کاربری و رمز عبور مشکل داره، دوباره تلاش کن!</center>
                     </div>
                     {% endif %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" name="username" value="">
+                        <input type="text" class="form-control" placeholder="* نام کاربری" name="username" value="">
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" name="password" value="">
+                        <input type="password" class="form-control" placeholder="* رمز عبور" name="password" value="">
                     </div>
 
                     <div class="form-group">
-                        <center><input type="submit" class="btnSubmit" value="Login"></center>
+                        <center><input type="submit" class="btnSubmit" value="ورود"></center>
                     </div>
-                    <center><a href="{% url 'reset_password' %}" style="color: white">forget password?</a></center>
+                    <center><a href="{% url 'reset_password' %}" style="color: white">فراموشی رمز عبور؟</a></center>
 
                 </form>
             </div>

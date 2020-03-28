@@ -21,13 +21,13 @@
     <div align="right">
         <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
         {% csrf_token %}
-        <a class="nav-link" href="{% url 'change_password'%}" style="color: white">تغییر رمز</a>
+        <a class="nav-link" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
     </div>
 
 </header>
 <body>
 
-<!--    <form method="post" action="{% url 'edit' %}">-->
+<!--    <form method="post" action="{% url 'type:edit' %}">-->
 <!--        {% csrf_token %}-->
 <!--        username:-->
 <!--        <input type="text" value="{{ user.username }}" readonly>-->
@@ -46,14 +46,14 @@
 
 
 <div class="container emp-profile">
-    <form method="post" action="{% url 'edit' %}">
+    <form method="post" action="{% url 'type:edit' %}">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                          alt=""/>
                     <div class="file btn btn-lg btn-primary">
-                        Change Photo
+                        تغییر عکس پروفایل
                         <input type="file" name="file"/>
                     </div>
                 </div>
@@ -63,12 +63,12 @@
                     <h5>
                         {{user.first_name}} {{user.last_name}}
                     </h5>
-                    <p class="proile-rating">Rank : <span>some number</span></p>
-                    <p class="proile-rating">Score : <span>some number</span></p>
+                    <p class="proile-rating">رتبه فعلی : <span>###</span></p>
+                    <p class="proile-rating">بهترین امتیاز : <span>###</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                               aria-controls="home" aria-selected="true">About</a>
+                               aria-controls="home" aria-selected="true">اطلاعات</a>
                         </li>
                         <!--                                <li class="nav-item">-->
                         <!--                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>-->
@@ -78,7 +78,7 @@
             </div>
             {% csrf_token %}
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
             </div>
         </div>
         <div class="row">
@@ -88,12 +88,12 @@
                     <!--                            <a href="">Website Link</a><br/>-->
                     <!--                            <a href="">Bootsnipp Profile</a><br/>-->
                     <!--                            <a href="">Bootply Profile</a>-->
-                    <p>SKILLS</p>
-                    <a href="">something</a><br/>
-                    <a href="">something</a><br/>
-                    <a href="">something</a><br/>
-                    <a href="">something</a><br/>
-                    <a href="">something</a><br/>
+                    <p>مهارت ها</p>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
                 </div>
             </div>
             <div class="col-md-8">
@@ -101,7 +101,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Username</label>
+                                <label>نام کاربری</label>
                             </div>
                             <div class="col-md-6">
                                 <p>{{user.username}}</p>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>First Name</label>
+                                <label>نام</label>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" value="{{ user.first_name }}" name="firstName">
@@ -117,7 +117,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Last Name</label>
+                                <label>نام خانوادگی</label>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" value="{{ user.last_name }}" name="lastName">
@@ -133,7 +133,7 @@
                         <!--                                        </div>-->
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Email</label>
+                                <label>ایمیل</label>
                             </div>
                             <div class="col-md-6">
                                 <p>{{user.email}}</p>
