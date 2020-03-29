@@ -8,6 +8,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     max_point = models.IntegerField(default=0)
+    image = models.ImageField(null=True, blank=True)
 
     @receiver(post_save, sender=User)
     def update_profile(sender, instance, created, *args, **kwargs):

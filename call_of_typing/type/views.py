@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
+from .form import ProfileForm
 from .models import register_validation
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
@@ -98,4 +99,17 @@ def signin(request):
         return render(request, 'registration/login.html', stuff_for_front)
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
+
+
+def testSetting(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+
+    stuff = {'form': form}
+    return render(request, 'test.html', stuff)
 

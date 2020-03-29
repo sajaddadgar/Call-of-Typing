@@ -17,4 +17,6 @@ urlpatterns = [
     path('accounts/authentication/', views.user_auth, name='user_auth'),
     path('accounts/signin/', views.signin, name='signin'),
 
+    path('test/', views.testSetting, name='test'),
+
 ]

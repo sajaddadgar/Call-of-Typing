@@ -1,0 +1,18 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+<img src="{{ request.user.profile.image.url }}">
+
+<form method="post" enctype="multipart/form-data" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="update info"/>
+</form>
+
+</body>
+</html>
