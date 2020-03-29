@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="../../static/css/register.css" />
 
     <title>Register</title>
+    <style>
+        input[type="text"]::placeholder{ text-align: right; font-family: "2  Koodak" }
+        input[type="password"]::placeholder{ text-align: right; font-family: "2  Koodak"}
+        input[type="email"]::placeholder{text-align: right; font-family: "2  Koodak"}
+    </style>
 </head>
 
 
@@ -27,7 +32,7 @@
     <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
-            <p>ثبت نام</p>
+            <p style="font-family: '2  Koodak'; font-size: 40px">ثبت نام</p>
         </div>
 
         <div class=" col-md-6 form-content">
@@ -35,16 +40,16 @@
 
                 {% if error %}
                 <div class="form-control alert alert-danger" role="alert">
-                    <center style="color: red;">خطایی وجود دارد</center>
+                    <center style="color: red; font-family: '2  Koodak'">خطایی وجود دارد</center>
                 </div>
                 {% endif %}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input id="first_name" type="text" class="form-control" placeholder="* نام" value=""
-                            name="firstname" />
+                        <input id="first_name" type="text" class="form-control" style="text-align: right" placeholder="* نام"
+                             value="" name="firstname" />
                     </div>
                     <div class="form-group">
-                        <input id="last_name" type="text" class="form-control" placeholder="* نام خانوادگی" value=""
+                        <input id="last_name" type="text" class="form-control" style="text-align: right" placeholder="* نام خانوادگی" value=""
                             name="lastname" />
                     </div>
                     <div class="form-group">
@@ -66,7 +71,7 @@
                 </div>
             </div>
             <center>
-                <button id="submit_btn" type="submit" class="btnSubmit">ایجاد اکانت</button>
+                <button id="submit_btn" type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 13px; margin-bottom: 3px">عضویت</button>
             </center>
         </div>
     </form>
