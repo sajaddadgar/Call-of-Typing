@@ -7,6 +7,7 @@ from .form import ProfileForm
 from .models import register_validation
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -102,6 +103,10 @@ def signin(request):
 
 
 def testSetting(request):
+    user = request.user
+    user.first_name = request.POST['firstName']
+    user.last_name = request.POST['lastName']
+    user.save()
     profile = request.user.profile
     form = ProfileForm(instance=profile)
 
@@ -110,6 +115,9 @@ def testSetting(request):
         if form.is_valid():
             form.save()
 
-    stuff = {'form': form}
-    return render(request, 'test.html', stuff)
+    stuff_for_front = {
+        'user': request.user,
+        'form': form
+    }
+    return render(request, 'test.html', stuff_for_front)
 

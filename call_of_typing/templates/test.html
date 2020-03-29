@@ -1,18 +1,220 @@
-{% load static %}
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
-    <title>test</title>
+    <title>profile</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/profile.css"/>
 </head>
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        {% csrf_token %}
+        <a class="nav-link" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
+    </div>
+
+</header>
 <body>
 
-<img src="{{ request.user.profile.image.url }}">
+<!--    <form method="post" action="{% url 'type:edit' %}">-->
+<!--        {% csrf_token %}-->
+<!--        username:-->
+<!--        <input type="text" value="{{ user.username }}" readonly>-->
+<!--        <br>-->
+<!--        first name:-->
+<!--        <input type="text" value="{{ user.first_name }}" name="firstName">-->
+<!--        <br>-->
+<!--        last name:-->
+<!--        <input type="text" value="{{ user.last_name }}" name="lastName">-->
+<!--        <br>-->
+<!--        email:-->
+<!--        <input type="text" value="{{ user.email }}" readonly>-->
+<!--        <br>-->
+<!--        <input type="submit" value="edit" >-->
+<!--    </form>-->
 
-<form method="post" enctype="multipart/form-data" action="">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" name="update info"/>
-</form>
+
+<div class="container emp-profile">
+    <form method="post" action="{% url 'type:edit' %}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}"
+                         alt=""/>
+                    {% endif %}
+                        {% csrf_token %}
+                        {{form.as_p}}
+<!--                        <input type="submit" name="update info"/>-->
+<!--                    <div class="file btn btn-lg btn-primary">-->
+<!--                        تغییر عکس پروفایل-->
+<!--                        <input type="file" name="file"/>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{user.first_name}} {{user.last_name}}
+                    </h5>
+                    <p class="proile-rating">رتبه فعلی : <span>###</span></p>
+                    <p class="proile-rating">بهترین امتیاز : <span>###</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">اطلاعات</a>
+                        </li>
+                        <!--                                <li class="nav-item">-->
+                        <!--                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>-->
+                        <!--                                </li>-->
+                    </ul>
+                </div>
+            </div>
+            {% csrf_token %}
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <!--                            <p>WORK LINK</p>-->
+                    <!--                            <a href="">Website Link</a><br/>-->
+                    <!--                            <a href="">Bootsnipp Profile</a><br/>-->
+                    <!--                            <a href="">Bootply Profile</a>-->
+                    <p>مهارت ها</p>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                    <a href="">###</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>نام کاربری</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.username}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>نام</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ user.first_name }}" name="firstName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>نام خانوادگی</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ user.last_name }}" name="lastName">
+                            </div>
+                        </div>
+                        <!--                                        <div class="row">-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <label>Change Password</label>-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <input type="password" value="" name="password">-->
+                        <!--                                            </div>-->
+                        <!--                                        </div>-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>ایمیل</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.email}}</p>
+                            </div>
+                        </div>
+                        <!--                                        <div class="row">-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <label>Phone</label>-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <p>123 456 7890</p>-->
+                        <!--                                            </div>-->
+                        <!--                                        </div>-->
+                        <!--                                        <div class="row">-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <label>Profession</label>-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="col-md-6">-->
+                        <!--                                                <p>Web Developer and Designer</p>-->
+                        <!--                                            </div>-->
+                        <!--                                        </div>-->
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>230</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Availability</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>6 months</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
 
 </body>
 </html>
