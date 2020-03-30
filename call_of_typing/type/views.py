@@ -53,16 +53,8 @@ def log_out(request):
 
 
 def user_profile(request):
-    profile = request.user.profile
-    form = ProfileForm(instance=profile)
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save()
-
     stuff_for_front = {
         'user': request.user,
-        'form': form
     }
     return render(request, 'registration/profile.html', stuff_for_front)
 
@@ -110,22 +102,18 @@ def signin(request):
     return HttpResponseRedirect(reverse('type:home'))
 
 
-def testSetting(request):
-    # user = request.user
-    # user.first_name = request.POST['firstName']
-    # user.last_name = request.POST['lastName']
-    # user.save()
+def change_image(request):
     profile = request.user.profile
     form = ProfileForm(instance=profile)
-
+    print(form.fields)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
 
     stuff_for_front = {
-        'user': request.user,
         'form': form
     }
-    return render(request, 'test.html', stuff_for_front)
+    return render(request, 'registration/changeImage.html', stuff_for_front)
+
 

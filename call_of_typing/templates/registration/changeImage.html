@@ -1,0 +1,56 @@
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/profile.css"/>
+<style>
+
+    .emp-profile {
+        left: 50%;
+        top: 50%;
+        width: 500px;
+        height: 200px;
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+
+</style>
+
+</head>
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        {% csrf_token %}
+        <a class="nav-link" href="{% url 'type:profile'%}" style="color: white">پروفایل</a>
+    </div>
+
+</header>
+<body>
+
+<div class="container emp-profile">
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" style="margin-left: 50px" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+    </form>
+</div>
+
+
+</body>
+</html>

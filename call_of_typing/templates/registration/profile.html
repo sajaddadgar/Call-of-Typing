@@ -15,6 +15,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="../../static/css/profile.css"/>
+
+    <style>
+
+        .profile_image_border {
+            border-style: solid;
+            border-width: 5px;
+            border-radius: 50%;
+            border-color: #1a1a3a;
+        }
+
+    </style>
 </head>
 
 <header>
@@ -22,6 +33,7 @@
         <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
         {% csrf_token %}
         <a class="nav-link" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
+        <a class="nav-link" href="{% url 'type:change_image'%}" style="color: white">تغییر عکس پروفایل</a>
     </div>
 
 </header>
@@ -45,27 +57,25 @@
 <!--    </form>-->
 
 
-<!-- todo -->
-<form method="post" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
-</form>
-<img src="{{ request.user.profile.image.url }}" width="200px" height="200px">
-
+<!--<div class="container emp-image_profile">-->
+<!--<img src="" width="200px" height="200px">-->
+<!--<form method="post" action="" enctype="multipart/form-data">-->
+    <!--{% csrf_token %}-->
+    <!--{{form.as_p}}-->
+    <!--<input type="submit" name="btnAddMore" value="ثبت تغییرات"/>-->
+<!--</form>-->
+<!--</div>-->
 
 <div class="container emp-profile">
     <form method="post" action="{% url 'type:edit' %}">
         <div class="row">
             <div class="col-md-4">
+
                 <div class="profile-img">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    <img class="profile_image_border" src="{{ user.profile.image.url }}"
                          alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        تغییر عکس پروفایل
-                        <input type="file" name="file"/>
-                    </div>
                 </div>
+
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
