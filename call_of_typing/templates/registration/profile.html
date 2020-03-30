@@ -72,8 +72,13 @@
             <div class="col-md-4">
 
                 <div class="profile-img">
+                    {% if user.profile.image %}
                     <img class="profile_image_border" src="{{ user.profile.image.url }}"
                          alt=""/>
+                    {% else %}
+                    <img class="profile_image_border" src="/static/profile_image/Free_user_icon.png"
+                         alt=""/>
+                    {% endif %}
                 </div>
 
             </div>
