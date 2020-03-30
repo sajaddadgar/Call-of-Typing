@@ -53,8 +53,16 @@ def log_out(request):
 
 
 def user_profile(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+
     stuff_for_front = {
-        'user': request.user
+        'user': request.user,
+        'form': form
     }
     return render(request, 'registration/profile.html', stuff_for_front)
 
@@ -103,10 +111,10 @@ def signin(request):
 
 
 def testSetting(request):
-    user = request.user
-    user.first_name = request.POST['firstName']
-    user.last_name = request.POST['lastName']
-    user.save()
+    # user = request.user
+    # user.first_name = request.POST['firstName']
+    # user.last_name = request.POST['lastName']
+    # user.save()
     profile = request.user.profile
     form = ProfileForm(instance=profile)
 

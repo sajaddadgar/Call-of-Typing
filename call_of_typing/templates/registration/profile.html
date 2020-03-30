@@ -45,6 +45,15 @@
 <!--    </form>-->
 
 
+<!-- todo -->
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+</form>
+<img src="{{ request.user.profile.image.url }}" width="200px" height="200px">
+
+
 <div class="container emp-profile">
     <form method="post" action="{% url 'type:edit' %}">
         <div class="row">
