@@ -19,4 +19,6 @@ urlpatterns = [
 
     path('change_image/', views.change_image, name='change_image'),
 
+    path('OrdTextType/', views.ord_type, name='ord_type'),
+
 ]

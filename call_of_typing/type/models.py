@@ -8,7 +8,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     max_point = models.IntegerField(default=0)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(blank=True, null=True)
 
     @receiver(post_save, sender=User)
     def update_profile(sender, instance, created, *args, **kwargs):
@@ -22,7 +22,9 @@ class Profile(models.Model):
 
 
 class OrdinaryText(models.Model):
-    pass
+    content = models.CharField(max_length=1000, null=True)
+    creation_date = models.DateField(auto_now=True)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
 
 def is_email_unique(email):

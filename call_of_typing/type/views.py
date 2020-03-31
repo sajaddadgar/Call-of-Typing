@@ -117,3 +117,5 @@ def change_image(request):
     return render(request, 'registration/changeImage.html', stuff_for_front)
 
 
+def ord_type(request):
+    pass
