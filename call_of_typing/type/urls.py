@@ -16,9 +16,8 @@ urlpatterns = [
     path('accounts/changepassword/', views.change_password_page, name='change_password'),
     path('accounts/authentication/', views.user_auth, name='user_auth'),
     path('accounts/signin/', views.signin, name='signin'),
+    path('accounts/change_image/', views.change_image, name='change_image'),
 
-    path('change_image/', views.change_image, name='change_image'),
-
-    path('OrdTextType/', views.ord_type, name='ord_type'),
+    path('type/normal/', views.ord_type, name='ord_type'),
 
 ]

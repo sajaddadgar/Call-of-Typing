@@ -27,23 +27,5 @@ class OrdinaryText(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
 
-def is_email_unique(email):
-    email = email.lower()
-    for person in Profile.objects.all():
-        if person.user.email == email:
-            return False
-    return True
 
-
-def register_validation(first_name, last_name, username, pass1, pass2, email):
-    if first_name == '' and last_name == '' and email == '' and username == '':
-        return False
-    else:
-        if pass1 != pass2:
-            return False
-        else:
-            if is_email_unique(email):
-                return True
-            else:
-                return False
 

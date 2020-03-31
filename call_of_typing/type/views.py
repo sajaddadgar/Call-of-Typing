@@ -4,10 +4,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
-from .models import register_validation
+from .models import Profile
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -100,6 +99,27 @@ def signin(request):
         return render(request, 'registration/login.html', stuff_for_front)
     login(request, user)
     return HttpResponseRedirect(reverse('type:home'))
+
+
+def is_email_unique(email):
+    email = email.lower()
+    for person in Profile.objects.all():
+        if person.user.email == email:
+            return False
+    return True
+
+
+def register_validation(first_name, last_name, username, pass1, pass2, email):
+    if first_name == '' and last_name == '' and email == '' and username == '':
+        return False
+    else:
+        if pass1 != pass2:
+            return False
+        else:
+            if is_email_unique(email):
+                return True
+            else:
+                return False
 
 
 def change_image(request):

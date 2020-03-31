@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Homepage</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -14,87 +13,6 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/index.css"/>
-
-    <!--animation-->
-    <!--<style>-->
-
-
-        <!--.text-animation {-->
-            <!--list-style: none;-->
-            <!--position: absolute;-->
-            <!--left: 42%;-->
-            <!--top: 30%;-->
-            <!--transform: translateX(-50%) translateY(-50%);-->
-        <!--}-->
-
-        <!--.text-animation li {-->
-            <!--display: inline-block;-->
-            <!--margin-right: 5px;-->
-            <!--font-family: sans-serif;-->
-            <!--font-weight: bold;-->
-            <!--font-size: 30px;-->
-            <!--color: wheat;-->
-            <!--opacity: 1;-->
-            <!--transition: all 2.5s ease;-->
-        <!--}-->
-
-        <!--.text-animation li:last-child {-->
-            <!--margin-right: 0;-->
-        <!--}-->
-
-        <!--.text-animation.hidden {-->
-            <!--opacity: 1;-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(1) {-->
-            <!--transform: translateX(-200px) translateY(-200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(2) {-->
-            <!--transform: translateX(20px) translateY(100px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(3) {-->
-            <!--transform: translateX(-150px) translateY(-80px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(4) {-->
-            <!--transform: translateX(10px) translateY(-200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(5) {-->
-            <!--transform: translateX(-300px) translateY(200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(6) {-->
-            <!--transform: translateX(20px) translateY(-20px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(7) {-->
-            <!--transform: translateX(30px) translateY(200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(8) {-->
-            <!--transform: translateX(-200px) translateY(-200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(9) {-->
-            <!--transform: translateX(20px) translateY(100px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(10) {-->
-            <!--transform: translateX(-150px) translateY(-80px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(11) {-->
-            <!--transform: translateX(10px) translateY(-200px);-->
-        <!--}-->
-
-        <!--.text-animation.hidden li:nth-child(12) {-->
-            <!--transform: translateX(-300px) translateY(200px);-->
-        <!--}-->
-    <!--</style>-->
-
 </head>
 
 <body>
@@ -110,9 +28,7 @@
                     aria-label="Toggle navigation">
                 <i class="fas fa-align-right text-light"></i>
             </button>
-
             {% if user.is_authenticated %}
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="mr-auto"></div>
                 <ul class="navbar-nav">
@@ -130,13 +46,10 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </nav>
-
         {% else %}
-
         <div class="collapse navbar-collapse" id="navbarNav2">
             <div class="mr-auto"></div>
             <ul class="navbar-nav">
@@ -154,33 +67,15 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-
             </ul>
         </div>
         </nav>
-
         {% endif %}
-
     </div>
     <div class="container text-center">
         <div class="row">
             <div class="col-md-7 col-sm-12  text-white">
                 <h1 style="margin-top: -4px">CALL OF TYPING</h1>
-                <!--<ul class="text-animation hidden">-->
-                    <!--<li>C</li>-->
-                    <!--<li>A</li>-->
-                    <!--<li>L</li>-->
-                    <!--<li>L</li>-->
-                    <!--<li></li>-->
-                    <!--<li>OF</li>-->
-                    <!--<li></li>-->
-                    <!--<li>T</li>-->
-                    <!--<li>Y</li>-->
-                    <!--<li>P</li>-->
-                    <!--<li>I</li>-->
-                    <!--<li>N</li>-->
-                    <!--<li>G</li>-->
-                <!--</ul>-->
                 <h4 style="font-family: sans-serif;">
                     این برنامه بهت کمک می کنه که مهارت و سرعت تایپتو بهتر کنی و در کنارش بتونی یه رقابتی هم با بقیه
                     داشته باشی
@@ -198,7 +93,6 @@
     </div>
 </header>
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -207,15 +101,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="../static/js/index.js"></script>
-<script type="text/javascript">
 
-    $(function () {
-        setTimeout(function () {
-            $('.text-animation').removeClass('hidden');
-        }, 500)
-    })();
-
-</script>
 </body>
 
 </html>
