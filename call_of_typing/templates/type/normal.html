@@ -181,7 +181,7 @@
     }
 
     function finished() {
-        $.post("#", {
+        $.post("{% url 'type:change_max_point' %}", {
                 csrfmiddlewaretoken: '{{ csrf_token }}',
                 word_per_min: wpm,
                 error_count: errors,

@@ -17,7 +17,7 @@ urlpatterns = [
     path('accounts/authentication/', views.user_auth, name='user_auth'),
     path('accounts/signin/', views.signin, name='signin'),
     path('accounts/change_image/', views.change_image, name='change_image'),
-
+    path('type/change_max_point', views.change_max_point, name='change_max_point'),
     path('type/normal/', views.ord_type, name='ord_type'),
 
 ]
