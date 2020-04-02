@@ -138,4 +138,5 @@ def change_image(request):
 
 
 def ord_type(request):
-    pass
+    return render(request, 'type/normal.html')
+
