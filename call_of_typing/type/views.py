@@ -145,9 +145,10 @@ def change_max_point(request):
     current_user = request.user
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
-    score = word_per_min - error_count
-    if score > current_user.profile.max_point:
-        current_user.profile.max_point = score
-        current_user.save()
+    curr_point = word_per_min - error_count
+    current_user.profile.score += curr_point
+    if curr_point > current_user.profile.max_point:
+        current_user.profile.max_point = curr_point
 
+    current_user.save()
     return redirect('/')
