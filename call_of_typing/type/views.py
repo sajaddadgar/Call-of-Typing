@@ -4,9 +4,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
-from .models import Profile
+from .models import Profile, OrdinaryText
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -152,3 +153,14 @@ def change_max_point(request):
 
     current_user.save()
     return redirect('/')
+
+
+def createTextType(request):
+    return render(request, 'type/create.html')
+
+
+def add_new_text(request):
+    if request.method == 'POST':
+        OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
+        return redirect('type:createTextType')
+
