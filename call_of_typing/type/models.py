@@ -27,6 +27,9 @@ class OrdinaryText(models.Model):
     creation_date = models.DateField(auto_now=True)
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.content
+
 
 
 

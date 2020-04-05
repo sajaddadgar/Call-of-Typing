@@ -30,10 +30,11 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
         {% csrf_token %}
-        <a class="nav-link" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
-        <a class="nav-link" href="{% url 'type:change_image'%}" style="color: white">تغییر عکس پروفایل</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_image'%}" style="color: white">تغییر عکس پروفایل</a>
+        <a class="profile-edit-btn" href="{% url 'type:createTextType'%}" style="color: white">ایجاد تست</a>
     </div>
 
 </header>
