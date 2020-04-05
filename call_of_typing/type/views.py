@@ -152,3 +152,21 @@ def change_max_point(request):
 
     current_user.save()
     return redirect('/')
+
+
+def LCS(S1, S2):
+    L1 = len(S1)
+    L2 = len(S2)
+
+    C = [[None for j in range(L2 + 1)] for i in range(L1 + 1)]
+
+    for i in range(L1 + 1):
+        for j in range(L2 + 1):
+            if i == 0 or j == 0:
+                C[i][j] = 0
+            elif S2[j - 1] == S1[i - 1]:
+                C[i][j] = C[i - 1][j - 1] + 1
+            else:
+                C[i][j] = max(C[i - 1][j], C[i][j - 1])
+
+    return C[L1][L2]
