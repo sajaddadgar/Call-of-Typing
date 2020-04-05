@@ -154,6 +154,16 @@ def change_max_point(request):
     return redirect('/')
 
 
+def createTextType(request):
+    return render(request, 'type/create.html')
+
+
+def add_new_text(request):
+    if request.method == 'POST':
+        OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
+        return redirect('type:createTextType')
+
+
 def LCS(S1, S2):
     L1 = len(S1)
     L2 = len(S2)
@@ -170,14 +180,3 @@ def LCS(S1, S2):
                 C[i][j] = max(C[i - 1][j], C[i][j - 1])
 
     return C[L1][L2]
-
-
-def createTextType(request):
-    return render(request, 'type/create.html')
-
-
-def add_new_text(request):
-    if request.method == 'POST':
-        OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
-        return redirect('type:createTextType')
-
