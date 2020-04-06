@@ -4,10 +4,11 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
-from .models import Profile,OrdinaryText
+from .models import Profile, OrdinaryText
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
-
+from django.db import IntegrityError
+from random import randint
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
 
@@ -29,13 +30,18 @@ def register(request):
         last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         if register_validation(first_name, last_name, username, password1, password2, email):
-            User.objects.create_user(username=username,
+            try:
+                User.objects.create_user(username=username,
                                      password=password1,
                                      first_name=first_name,
                                      last_name=last_name,
                                      email=email)
+            except IntegrityError:
+                stuff_for_front = {'integrity_error': 'duplicate key'}
+                return render(request, 'registration/register.html', stuff_for_front)
         else:
-            raise ValidationError("something wrong: email must be unique, username and name are empty, etc.")
+            stuff_for_front = {'error': 'sth is wrong'}
+            return render(request, 'registration/register.html', stuff_for_front)
 
         return HttpResponseRedirect(reverse('type:home'))
 
@@ -110,7 +116,7 @@ def is_email_unique(email):
 
 
 def register_validation(first_name, last_name, username, pass1, pass2, email):
-    if first_name == '' and last_name == '' and email == '' and username == '':
+    if first_name == '' or last_name == '' or email == '' or username == '':
         return False
     else:
         if pass1 != pass2:
@@ -138,7 +144,12 @@ def change_image(request):
 
 
 def ord_type(request):
-    return render(request, 'type/normal.html')
+    n = OrdinaryText.objects.all().count()
+    text_obj = OrdinaryText.objects.get(id=randint(1, n))
+    stuff_for_front = {
+        'text': text_obj.content
+    }
+    return render(request, 'type/normal.html', stuff_for_front)
 
 
 def change_max_point(request):

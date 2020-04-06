@@ -25,10 +25,10 @@
 <hr style="clear:both;"/>
 <div>
     <textarea name="" id="input_text" cols="30"
-              rows="10">یه کوفتی اینجا بنویس</textarea>
+              rows="10">{{text}}</textarea>
 </div>
 <div class="settings">
-    <a href="#" id="reset">Reset</a> | <a href="#" id="change">Change text</a> | <a href="#" id="pause">Pause II</a>
+    <a href="#" id="reset">Reset</a> | <a href="{%url 'type:ord_type' %}" id="change">Change text</a> | <a href="#" id="pause">Pause II</a>
 </div>
 
 
@@ -79,9 +79,10 @@
      * The typing test stuff
      */
 
-    var character_length = 31;
+    //var character_length = 21;
     var index = 0;
     var letters = $("#input_text").val();
+    var character_length = letters.length;
     var started = false;
     var current_string = letters.substring(index, index + character_length);
 
