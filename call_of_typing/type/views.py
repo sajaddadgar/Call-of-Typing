@@ -9,6 +9,8 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
+
+
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
 
@@ -144,8 +146,12 @@ def change_image(request):
 
 
 def ord_type(request):
-    n = OrdinaryText.objects.all().count()
-    text_obj = OrdinaryText.objects.get(id=randint(1, n))
+    all_objects = OrdinaryText.objects.all()
+    IDs = []
+    for obj in all_objects:
+        IDs.append(obj.id)
+
+    text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs)-1)])
     stuff_for_front = {
         'text': text_obj.content
     }
