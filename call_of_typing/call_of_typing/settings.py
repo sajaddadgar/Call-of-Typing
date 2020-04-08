@@ -9,6 +9,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'type/media')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -16,8 +19,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'type',
 ]
+
+CRYSPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,16 +55,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'call_of_typing.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cot',
         'USER': 'root',
-        'PASSWORD': 'java123',
+        'PASSWORD': '24762475',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+
+# Password validation
+# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -87,9 +99,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/profile_image/'
+MEDIA_URL = '/Media_Files/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/profile_image')
+IMAGE_ROOT = os.path.join(BASE_DIR, 'static/profile_image')
+SONG_ROOT = os.path.join(BASE_DIR, 'static/songs')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),

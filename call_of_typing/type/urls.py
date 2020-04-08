@@ -22,5 +22,5 @@ urlpatterns = [
     path('type/normal/', views.ord_type, name='ord_type'),
     path('type/create/', views.createTextType, name='createTextType'),
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
-
+    path('type/music/', views.music_upload, name='UploadMusic'),
 ]

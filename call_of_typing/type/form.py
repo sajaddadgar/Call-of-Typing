@@ -5,7 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div
 from django.forms import ModelForm
 from .models import Profile
-
+from .models import Track
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -44,4 +44,9 @@ class RegisterForm(UserCreationForm):
                  css_class='row'
             )
         )
+
+class SongForm(forms.ModelForm):
+    class Meta:
+        model = Track
+        fields = ('track_title', 'file_type','Artist_name' , 'song')
 
