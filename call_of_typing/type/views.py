@@ -10,7 +10,6 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
-import soundcloud
 
 
 # Get authenticated user: request.user
@@ -36,10 +35,10 @@ def register(request):
         if register_validation(first_name, last_name, username, password1, password2, email):
             try:
                 User.objects.create_user(username=username,
-                                         password=password1,
-                                         first_name=first_name,
-                                         last_name=last_name,
-                                         email=email)
+                                     password=password1,
+                                     first_name=first_name,
+                                     last_name=last_name,
+                                     email=email)
             except IntegrityError:
                 stuff_for_front = {'integrity_error': 'duplicate key'}
                 return render(request, 'registration/register.html', stuff_for_front)
@@ -153,7 +152,7 @@ def ord_type(request):
     for obj in all_objects:
         IDs.append(obj.id)
 
-    text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs) - 1)])
+    text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs)-1)])
     stuff_for_front = {
         'text': text_obj.content
     }
