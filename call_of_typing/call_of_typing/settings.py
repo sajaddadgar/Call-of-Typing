@@ -9,8 +9,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'type/media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'type/media')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -63,7 +63,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cot',
         'USER': 'root',
-        'PASSWORD': 'mmm1298',
+        'PASSWORD': '24762475',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -99,11 +99,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-IMAGE_URL = '/profile_image/'
-SONG_URL = '/songs/'
+MEDIA_URL = '/media/'
 
-IMAGE_ROOT = os.path.join(BASE_DIR, 'static/profile_image')
-SONG_ROOT = os.path.join(BASE_DIR, 'static/songs')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),
