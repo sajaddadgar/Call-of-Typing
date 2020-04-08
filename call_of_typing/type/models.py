@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     max_point = models.IntegerField(default=0)
     # score = models.IntegerField(default=0, null = True, blank = True)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(upload_to='profile_image', blank=True, null=True)
 
     @receiver(post_save, sender=User)
     def update_profile(sender, instance, created, *args, **kwargs):
