@@ -1,5 +1,7 @@
 import os
 
+from .secrets import *
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
@@ -61,9 +63,9 @@ WSGI_APPLICATION = 'call_of_typing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cot',
+        'NAME': DATABASE_NAME,
         'USER': 'root',
-        'PASSWORD': 'java123',
+        'PASSWORD': SQL_PASS,
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -113,5 +115,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'call.of.typing@gmail.com'
-EMAIL_HOST_PASSWORD = 'se project 2020'
+EMAIL_HOST_USER = EMAIL_HOST
+EMAIL_HOST_PASSWORD = EMAIL_PASS
