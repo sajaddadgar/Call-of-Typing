@@ -8,7 +8,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     max_point = models.IntegerField(default=0)
-    # score = models.IntegerField(default=0, null = True, blank = True)
+    score = models.IntegerField(default=0, null = True, blank = True)
     image = models.ImageField(upload_to='profile_image', blank=True, null=True)
 
     @receiver(post_save, sender=User)
@@ -33,8 +33,7 @@ class OrdinaryText(models.Model):
 
 class Track(models.Model):
     track_title = models.CharField(max_length=500)
-    Artist_name = models.CharField(max_length=500 , null = True, blank = True)
-    file_type = models.CharField(max_length=10)
+    Artist_name = models.CharField(max_length=500, null=True, blank=True)
     song = models.FileField(upload_to='songs/files/')
 
     def __str__(self):

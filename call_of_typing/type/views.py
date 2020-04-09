@@ -50,6 +50,7 @@ def register(request):
         return HttpResponseRedirect(reverse('type:home'))
     return render(request, 'registration/register.html')
 
+
 def signup(request):
     return render(request, 'registration/register.html')
 
@@ -148,11 +149,7 @@ def change_image(request):
 
 
 def ord_type(request):
-    all_objects = OrdinaryText.objects.all()
-    IDs = []
-    for obj in all_objects:
-        IDs.append(obj.id)
-
+    IDs = OrdinaryText.objects.all().values_list('id', flat=True)
     text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs) - 1)])
     stuff_for_front = {
         'text': text_obj.content
