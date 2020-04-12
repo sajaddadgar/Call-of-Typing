@@ -136,7 +136,6 @@ def register_validation(first_name, last_name, username, pass1, pass2, email):
 def change_image(request):
     profile = request.user.profile
     form = ProfileForm(instance=profile)
-    print(form.fields)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -162,6 +161,7 @@ def music_upload(request):
         form = SongForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+
     else:
         form = SongForm()
     stuff_for_front = {
@@ -174,13 +174,16 @@ def change_max_point(request):
     current_user = request.user
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
-    curr_point = word_per_min - error_count
-    current_user.profile.score += curr_point
-    if curr_point > current_user.profile.max_point:
-        current_user.profile.max_point = curr_point
-
-    current_user.save()
+    calculate_score(current_user, word_per_min, error_count)
     return redirect('/')
+
+
+def calculate_score(user, word_per_min, error_count):
+    curr_point = word_per_min - error_count
+    user.profile.text_score += curr_point
+    if curr_point > user.profile.text_max_point:
+        user.profile.text_max_point = curr_point
+    user.save()
 
 
 def createTextType(request):
@@ -209,3 +212,4 @@ def LCS(S1, S2):
                 C[i][j] = max(C[i - 1][j], C[i][j - 1])
 
     return C[L1][L2]
+

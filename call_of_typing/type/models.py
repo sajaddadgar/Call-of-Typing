@@ -6,9 +6,11 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    max_point = models.IntegerField(default=0)
-    score = models.IntegerField(default=0, null = True, blank = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    text_max_point = models.IntegerField(default=0)
+    text_score = models.IntegerField(default=0, null=True, blank=True)
+    song_max_point = models.IntegerField(default=0, null=True, blank=True)
+    song_score = models.IntegerField(default=0, null=True, blank=True)
     image = models.ImageField(upload_to='profile_image', blank=True, null=True)
 
     @receiver(post_save, sender=User)
