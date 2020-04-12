@@ -13,8 +13,15 @@
 
 
     <title>Ranking</title>
+    <script type="text/javascript" src="../static/js/ranking.js"></script>
+
 
 </head>
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+    </div>
+</header>
 
 <body>
 
@@ -25,30 +32,39 @@
 
     <div class="container">
         <div class="col-md-6">
-            <table class="table table-dark" >
-                <thead>
-                    <tr>
-                        <th scope="col" style="text-align: center;">Type Ranking</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Scores</th>
-                    </tr>
-                </thead>
 
-                <tbody >
-                    {% for data in rank_array %}
-                    <tr>
-                        <th scope="row">{{ data.rank}}</th>
-                        <td>{{ data.user }}</td>
-                        <td>{{data.score }}</td>
-                    </tr>
+            <div id="type-ranking">
+                <table class="table table-dark">
+                    <thead id="type-ranking-table-header">
+                        <tr>
+                            <th scope="col" style="text-align: center;">Type Ranking</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Scores</th>
+                        </tr>
+                    </thead>
 
-                    {% endfor %}
-                </tbody>
+                    <tbody id="type-ranking-table-body">
+                        {% for data in rank_array %}
+                        <tr>
+                            <th scope="row">{{ data.rank}}</th>
+                            <td>{{ data.user }}</td>
+                            <td>{{data.score }}</td>
+                        </tr>
 
-            </table>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+                <div >
+                    <button class="btn btn-dark" onclick="type_ranking()">Type ranking</button>
+                    <button class="btn btn-dark" onclick="song_ranking()">Song ranking</button>
+                    <button class="btn btn-dark" onclick="group_ranking()">Group ranking</button>
+                    <button class="btn btn-dark" onclick="total_ranking()">Total ranking</button>
+                </div>
+            </div>
 
         </div>
 
