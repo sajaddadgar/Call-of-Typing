@@ -6,61 +6,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" /> -->
-
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../static/css/ranking.css" />
 
 
     <title>Ranking</title>
 
-
-
 </head>
 
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Type Ranking</h1>
-        </header>
-        <div class="wrapper">
-            <table>
 
+    <!-- to have all teh table in one page, by make them appear when the related bottom clicked,
+         you should change the other one display to 'none' and the selected one change it's display to 'table'
+        wont work properly, check it later -->
+
+    <div class="container">
+        <div class="col-md-6">
+            <table class="table table-dark" >
                 <thead>
                     <tr>
-                        <th >Rank</th>
-                        <th >User</th>
-                        <th >Scores</th>
+                        <th scope="col" style="text-align: center;">Type Ranking</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Scores</th>
                     </tr>
                 </thead>
 
-                <tbody>
-
+                <tbody >
                     {% for data in rank_array %}
                     <tr>
-                        <td class="rank">{{ data.rank}}</td>
-                        <td class="team">{{ data.user }}</td>
-                        <td class="points">{{data.score }}</td>
+                        <th scope="row">{{ data.rank}}</th>
+                        <td>{{ data.user }}</td>
+                        <td>{{data.score }}</td>
                     </tr>
 
                     {% endfor %}
-
-
                 </tbody>
 
             </table>
+
         </div>
+
     </div>
+
 </body>
 
 </html>
