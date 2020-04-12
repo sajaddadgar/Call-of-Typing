@@ -10,6 +10,8 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
+
+
 # import soundcloud
 
 
@@ -23,6 +25,22 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+
+def ranking(request):
+    all_users = Profile.objects.all()
+
+    rank_array = []
+    all_users = sorted(all_users, key=lambda x: x.score, reverse=True)
+    for i in range(10):
+        if i < len(all_users):
+            rank = {'rank': i + 1, 'user': all_users[i], 'score': all_users[i].score}
+            rank_array.append(rank)
+
+    stuff_for_front = {
+        'rank_array': rank_array
+    }
+    return render(request, 'ranking.html', stuff_for_front)
 
 
 def register(request):
