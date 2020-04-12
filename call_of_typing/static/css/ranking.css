@@ -2,3 +2,14 @@
     margin-top: 5%;
     margin-left: 23%;
 }
+ 
+.flex-box-buttons button{
+    margin:2px;
+}
+
+.flex-box-buttons{
+    display: flex;
+    padding: 4px;
+    flex-direction: row;
+    justify-content: space-evenly;
+} 
