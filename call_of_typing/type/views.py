@@ -30,15 +30,23 @@ def about(request):
 def ranking(request):
     all_users = Profile.objects.all()
 
-    rank_array = []
-    all_users = sorted(all_users, key=lambda x: x.score, reverse=True)
+    text_rank_array = []
+    song_rank_array = []
+    all_users_text = sorted(all_users, key=lambda x: x.text_score, reverse=True)
+    all_users_song = sorted(all_users, key=lambda x: x.text_score, reverse=True)
     for i in range(10):
         if i < len(all_users):
-            rank = {'rank': i + 1, 'user': all_users[i], 'score': all_users[i].score}
-            rank_array.append(rank)
+            text_rank = {'rank': i + 1, 'user': all_users_text[i], 'score': all_users_text[i].text_score}
+            text_rank_array.append(text_rank)
+
+    for i in range(10):
+        if i < len(all_users):
+            song_rank = {'rank': i + 1, 'user': all_users_song[i], 'score': all_users_song[i].song_score}
+            song_rank_array.append(song_rank)
 
     stuff_for_front = {
-        'rank_array': rank_array
+        'text_rank_array': text_rank_array ,
+        'song_rank_array': song_rank_array
     }
     return render(request, 'ranking.html', stuff_for_front)
 

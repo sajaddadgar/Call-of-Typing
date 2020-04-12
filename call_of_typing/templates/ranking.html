@@ -47,11 +47,11 @@
                     </thead>
 
                     <tbody id="type-ranking-table-body">
-                        {% for data in rank_array %}
+                        {% for data in text_rank_array %}
                         <tr>
                             <th scope="row">{{ data.rank}}</th>
                             <td>{{ data.user }}</td>
-                            <td>{{data.score }}</td>
+                            <td>{{ data.score }}</td>
                         </tr>
 
                         {% endfor %}
