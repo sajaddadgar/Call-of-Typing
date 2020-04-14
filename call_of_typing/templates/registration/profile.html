@@ -61,8 +61,19 @@
                     <h5>
                         {{user.first_name}} {{user.last_name}}
                     </h5>
-                    <p class="proile-rating">رتبه فعلی : <span>###</span></p>
-                    <p class="proile-rating">بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}</span></p>
+                    <p class="proile-rating" style="margin-left: 292px; padding-bottom: 12px">رتبه فعلی : <span> نامشخص </span></p>
+                        <!-- <p class="proile-rating" style="margin-left: 300px">بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}</span> </p> -->
+                    <p>
+                        <span class="proile-rating" style="margin-left: 145px"> بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px">مجموع امتیازات(متن) : <span>{{user.profile.text_score}} </span> </span>
+                    </p>
+                    <!-- <p class="proile-rating" style="margin-left: 300px">مجموع امتیاز ها(متن) : <span>{{user.profile.text_max_point}}</span></p> -->
+                    <p>
+                        <span class="proile-rating" style="margin-left: 145px"> بهترین امتیاز(آهنگ) : <span>{{user.profile.song_max_point}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px">مجموع امتیازات(آهنگ) : <span>{{user.profile.song_score}} </span> </span>
+                    </p>
+
+                    <!-- <p class="proile-rating" style="margin-left: 300px;margin-top: -10px">بهترین امتیاز(آهنگ) : <span>{{user.profile.song_max_point}}</span></p> -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -80,6 +91,7 @@
             </div>
         </div>
         <div class="row">
+            <!--
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>مهارت ها</p>
@@ -90,39 +102,40 @@
                     <a href="">###</a><br/>
                 </div>
             </div>
-            <div class="col-md-8">
+            -->
+            <div class="col-md-8" style="margin-left: 350px">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>نام کاربری</label>
+                                <p>{{user.username}}</p>
                             </div>
                             <div class="col-md-6">
-                                <p>{{user.username}}</p>
+                                <label>نام کاربری</label>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" value="{{user.first_name}}" name="firstName">
+                            </div>
                             <div class="col-md-6">
                                 <label>نام</label>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" value="{{ user.first_name }}" name="firstName">
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <label>نام خانوادگی</label>
-                            </div>
                             <div class="col-md-6">
                                 <input type="text" value="{{ user.last_name }}" name="lastName">
                             </div>
+                            <div class="col-md-6">
+                                <label>نام خانوادگی</label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>ایمیل</label>
+                                <p>{{user.email}}</p>
                             </div>
                             <div class="col-md-6">
-                                <p>{{user.email}}</p>
+                                <label>ایمیل</label>
                             </div>
                         </div>
                     </div>

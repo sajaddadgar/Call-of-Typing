@@ -48,6 +48,7 @@ class RegisterForm(UserCreationForm):
 
 
 class SongForm(forms.ModelForm):
+
     class Meta:
         model = Track
         fields = ('track_title', 'Artist_name', 'song')
