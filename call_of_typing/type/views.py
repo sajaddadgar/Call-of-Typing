@@ -28,24 +28,29 @@ def about(request):
 
 
 def ranking(request):
-    all_users = Profile.objects.all()
+    all_users = User.objects.filter(is_superuser=0)
+    text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
+    song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
 
+    '''
     text_rank_array = []
     song_rank_array = []
-    all_users_text = sorted(all_users, key=lambda x: x.text_score, reverse=True)
-    all_users_song = sorted(all_users, key=lambda x: x.text_score, reverse=True)
+    all_users_text = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)
+    all_users_song = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)
+    
     for i in range(10):
         if i < len(all_users):
-            text_rank = {'rank': i + 1, 'user': all_users_text[i], 'score': all_users_text[i].text_score}
+            text_rank = {'rank': i + 1, 'user': all_users_text[i], 'score': all_users_text[i].profile.text_score}
             text_rank_array.append(text_rank)
 
     for i in range(10):
         if i < len(all_users):
-            song_rank = {'rank': i + 1, 'user': all_users_song[i], 'score': all_users_song[i].song_score}
+            song_rank = {'rank': i + 1, 'user': all_users_song[i], 'score': all_users_song[i].profile.song_score}
             song_rank_array.append(song_rank)
+    '''
 
     stuff_for_front = {
-        'text_rank_array': text_rank_array ,
+        'text_rank_array': text_rank_array,
         'song_rank_array': song_rank_array
     }
     return render(request, 'ranking.html', stuff_for_front)
@@ -74,7 +79,7 @@ def register(request):
             return render(request, 'registration/register.html', stuff_for_front)
 
         return HttpResponseRedirect(reverse('type:home'))
-    return render(request, 'registration/register.html')
+
 
 
 def signup(request):

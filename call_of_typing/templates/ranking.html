@@ -39,7 +39,7 @@
 
                     <thead>
                         <tr>
-                            <th scope="col">Type Ranking</th>
+                            <th scope="col">Text Type Ranking</th>
                         </tr>
                         <tr>
                             <th scope="col">Rank</th>
@@ -49,11 +49,11 @@
                     </thead>
 
                     <tbody>
-                        {% for data in text_rank_array %}
+                        {% for user in text_rank_array %}
                         <tr>
-                            <th scope="row">{{ data.rank}}</th>
-                            <td>{{ data.user }}</td>
-                            <td>{{ data.score }}</td>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.profile.text_score }}</td>
                         </tr>
 
                         {% endfor %}
@@ -64,7 +64,7 @@
                 <table class="table table-dark" id="song-table" style="display: none;">
                     <thead>
                         <tr>
-                            <th scope="col">Song Ranking</th>
+                            <th scope="col">Song Type Ranking</th>
                         </tr>
                         <tr>
                             <th scope="col">Rank</th>
@@ -74,11 +74,11 @@
                     </thead>
 
                     <tbody>
-                        {% for data in song_rank_array %}
+                        {% for user in song_rank_array %}
                         <tr>
-                            <th scope="row">{{ data.rank}}</th>
-                            <td>{{ data.user }}</td>
-                            <td>{{ data.score }}</td>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.profile.song_score }}</td>
                         </tr>
 
                         {% endfor %}
