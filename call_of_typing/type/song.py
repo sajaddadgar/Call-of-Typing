@@ -67,13 +67,22 @@ class Spotify:
 
     def get_image_url(self):
         data = genius.search_song(self.song, self.artist)
-        image_url = data.song_art_image_url
-        return image_url
+        return data.song_art_image_url
 
 
-s = Spotify('anita', 'bargashtam')
-print(s.get_song_url())
+
 
 
 class Genius:
-    pass
+
+    def __init__(self, artist, song):
+        self.artist = artist
+        self.song = song
+
+    def get_lyric(self):
+        data = genius.search_song(self.song, self.artist)
+        return data.lyrics
+
+
+s = Genius('alan walker', 'faded')
+print(s.get_lyric())
