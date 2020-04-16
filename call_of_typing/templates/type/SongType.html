@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing speed test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{% static 'css/normal.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="your-attempt" class="mono your-attempt"></div>
+    <script>
+        char_count=0;
+        $(window).keypress(function (evt) {
+            evt = evt || window.event;
+        var charCode = evt.which || evt.keyCode;
+        var charTyped = String.fromCharCode(charCode);
+         $("#your-attempt").append(charTyped);
+         char_count++;
+         if(char_count % 60 == 0){
+             $("#your-attempt").append('\n');
+         }
+        })
+    </script>
+</body>
+</html>
