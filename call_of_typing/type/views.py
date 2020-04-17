@@ -187,6 +187,15 @@ def ord_type(request):
     return render(request, 'type/normal.html', stuff_for_front)
 
 
+def song_type(request):
+    return render(request, 'type/SongType.html')
+
+
+def change_song_score(request):
+    string = request.POST['user_typed_string']
+    return redirect('/')
+
+
 def music_upload(request):
     if request.method == 'POST':
         form = SongForm(request.POST, request.FILES)

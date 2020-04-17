@@ -10,18 +10,30 @@
 </head>
 <body>
     <div id="your-attempt" class="mono your-attempt"></div>
+    <input class="profile-edit-btn" type="submit" value="submit" onclick="finish()"/>
     <script>
-        char_count=0;
+        let char_count=0;
+        let typed_string = "";
         $(window).keypress(function (evt) {
             evt = evt || window.event;
         var charCode = evt.which || evt.keyCode;
         var charTyped = String.fromCharCode(charCode);
          $("#your-attempt").append(charTyped);
+         typed_string += (charTyped);
          char_count++;
          if(char_count % 60 == 0){
              $("#your-attempt").append('\n');
          }
         })
+        function finish(){
+            $.post(
+                "{% url 'type:change_song_score' %}",{
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    user_typed_string: typed_string
+                }
+            );
+            window.location.href = "{% url 'type:home' %}";
+        }
     </script>
 </body>
 </html>
