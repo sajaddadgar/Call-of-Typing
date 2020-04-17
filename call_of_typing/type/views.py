@@ -190,16 +190,16 @@ def song_type(request):
 
 def change_song_score(request):
     current_user = request.user
+    string = request.POST['user_typed_string']
+    global score
+    score = LCS(lyrics, string)
+    score = (score * 1000) // len(lyrics)
     if current_user.is_authenticated:
-        string = request.POST['user_typed_string']
-        lyrics = genius_obj.get_lyric()
-        score = LCS(lyrics, string)
-        score = (score*1000)//len(lyrics)
         if score > current_user.profile.song_max_point:
             current_user.profile.song_max_point = score
         current_user.profile.song_score += score
         current_user.save()
-    return redirect('/')
+
 
 
 def music_upload(request):
@@ -269,8 +269,9 @@ def get_links(request):
         soundcloud = SoundCloud(singer_name, song_title)
         spotify_link = spotify.get_song_url()
         soundcloud_link = soundcloud.get_songs_list()
-        global genius_obj
         genius_obj = Genius(singer_name, song_title)
+        global lyrics
+        lyrics = genius_obj.get_lyric()
         stuff_for_front = {
             'spotify': spotify_link,
             'soundcloud': soundcloud_link
