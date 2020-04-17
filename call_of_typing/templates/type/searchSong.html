@@ -1,0 +1,22 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search songs</title>
+</head>
+<body>
+
+<form action="{% url 'type:song_search' %}" method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="artist name" name="singer">
+    <input type="text" placeholder="song name" name="song">
+    <input type="submit" value="search">
+</form>
+<a href="{{ spotify }}">spotify</a>
+{% for link in soundcloud %}
+
+<a href="{{ link.url }}">soundcloud</a>
+<br>
+{% endfor %}
+</body>
+</html>

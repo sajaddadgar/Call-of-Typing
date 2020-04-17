@@ -10,9 +10,7 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
-
-
-# import soundcloud
+from .song import *
 
 
 # Get authenticated user: request.user
@@ -37,7 +35,7 @@ def ranking(request):
     song_rank_array = []
     all_users_text = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)
     all_users_song = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)
-    
+
     for i in range(10):
         if i < len(all_users):
             text_rank = {'rank': i + 1, 'user': all_users_text[i], 'score': all_users_text[i].profile.text_score}
@@ -81,7 +79,6 @@ def register(request):
         return HttpResponseRedirect(reverse('type:home'))
 
 
-
 def signup(request):
     return render(request, 'registration/register.html')
 
@@ -109,7 +106,7 @@ def edit_profile(request):
 
 
 def change_password_page(request):
-    return render(request, 'registration/ChangePassword.html')
+    return render(request, 'registration/changePassword.html')
 
 
 def edit_password(request):
@@ -125,9 +122,9 @@ def edit_password(request):
             user.save()
             return HttpResponseRedirect(reverse('type:home'))
         else:
-            return render(request, 'registration/ChangePassword.html', stuff_for_front)
+            return render(request, 'registration/changePassword.html', stuff_for_front)
     else:
-        return render(request, 'registration/ChangePassword.html', stuff_for_front)
+        return render(request, 'registration/changePassword.html', stuff_for_front)
 
 
 def user_auth(request):
@@ -188,7 +185,7 @@ def ord_type(request):
 
 
 def song_type(request):
-    return render(request, 'type/SongType.html')
+    return render(request, 'type/songType.html')
 
 
 def change_song_score(request):
@@ -207,7 +204,7 @@ def music_upload(request):
     stuff_for_front = {
         'form': form
     }
-    return render(request, 'type/MusicUpload.html', stuff_for_front)
+    return render(request, 'type/musicUpload.html', stuff_for_front)
 
 
 def change_max_point(request):
@@ -252,4 +249,22 @@ def LCS(S1, S2):
                 C[i][j] = max(C[i - 1][j], C[i][j - 1])
 
     return C[L1][L2]
+
+
+def get_links(request):
+    singer_name = request.POST.get('singer')
+    song_title = request.POST.get('song')
+
+    if singer_name!=None and song_title!=None:
+        spotify = Spotify(singer_name, song_title)
+        soundcloud = SoundCloud(singer_name, song_title)
+        spotify_link = spotify.get_song_url()
+        soundcloud_link = soundcloud.get_songs_list()
+        stuff_for_front = {
+            'spotify': spotify_link,
+            'soundcloud': soundcloud_link
+        }
+    else:
+        return render(request, 'type/searchSong.html')
+    return render(request, 'type/searchSong.html', stuff_for_front)
 

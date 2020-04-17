@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('ranking/', views.ranking, name='ranking'),
-    
+
     path('accounts/logout/', views.log_out, name='logout'),
     path('accounts/register/', views.register, name='register'),
     path('accounts/signup/', views.signup, name='signup'),
@@ -22,8 +22,9 @@ urlpatterns = [
     path('type/change_max_point', views.change_max_point, name='change_max_point'),
     path('type/change_song_score', views.change_song_score, name='change_song_score'),
     path('type/normal/', views.ord_type, name='ord_type'),
-    path('type/SongType', views.song_type, name='song_type'),
+    path('type/song', views.song_type, name='song_type'),
     path('type/create/', views.createTextType, name='createTextType'),
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
     path('type/music/', views.music_upload, name='UploadMusic'),
+    path('type/song/search', views.get_links, name='song_search'),
 ]

@@ -1,7 +1,7 @@
 import requests
 from requests.compat import quote_plus
 from bs4 import BeautifulSoup
-from call_of_typing.call_of_typing.secrets import *
+from .token import *
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import lyricsgenius as genius
@@ -83,6 +83,3 @@ class Genius:
         data = genius.search_song(self.song, self.artist)
         return data.lyrics
 
-
-s = Genius('alan walker', 'faded')
-print(s.get_lyric())
