@@ -12,11 +12,17 @@
     <input type="text" placeholder="song name" name="song">
     <input type="submit" value="search">
 </form>
+{% if spotify %}
 <a href="{{ spotify }}">spotify</a>
 {% for link in soundcloud %}
 
 <a href="{{ link.url }}">soundcloud</a>
 <br>
 {% endfor %}
+<form action="{% url 'type:song_type' %}">
+    {% csrf_token %}
+    <input type="submit" value="start">
+</form>
+{% endif %}
 </body>
 </html>
