@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
@@ -11,10 +11,15 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
 from .song import *
-
+import time
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
+
+# global variables
+song_score = -1
+lyrics = ""
+# # #
 
 
 def home(request):
@@ -189,17 +194,23 @@ def song_type(request):
 
 
 def change_song_score(request):
+    global song_score
     current_user = request.user
     string = request.POST['user_typed_string']
-    global score
-    score = LCS(lyrics, string)
-    score = (score * 1000) // len(lyrics)
+    calculate_song_score(string)
     if current_user.is_authenticated:
-        if score > current_user.profile.song_max_point:
-            current_user.profile.song_max_point = score
-        current_user.profile.song_score += score
+        if song_score > current_user.profile.song_max_point:
+            current_user.profile.song_max_point = song_score
+        current_user.profile.song_score += song_score
         current_user.save()
+    return JsonResponse({'score': song_score})
 
+
+def show_song_score(request):
+    global song_score
+    time.sleep(2)
+    stuff_for_front = {'score': str(song_score)}
+    return render(request, 'type/songType.html', stuff_for_front)
 
 
 def music_upload(request):
@@ -232,6 +243,12 @@ def calculate_score(user, word_per_min, error_count):
     user.save()
 
 
+def calculate_song_score(string):
+    global song_score
+    global lyrics
+    song_score = LCS(lyrics, string)
+
+
 def createTextType(request):
     return render(request, 'type/create.html')
 
@@ -246,10 +263,10 @@ def LCS(S1, S2):
     L1 = len(S1)
     L2 = len(S2)
 
-    C = [[None for j in range(L2 + 1)] for i in range(L1 + 1)]
+    C = [[0 for j in range(L2 + 1)] for i in range(L1 + 1)]
 
-    for i in range(L1 + 1):
-        for j in range(L2 + 1):
+    for i in range(1, L1 + 1):
+        for j in range(1, L2 + 1):
             if i == 0 or j == 0:
                 C[i][j] = 0
             elif S2[j - 1] == S1[i - 1]:
@@ -272,6 +289,7 @@ def get_links(request):
         genius_obj = Genius(singer_name, song_title)
         global lyrics
         lyrics = genius_obj.get_lyric()
+        print(lyrics)
         stuff_for_front = {
             'spotify': spotify_link,
             'soundcloud': soundcloud_link

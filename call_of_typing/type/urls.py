@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('type/change_max_point', views.change_max_point, name='change_max_point'),
     path('type/change_song_score', views.change_song_score, name='change_song_score'),
+    path('type/show_song_score', views.show_song_score, name='show_song_score'),
     path('type/normal/', views.ord_type, name='ord_type'),
     path('type/song', views.song_type, name='song_type'),
     path('type/create/', views.createTextType, name='createTextType'),

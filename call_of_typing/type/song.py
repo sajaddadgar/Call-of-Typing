@@ -72,7 +72,6 @@ class Spotify:
 
 
 
-
 class Genius:
 
     def __init__(self, artist, song):
