@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>search songs</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/upload_song.css">
 </head>
 <body>
+<header>
+	<div class="container-fluid p-0">
+		<nav class="navbar navbar-expand-lg">
+    	<a class="navbar-brand myHover" href="{% url 'type:home' %}">Call Of Typing </a>
+    	</nav>
+    </div>
+</header>
+<div class="container emp-profile">
+    <form action="{% url 'type:song_search' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
+                <input type="text" class="form-control" placeholder="Artist name" name="singer">
+            </div>
+            <div class="col-md-6" >
+                <input type="text" class="form-control" placeholder="Song name" name="song">
+            </div>
+        </div>
+        <input type="submit" style="margin-left:130px" class="btnSubmit" value="Search">
+    </form>
 
-<form action="{% url 'type:song_search' %}" method="post">
-    {% csrf_token %}
-    <input type="text" placeholder="artist name" name="singer">
-    <input type="text" placeholder="song name" name="song">
-    <input type="submit" value="search">
-</form>
-{% if spotify %}
-<a href="{{ spotify }}">spotify</a>
-{% for link in soundcloud %}
+    {% if spotify %}
+    <p>
+        <b>Spotify:</b> <a href="{{ spotify }}">{{spotify}}</a>
+        <br/>
+        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}">{{soundcloud.url}}</a>
 
-<a href="{{ link.url }}">soundcloud</a>
-<br>
-{% endfor %}
-<form action="{% url 'type:song_type' %}">
-    {% csrf_token %}
-    <input type="submit" value="start">
-</form>
-{% endif %}
+            <form action="{% url 'type:song_type' %}">
+                {% csrf_token %}
+                <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">
+            </form>
+    </p>
+    {% endif %}
+</div>
+
 </body>
 </html>

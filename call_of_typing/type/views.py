@@ -289,7 +289,6 @@ def get_links(request):
         genius_obj = Genius(singer_name, song_title)
         global lyrics
         lyrics = genius_obj.get_lyric()
-        print(lyrics)
         stuff_for_front = {
             'spotify': spotify_link,
             'soundcloud': soundcloud_link

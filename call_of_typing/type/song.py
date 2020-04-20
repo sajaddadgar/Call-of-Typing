@@ -31,7 +31,7 @@ class SoundCloud:
                 data['url'] = SOUNDCLOUD_URL + link['href']
                 result.append(data)
 
-        return result
+        return result[0]
 
     def get_song_image(self, url):
         script = []

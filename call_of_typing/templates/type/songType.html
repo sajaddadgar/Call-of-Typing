@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="{% static 'css/normal.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 </head>
 <body>
     <div id="your-attempt" class="mono your-attempt"></div>
@@ -15,18 +17,19 @@
     <p>Your score is: {{score}} </p>
     {% endif %}
     <script>
-        let char_count=0;
         let typed_string = "";
+        let typed_string_with_blank = "";
         $(window).keypress(function (evt) {
             evt = evt || window.event;
             var charCode = evt.which || evt.keyCode;
             var charTyped = String.fromCharCode(charCode);
-            $("#your-attempt").append(charTyped);
             typed_string += (charTyped);
-            char_count++;
-            if (char_count % 60 == 0) {
-                $("#your-attempt").append('\n');
+            typed_string_with_blank += (charTyped);
+            if (typed_string.length % 60 == 0) {
+                typed_string_with_blank += '\n';
             }
+            $("#your-attempt").text(typed_string_with_blank + '|');
+
         });
         function finish(){
            $.post("{%url 'type:change_song_score' %}",{
