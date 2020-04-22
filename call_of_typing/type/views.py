@@ -1,6 +1,5 @@
-from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
@@ -11,13 +10,12 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
 from .song import *
-import time
+
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
 
 # global variables
-song_score = -1
 lyrics = ""
 # # #
 
@@ -34,24 +32,6 @@ def ranking(request):
     all_users = User.objects.filter(is_superuser=0)
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
     song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
-
-    '''
-    text_rank_array = []
-    song_rank_array = []
-    all_users_text = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)
-    all_users_song = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)
-
-    for i in range(10):
-        if i < len(all_users):
-            text_rank = {'rank': i + 1, 'user': all_users_text[i], 'score': all_users_text[i].profile.text_score}
-            text_rank_array.append(text_rank)
-
-    for i in range(10):
-        if i < len(all_users):
-            song_rank = {'rank': i + 1, 'user': all_users_song[i], 'score': all_users_song[i].profile.song_score}
-            song_rank_array.append(song_rank)
-    '''
-
     stuff_for_front = {
         'text_rank_array': text_rank_array,
         'song_rank_array': song_rank_array
@@ -190,27 +170,24 @@ def ord_type(request):
 
 
 def song_type(request):
-    return render(request, 'type/songType.html')
+    global lyrics
+    stuff_for_front = {
+        'lyrics_length': len(lyrics)
+    }
+    return render(request, 'type/songType.html', stuff_for_front)
 
 
 def change_song_score(request):
-    global song_score
+    global lyrics
     current_user = request.user
     string = request.POST['user_typed_string']
-    calculate_song_score(string)
+    song_score = LCS(lyrics, string)
     if current_user.is_authenticated:
         if song_score > current_user.profile.song_max_point:
             current_user.profile.song_max_point = song_score
         current_user.profile.song_score += song_score
         current_user.save()
-    return JsonResponse({'score': song_score})
-
-
-def show_song_score(request):
-    global song_score
-    time.sleep(2)
-    stuff_for_front = {'score': str(song_score)}
-    return render(request, 'type/songType.html', stuff_for_front)
+    return HttpResponse(song_score)
 
 
 def music_upload(request):
@@ -241,12 +218,6 @@ def calculate_score(user, word_per_min, error_count):
     if curr_point > user.profile.text_max_point:
         user.profile.text_max_point = curr_point
     user.save()
-
-
-def calculate_song_score(string):
-    global song_score
-    global lyrics
-    song_score = LCS(lyrics, string)
 
 
 def createTextType(request):
@@ -281,7 +252,7 @@ def get_links(request):
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
 
-    if singer_name!=None and song_title!=None:
+    if singer_name is not None and song_title is not None:
         spotify = Spotify(singer_name, song_title)
         soundcloud = SoundCloud(singer_name, song_title)
         spotify_link = spotify.get_song_url()
