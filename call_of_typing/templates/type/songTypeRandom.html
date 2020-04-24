@@ -13,6 +13,7 @@
 <body>
     <div id="your-attempt" class="mono your-attempt"></div>
     <input class="profile-edit-btn" type="submit" value="submit" onclick="finish()"/>
+    <p id="timer"> </p>
     <p id="score"> </p>
     <script>
         let typed_string = "";
@@ -34,19 +35,32 @@
             $("#your-attempt").text(typed_string_with_blank + '|');
 
         });
+        let duration = '{{ duration_ms }}';
+        duration = parseInt(duration);
+        let time = new Date().getTime() + duration + 30000;
+        let x = setInterval(function(){
+            var now = new Date().getTime();
+            var distance = time - now;
+            var minutes = Math.floor((distance  % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance  % (1000 * 60)) / 1000);
+            document.getElementById("timer").innerHTML= minutes + ':' + seconds;
+            if(distance < 0){
+                clearInterval(x);
+                finish();
+            }
+         });
         function finish(){
            $.post("{%url 'type:change_song_score' %}",{
                 csrfmiddlewaretoken: '{{ csrf_token }}',
                 user_typed_string: typed_string
             },function(response){
-               document.getElementById('score').innerHTML="Your score is: " + response;
+               document.getElementById('score').innerHTML = "Your score is: " + response;
                document.onkeydown = function (e) {
                     return false;
                };
                window.location.href = "{% url 'type:home' %}";
            });
 
-            //window.location.href="";
         }
     </script>
 </body>

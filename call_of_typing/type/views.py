@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
 from .form import SongForm
-from .models import Profile, OrdinaryText
+from .models import Profile, OrdinaryText, Track
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -16,6 +16,7 @@ from .song import *
 # Get profile of user: request.user.profile.max_point
 
 # global variables
+duration_ms = 0
 lyrics = ""
 # # #
 
@@ -169,12 +170,40 @@ def ord_type(request):
     return render(request, 'type/normal.html', stuff_for_front)
 
 
+def song_type_mode(request):
+    if request.method == 'POST':
+        mode = request.POST['mode']
+        if mode == 'random_song':
+            IDs = Track.objects.all().values_list('id', flat=True)
+            track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
+            links = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            stuff_for_front ={
+                'Artist_name': track_obj.Artist_name,
+                'track_title': track_obj.track_title,
+                'spotify': links[0],
+                'soundcloud': links[1]
+            }
+            return render(request, 'type/songTypeMode.html', stuff_for_front)
+
+        elif mode == 'favorite_song':
+            return render(request, 'type/searchSong.html')
+
+    return render(request, 'type/songTypeMode.html')
+
+
 def song_type(request):
     global lyrics
     stuff_for_front = {
         'lyrics_length': len(lyrics)
     }
     return render(request, 'type/songType.html', stuff_for_front)
+
+
+def song_type_random(request):
+    stuff_for_front = {
+        'duration_ms': duration_ms
+    }
+    return render(request, 'type/songTypeRandom.html', stuff_for_front)
 
 
 def change_song_score(request):
@@ -253,18 +282,27 @@ def get_links(request):
     song_title = request.POST.get('song')
 
     if singer_name is not None and song_title is not None:
+        links = get_links_2(singer_name, song_title)
+        stuff_for_front = {
+            'spotify': links[0],
+            'soundcloud': links[1]
+        }
+    else:
+        return render(request, 'type/searchSong.html')
+    return render(request, 'type/searchSong.html', stuff_for_front)
+
+
+def get_links_2(singer_name, song_title):
+    if singer_name is not None and song_title is not None:
         spotify = Spotify(singer_name, song_title)
+        global duration_ms
+        duration_ms = spotify.get_duration_ms()
+        print(duration_ms)
         soundcloud = SoundCloud(singer_name, song_title)
         spotify_link = spotify.get_song_url()
         soundcloud_link = soundcloud.get_songs_list()
         genius_obj = Genius(singer_name, song_title)
         global lyrics
         lyrics = genius_obj.get_lyric()
-        stuff_for_front = {
-            'spotify': spotify_link,
-            'soundcloud': soundcloud_link
-        }
-    else:
-        return render(request, 'type/searchSong.html')
-    return render(request, 'type/searchSong.html', stuff_for_front)
-
+        links = [spotify_link, soundcloud_link]
+        return links
