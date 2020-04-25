@@ -22,6 +22,7 @@ urlpatterns = [
     path('type/change_max_point', views.change_max_point, name='change_max_point'),
     path('type/change_song_score', views.change_song_score, name='change_song_score'),
     path('type/normal/', views.ord_type, name='ord_type'),
+    path('type/normal_result', views.normal_result, name='normal_result'),
     path('type/song/mode', views.song_type_mode, name='song_type_mode'),
     path('type/song/random', views.song_type_random, name='song_type_random'),
     path('type/song', views.song_type, name='song_type'),

@@ -190,8 +190,8 @@
             function (data, status) {
                 console.log("Data: " + data + "\nStatus: " + status);
             });
-        alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
-        window.location.href = "{% url 'type:home' %}";
+        window.location.href = "{% url 'type:normal_result' %}";
+        // alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
     }
 
     var window_focus;

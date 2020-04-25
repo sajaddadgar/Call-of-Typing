@@ -1,3 +1,5 @@
+from os import error
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -11,13 +13,16 @@ from django.db import IntegrityError
 from random import randint
 from .song import *
 
-
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
 
 # global variables
 duration_ms = 0
 lyrics = ""
+word_per_min = 0
+error_count = 0
+
+
 # # #
 
 
@@ -177,7 +182,7 @@ def song_type_mode(request):
             IDs = Track.objects.all().values_list('id', flat=True)
             track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
             links = get_links_2(track_obj.Artist_name, track_obj.track_title)
-            stuff_for_front ={
+            stuff_for_front = {
                 'Artist_name': track_obj.Artist_name,
                 'track_title': track_obj.track_title,
                 'spotify': links[0],
@@ -234,11 +239,30 @@ def music_upload(request):
 
 
 def change_max_point(request):
-    current_user = request.user
+    global error_count
+    global word_per_min
+
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
-    calculate_score(current_user, word_per_min, error_count)
-    return redirect('/')
+    if request.user:
+        current_user = request.user
+        calculate_score(current_user, word_per_min, error_count)
+
+    return HttpResponse()
+
+
+def normal_result(request):
+    global error_count
+    global word_per_min
+    current_user = None
+    if request.user:
+        current_user = request.user
+    stuff_for_front = {
+        'current_user': current_user,
+        'error_count': error,
+        'word_per_min': word_per_min,
+    }
+    return render(request, 'type/normal_result.html', stuff_for_front)
 
 
 def calculate_score(user, word_per_min, error_count):
