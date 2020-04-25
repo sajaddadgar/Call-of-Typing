@@ -31,5 +31,7 @@ urlpatterns = [
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
     path('type/music/', views.music_upload, name='UploadMusic'),
     path('type/song/search', views.get_links, name='song_search'),
+    path('type/group/', views.group_page, name='GroupPage'),
+    path('type/group/create', views.creating_group, name='CreateGroup'),
 
 ]

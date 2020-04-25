@@ -302,6 +302,24 @@ def add_new_text(request):
         OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
         return redirect('type:createTextType')
 
+def group_page(request):
+    user = request.user
+    stuff_for_front = {
+        'user': user
+    }
+    return render(request, 'type/GroupPage.html', stuff_for_front)
+
+
+def creating_group(request):
+    user = request.user
+    new_group = Group.objects.create(name=request.POST['name'])
+    new_group.user_set.add(user)
+    user.profile.group = new_group
+    user.save()
+
+    return HttpResponseRedirect(reverse('type:home'))
+
+
 
 def LCS(S1, S2):
     L1 = len(S1)

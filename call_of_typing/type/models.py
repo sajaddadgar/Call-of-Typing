@@ -3,10 +3,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import Group
+
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    group = models.OneToOneField(Group, on_delete=models.CASCADE, blank=True, null=True, default=None)
     text_max_point = models.IntegerField(default=0)
     text_score = models.IntegerField(default=0, null=True, blank=True)
     song_max_point = models.IntegerField(default=0, null=True, blank=True)
