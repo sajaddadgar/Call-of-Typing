@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Group Page</title>
+</head>
+<body>
+        <form method="post" action="{% url 'type:CreateGroup' %}">
+                    {% csrf_token %}
+            <input type="text" value="" name="lastName">
+            <button type="submit" class="btnSubmit"  style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">create</button>
+        </form>
+
+</body>
+</html>

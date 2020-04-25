@@ -26,8 +26,10 @@ urlpatterns = [
     path('type/song/mode', views.song_type_mode, name='song_type_mode'),
     path('type/song/random', views.song_type_random, name='song_type_random'),
     path('type/song', views.song_type, name='song_type'),
+    path('type/song_result', views.song_result, name='song_result'),
     path('type/create/', views.createTextType, name='createTextType'),
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
     path('type/music/', views.music_upload, name='UploadMusic'),
     path('type/song/search', views.get_links, name='song_search'),
+
 ]

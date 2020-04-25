@@ -1,5 +1,3 @@
-from os import error
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -11,7 +9,13 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
+from django.contrib.auth.models import Group
+
+
+# import soundcloud
+
 from .song import *
+
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -19,8 +23,11 @@ from .song import *
 # global variables
 duration_ms = 0
 lyrics = ""
+
 word_per_min = 0
 error_count = 0
+
+song_score = 0
 
 
 # # #
@@ -38,6 +45,7 @@ def ranking(request):
     all_users = User.objects.filter(is_superuser=0)
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
     song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
+
     stuff_for_front = {
         'text_rank_array': text_rank_array,
         'song_rank_array': song_rank_array
@@ -213,6 +221,7 @@ def song_type_random(request):
 
 def change_song_score(request):
     global lyrics
+    global song_score
     current_user = request.user
     string = request.POST['user_typed_string']
     song_score = LCS(lyrics, string)
@@ -221,7 +230,17 @@ def change_song_score(request):
             current_user.profile.song_max_point = song_score
         current_user.profile.song_score += song_score
         current_user.save()
-    return HttpResponse(song_score)
+    return HttpResponse()
+
+def song_result(request):
+    global song_score
+    user = request.user
+
+    stuff_for_front = {
+        'song_score' : song_score,
+        'user' : user
+    }
+    return render(request, 'type/song_result.html',stuff_for_front)
 
 
 def music_upload(request):
@@ -259,10 +278,11 @@ def normal_result(request):
         current_user = request.user
     stuff_for_front = {
         'current_user': current_user,
-        'error_count': error,
+        'error_count': error_count,
         'word_per_min': word_per_min,
     }
     return render(request, 'type/normal_result.html', stuff_for_front)
+
 
 
 def calculate_score(user, word_per_min, error_count):
