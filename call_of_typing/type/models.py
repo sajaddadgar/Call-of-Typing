@@ -28,11 +28,15 @@ class Profile(models.Model):
 class GroupMembers(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_text_score = models.IntegerField(default=0)
+    user_song_score = models.IntegerField(default=0)
 
 
 class GroupAdmin(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, primary_key=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    group_text_score = models.IntegerField(default=0)
+    group_song_score = models.IntegerField(default=0)
 
 
 class OrdinaryText(models.Model):
