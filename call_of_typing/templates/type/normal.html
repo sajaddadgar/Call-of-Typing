@@ -187,10 +187,12 @@
                 error_count: errors,
                 word_count: wordcount
             },
-            function (data, status) {
+            function (respone) {
                 console.log("Data: " + data + "\nStatus: " + status);
+                window.location.href = "{% url 'type:normal_result' %}";
+
             });
-        window.location.href = "{% url 'type:normal_result' %}";
+
         // alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
     }
 

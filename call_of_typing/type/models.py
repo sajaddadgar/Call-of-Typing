@@ -6,10 +6,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import Group
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    group = models.OneToOneField(Group, on_delete=models.CASCADE, blank=True, null=True, default=None)
     text_max_point = models.IntegerField(default=0)
     text_score = models.IntegerField(default=0, null=True, blank=True)
     song_max_point = models.IntegerField(default=0, null=True, blank=True)
@@ -25,6 +23,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class GroupMembers(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class GroupAdmin(models.Model):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE, primary_key=True)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class OrdinaryText(models.Model):
@@ -43,3 +51,4 @@ class Track(models.Model):
 
     def __str__(self):
         return self.track_title
+
