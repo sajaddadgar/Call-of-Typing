@@ -4,18 +4,16 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
 from .form import SongForm
-from .models import Profile, OrdinaryText, Track
+from .models import Profile, OrdinaryText, Track, GroupAdmin, GroupMembers
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
 from django.contrib.auth.models import Group
 
-
 # import soundcloud
 
 from .song import *
-
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -26,6 +24,7 @@ lyrics = ""
 
 word_per_min = 0
 error_count = 0
+text_score = 0
 
 song_score = 0
 
@@ -232,15 +231,16 @@ def change_song_score(request):
         current_user.save()
     return HttpResponse()
 
+
 def song_result(request):
     global song_score
     user = request.user
 
     stuff_for_front = {
-        'song_score' : song_score,
-        'user' : user
+        'song_score': song_score,
+        'user': user
     }
-    return render(request, 'type/song_result.html',stuff_for_front)
+    return render(request, 'type/song_result.html', stuff_for_front)
 
 
 def music_upload(request):
@@ -260,12 +260,19 @@ def music_upload(request):
 def change_max_point(request):
     global error_count
     global word_per_min
+    global text_score
 
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
+
     if request.user:
         current_user = request.user
         calculate_score(current_user, word_per_min, error_count)
+    else:
+        if word_per_min - error_count >= 0:
+            text_score = word_per_min - error_count
+        else:
+            text_score = 0
 
     return HttpResponse()
 
@@ -273,20 +280,30 @@ def change_max_point(request):
 def normal_result(request):
     global error_count
     global word_per_min
+    global text_score
+
     current_user = None
+
     if request.user:
         current_user = request.user
+        if word_per_min - error_count >= 0:
+            text_score = word_per_min - error_count
+        else:
+            text_score = 0
+
     stuff_for_front = {
         'current_user': current_user,
         'error_count': error_count,
         'word_per_min': word_per_min,
+        'text_score' : text_score
     }
     return render(request, 'type/normal_result.html', stuff_for_front)
 
 
-
 def calculate_score(user, word_per_min, error_count):
     curr_point = word_per_min - error_count
+    if curr_point < 0:
+        curr_point = 0
     user.profile.text_score += curr_point
     if curr_point > user.profile.text_max_point:
         user.profile.text_max_point = curr_point
@@ -302,6 +319,7 @@ def add_new_text(request):
         OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
         return redirect('type:createTextType')
 
+
 def group_page(request):
     user = request.user
     stuff_for_front = {
@@ -314,11 +332,10 @@ def creating_group(request):
     user = request.user
     new_group = Group.objects.create(name=request.POST['name'])
     new_group.user_set.add(user)
-    user.profile.group = new_group
+    GroupAdmin.group = new_group
+    GroupAdmin.admin = user
     user.save()
-
     return HttpResponseRedirect(reverse('type:home'))
-
 
 
 def LCS(S1, S2):
