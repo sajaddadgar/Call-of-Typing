@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/normal_result.css" />
+
+    <title>Result</title>
 </head>
+
 <body>
 
-<p>We are here.^___^
-</p>
-<P>YAAAAYY</P>
+
+    <div class="container result-container">
+        <div class="row">
+            <div class="col-md-6 result-form">
+                <h3>Result</h3>
+               <center><span class="badge badge-pill badge-info">کلمه/دقیقه :{{word_per_min}}</span></center>
+               <center><span class="badge badge-pill badge-info">خطا: {{error_count}}</span></center>
+
+
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
