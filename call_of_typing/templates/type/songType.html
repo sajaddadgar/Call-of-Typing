@@ -39,14 +39,13 @@
                 csrfmiddlewaretoken: '{{ csrf_token }}',
                 user_typed_string: typed_string
             },function(response){
-               document.getElementById('score').innerHTML="Your score is: " + response;
+               //document.getElementById('score').innerHTML="Your score is: " + response;
                document.onkeydown = function (e) {
                     return false;
                };
                window.location.href = "{% url 'type:song_result' %}";
            });
 
-            //window.location.href="";
         }
     </script>
 </body>

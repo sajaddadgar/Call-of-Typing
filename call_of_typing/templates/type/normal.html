@@ -74,11 +74,6 @@
         }
     }
 
-    /*
-     * The typing test stuff
-     */
-
-    //var character_length = 21;
     var index = 0;
     var letters = $("#input_text").val();
     var character_length = letters.length;
@@ -187,8 +182,7 @@
                 error_count: errors,
                 word_count: wordcount
             },
-            function (status, data) {
-                console.log("Data: " + data + "\nStatus: " + status);
+            function (response) {
                 window.location.href = "{% url 'type:normal_result' %}";
             });
 

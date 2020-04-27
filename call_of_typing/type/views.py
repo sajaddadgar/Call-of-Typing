@@ -24,6 +24,7 @@ lyrics = ""
 
 word_per_min = 0
 error_count = 0
+word_count = 0
 text_score = 0
 
 song_score = 0
@@ -229,7 +230,7 @@ def change_song_score(request):
             current_user.profile.song_max_point = song_score
         current_user.profile.song_score += song_score
         current_user.save()
-    return HttpResponse()
+    return HttpResponse('success')
 
 
 def song_result(request):
@@ -259,22 +260,21 @@ def music_upload(request):
 
 def change_max_point(request):
     global error_count
+    global word_count
     global word_per_min
     global text_score
 
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
+    word_count = int(request.POST['word_count'])
+    current_user = request.user
 
-    if request.user:
-        current_user = request.user
-        calculate_score(current_user, word_per_min, error_count)
+    if current_user.is_authenticated:
+        calculate_text_score(current_user)
     else:
-        if word_per_min - error_count >= 0:
-            text_score = word_per_min - error_count
-        else:
-            text_score = 0
+        text_score = word_per_min*word_count
 
-    return HttpResponse()
+    return HttpResponse('success')
 
 
 def normal_result(request):
@@ -282,28 +282,18 @@ def normal_result(request):
     global word_per_min
     global text_score
 
-    current_user = None
-
-    if request.user:
-        current_user = request.user
-        if word_per_min - error_count >= 0:
-            text_score = word_per_min - error_count
-        else:
-            text_score = 0
-
     stuff_for_front = {
-        'current_user': current_user,
         'error_count': error_count,
         'word_per_min': word_per_min,
-        'text_score' : text_score
+        'text_score': text_score
     }
     return render(request, 'type/normal_result.html', stuff_for_front)
 
 
-def calculate_score(user, word_per_min, error_count):
-    curr_point = word_per_min - error_count
-    if curr_point < 0:
-        curr_point = 0
+def calculate_text_score(user):
+    global word_per_min
+    global word_count
+    curr_point = word_per_min*word_count
     user.profile.text_score += curr_point
     if curr_point > user.profile.text_max_point:
         user.profile.text_max_point = curr_point
@@ -376,7 +366,6 @@ def get_links_2(singer_name, song_title):
         spotify = Spotify(singer_name, song_title)
         global duration_ms
         duration_ms = spotify.get_duration_ms()
-        print(duration_ms)
         soundcloud = SoundCloud(singer_name, song_title)
         spotify_link = spotify.get_song_url()
         soundcloud_link = soundcloud.get_songs_list()
