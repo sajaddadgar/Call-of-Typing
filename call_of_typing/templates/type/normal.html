@@ -30,37 +30,27 @@
     <a href="#" id="reset">Reset</a> | <a href="{%url 'type:ord_type' %}" id="change">Change text</a> | <a href="#" id="pause">Pause II</a>
 </div>
 
-
+{% if user.is_authenticated %}
 <p style="color: white">@{{ user.username }}<p>
-
+{% endif %}
 
 
 <script>
-
-
-    /*
- * The animation at the start, made from my previous pen
- * https://codepen.io/EightArmsHQ/pen/HJsav
- */
 
     // The base speed per character
     time_setting = 30;
     // How much to 'sway' (random * this-many-milliseconds)
     random_setting = 100;
     // The text to use NB use \n not real life line breaks!
-    input_text = "متن زیر رو چقدر سریع میتونی تایپ کنی؟";
+    input_text = "";
     // Where to fill up
     target_setting = $("#output");
-    // Launch that function!
     type(input_text, target_setting, 0, time_setting, random_setting);
 
     function type(input, target, current, time, random) {
-        // If the current count is larger than the length of the string, then for goodness sake, stop
         if (current > input.length) {
-            // Write Complete
             console.log("Complete.");
         } else {
-            // console.log(current)
             // Increment the marker
             current += 1;
             // fill the target with a substring, from the 0th character to the current one
@@ -95,13 +85,16 @@
         evt = evt || window.event;
         var charCode = evt.which || evt.keyCode;
         var charTyped = String.fromCharCode(charCode);
-        if (charTyped == letters.charAt(index)) {
-            if (charTyped == " ") {
+        if (charTyped === letters.charAt(index)) {
+            if (charTyped === " ") {
                 wordcount++;
                 $("#wordcount").text(wordcount);
             }
             index++;
             current_string = letters.substring(index, index + character_length);
+            if(current_string[0] === ' '){
+                current_string += ' ';
+            }
             $("#target").text(current_string);
             $("#your-attempt").append(charTyped);
             if (index == letters.length) {
@@ -186,7 +179,6 @@
                 window.location.href = "{% url 'type:normal_result' %}";
             });
 
-        // alert("Congratulations!\nWords per minute: " + wpm + "\nWordcount: " + wordcount + "\nErrors:" + errors);
     }
 
     var window_focus;
