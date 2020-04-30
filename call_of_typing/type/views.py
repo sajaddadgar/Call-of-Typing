@@ -272,7 +272,7 @@ def change_max_point(request):
     if current_user.is_authenticated:
         calculate_text_score(current_user)
     else:
-        text_score = word_per_min*word_count
+        text_score = word_per_min * word_count
 
     return HttpResponse('success')
 
@@ -282,10 +282,23 @@ def normal_result(request):
     global word_per_min
     global text_score
 
+    all_users = User.objects.filter(is_superuser=0)
+
+    # all_sorted_user = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)
+
+    rank_array = []
+    current_user = request.user
+
+    if current_user.is_authenticated:
+        rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
+
+
     stuff_for_front = {
+
         'error_count': error_count,
         'word_per_min': word_per_min,
-        'text_score': text_score
+        'text_score': text_score,
+        'rank_array': rank_array,
     }
     return render(request, 'type/normal_result.html', stuff_for_front)
 
@@ -293,7 +306,7 @@ def normal_result(request):
 def calculate_text_score(user):
     global word_per_min
     global word_count
-    curr_point = word_per_min*word_count
+    curr_point = word_per_min * word_count
     user.profile.text_score += curr_point
     if curr_point > user.profile.text_max_point:
         user.profile.text_max_point = curr_point

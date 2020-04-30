@@ -7,7 +7,7 @@
 
 .result-form {
     padding: 5%;
-    background: -webkit-linear-gradient(bottom, #3294d6, #012f40);
+    background: -webkit-linear-gradient(bottom, #016d84, #06252b);
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     margin-left: 23%;
 
@@ -18,8 +18,15 @@
     padding: 5%;
     margin-top: 4%;
     width: 60%;
-    background-color: #194564;
+    background-color: #26282b;
 }
+
+.result-table{
+    margin-top: 4%;
+    background-color: #06252b;
+
+}
+
 
 .result-form h3 {
     text-align: center;
@@ -30,6 +37,10 @@
     padding: 10%;
 }
 
+.restart_btn{
+    margin-top: 4%;
+    align-content: center;
+}
 .btnSubmit {
     width: 50%;
     border-radius: 1rem;
