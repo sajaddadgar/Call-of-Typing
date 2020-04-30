@@ -34,9 +34,9 @@
 
     {% if spotify %}
     <p>
-        <b>Spotify:</b> <a href="{{ spotify }}">{{spotify}}</a>
+        <b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>
         <br/>
-        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}">{{soundcloud.url}}</a>
+        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>
 
             <form action="{% url 'type:song_type' %}">
                 {% csrf_token %}
