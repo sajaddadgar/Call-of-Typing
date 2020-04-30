@@ -49,7 +49,7 @@
                     <tbody>
                     {% for user in rank_array %}
                     <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
+                        <th scope="row">{{ user.profile.get_text_rank }}</th>
                         <td>{{ user.username }}</td>
                         <td>{{ user.profile.text_score }}</td>
                     </tr>

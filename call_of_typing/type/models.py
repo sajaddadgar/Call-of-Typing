@@ -24,6 +24,16 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def get_text_rank(self):
+        scores = Profile.objects.all().values_list('text_score', flat=True)
+        scores = sorted(set(scores), reverse=True)
+        return scores.index(self.text_score) + 1
+
+    def get_song_rank(self):
+        scores = Profile.objects.all().values_list('song_score', flat=True)
+        scores = sorted(set(scores), reverse=True)
+        return scores.index(self.song_score) + 1
+
 
 class GroupMembers(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
@@ -40,7 +50,7 @@ class GroupAdmin(models.Model):
 
 
 class OrdinaryText(models.Model):
-    content = models.CharField(max_length=1000, null=True)
+    content = models.CharField(max_length=1000, null=True,)
     creation_date = models.DateField(auto_now=True)
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
@@ -55,4 +65,5 @@ class Track(models.Model):
 
     def __str__(self):
         return self.track_title
+
 

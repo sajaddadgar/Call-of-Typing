@@ -44,14 +44,14 @@
                         <tr>
                             <th scope="col">Rank</th>
                             <th scope="col">User</th>
-                            <th scope="col">Scores</th>
+                            <th scope="col">Score</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {% for user in text_rank_array %}
                         <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
+                            <th scope="row">{{ user.profile.get_text_rank }}</th>
                             <td>{{ user.username }}</td>
                             <td>{{ user.profile.text_score }}</td>
                         </tr>
@@ -69,14 +69,14 @@
                         <tr>
                             <th scope="col">Rank</th>
                             <th scope="col">User</th>
-                            <th scope="col">Scores</th>
+                            <th scope="col">Score</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {% for user in song_rank_array %}
                         <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
+                            <th scope="row">{{ user.profile.get_song_rank }}</th>
                             <td>{{ user.username }}</td>
                             <td>{{ user.profile.song_score }}</td>
                         </tr>

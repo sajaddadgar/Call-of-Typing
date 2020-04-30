@@ -58,10 +58,13 @@
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
-                    <h5>
+                    <h5 style="padding-bottom: 20px">
                         {{user.first_name}} {{user.last_name}}
                     </h5>
-                    <p class="proile-rating" style="margin-left: 292px; padding-bottom: 12px">رتبه فعلی : <span> نامشخص </span></p>
+                    <p>
+                        <span class="proile-rating" style="margin-left: 190px "> رتبه فعلی(متن) : <span>{{user.profile.get_text_rank}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px">رتبه فعلی(آهنگ) : <span>{{user.profile.get_song_rank}} </span> </span>
+                    </p>
 
                     <p>
                         <span class="proile-rating" style="margin-left: 145px"> بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}  </span> </span>
