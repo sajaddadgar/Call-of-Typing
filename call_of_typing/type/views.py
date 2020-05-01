@@ -369,21 +369,22 @@ def get_links(request):
             'spotify': links[0],
             'soundcloud': links[1]
         }
+        return render(request, 'type/searchSong.html', stuff_for_front)
     else:
         return render(request, 'type/searchSong.html')
-    return render(request, 'type/searchSong.html', stuff_for_front)
 
 
 def get_links_2(singer_name, song_title):
-    if singer_name is not None and song_title is not None:
-        spotify = Spotify(singer_name, song_title)
-        global duration_ms
-        duration_ms = spotify.get_duration_ms()
-        soundcloud = SoundCloud(singer_name, song_title)
-        spotify_link = spotify.get_song_url()
-        soundcloud_link = soundcloud.get_songs_list()
-        genius_obj = Genius(singer_name, song_title)
-        global lyrics
-        lyrics = genius_obj.get_lyric()
-        links = [spotify_link, soundcloud_link]
-        return links
+    spotify = Spotify(singer_name, song_title)
+    global duration_ms
+    duration_ms = spotify.get_duration_ms()
+    soundcloud = SoundCloud(singer_name, song_title)
+    spotify_link = spotify.get_song_url()
+    soundcloud_link = soundcloud.get_songs_list()
+    genius_obj = Genius(singer_name, song_title)
+    global lyrics
+    lyrics = genius_obj.get_lyrics()
+    links = [spotify_link, soundcloud_link]
+    return links
+
+

@@ -28,8 +28,7 @@
 
             </h3>
 
-            <center><span class="badge badge-pill badge-info">امتیاز :{{song_score}}</span></center>
-            <center><span class="badge badge-pill badge-info">خطا: </span></center>
+            <center><span class="badge badge-pill badge-info" style="font-family: Arial; font-size: 25px">Score: {{song_score}}</span></center>
             {% if user.is_authenticated %}
             <div class="result-table">
                 <table class="table table-dark" id="type-table">
@@ -60,7 +59,7 @@
             </div>
             {% endif %}
             <center><div class="restart_btn">
-                <a href="{% url 'type:song_type' %}">
+                <a href="{% url 'type:song_type_mode' %}">
                 <button class="btn btn-dark px-5 py-2 primary-btn">
                     Restart
                 </button>

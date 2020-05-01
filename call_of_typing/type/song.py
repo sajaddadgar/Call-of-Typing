@@ -78,7 +78,7 @@ class Genius:
         self.artist = artist
         self.song = song
 
-    def get_lyric(self):
+    def get_lyrics(self):
         data = genius.search_song(self.song, self.artist)
         return data.lyrics
 
