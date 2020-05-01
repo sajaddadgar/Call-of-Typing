@@ -35,25 +35,28 @@
 
             <div id="tables">
 
-                <table class="table table-dark" id="type-table">
+                <table class="table table-dark" id="type-table" align="right">
 
                     <thead>
-                        <tr>
-                            <th scope="col">Text Type Ranking</th>
+                        <tr align="right">
+                            <th></th>
+                            <th></th>
+                            <th scope="col" style="font-family: '2  Koodak'">رتبه بندی تایپ متن</th>
                         </tr>
-                        <tr>
-                            <th scope="col">Rank</th>
-                            <th scope="col">User</th>
-                            <th scope="col">Score</th>
+                        <tr style="font-family: '2  Koodak'" align="right">
+                            <th scope="col">امتیاز</th>
+                            <th scope="col">کاربر</th>
+                            <th scope="col">رتبه</th>
                         </tr>
+
                     </thead>
 
                     <tbody>
                         {% for user in text_rank_array %}
-                        <tr>
-                            <th scope="row">{{ user.profile.get_text_rank }}</th>
+                        <tr align="right">
+                            <th scope="row">{{ user.profile.text_score }}</th>
                             <td>{{ user.username }}</td>
-                            <td>{{ user.profile.text_score }}</td>
+                            <td>{{ user.profile.get_text_rank }}</td>
                         </tr>
 
                         {% endfor %}
@@ -63,22 +66,24 @@
 
                 <table class="table table-dark" id="song-table" style="display: none;">
                     <thead>
-                        <tr>
-                            <th scope="col">Song Type Ranking</th>
+                        <tr align="right">
+                            <th></th>
+                            <th></th>
+                            <th scope="col" style="font-family: '2  Koodak'">رتبه بندی تایپ آهنگ</th>
                         </tr>
-                        <tr>
-                            <th scope="col">Rank</th>
-                            <th scope="col">User</th>
-                            <th scope="col">Score</th>
+                        <tr style="font-family: '2  Koodak'" align="right">
+                            <th scope="col">امتیاز</th>
+                            <th scope="col">کاربر</th>
+                            <th scope="col">رتبه</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {% for user in song_rank_array %}
-                        <tr>
-                            <th scope="row">{{ user.profile.get_song_rank }}</th>
+                        <tr align="right">
+                            <th scope="row">{{ user.profile.song_score }}</th>
                             <td>{{ user.username }}</td>
-                            <td>{{ user.profile.song_score }}</td>
+                            <td>{{ user.profile.get_song_rank }}</td>
                         </tr>
 
                         {% endfor %}
@@ -88,11 +93,11 @@
             </div>
 
 
-            <div class="flex-box-buttons">
-                <button class="btn btn-dark" onclick="type_ranking()">Type ranking</button>
-                <button class="btn btn-dark" onclick="song_ranking()">Song ranking</button>
-                <button class="btn btn-dark" onclick="group_ranking()">Group ranking</button>
-                <button class="btn btn-dark" onclick="total_ranking()">Total ranking</button>
+            <div class="flex-box-buttons" style="font-family: '2  Koodak'">
+                <button class="btn btn-dark" onclick="total_ranking()">رتبه بندی کلی</button>
+                <button class="btn btn-dark" onclick="group_ranking()">رتبه بندی گروه ها</button>
+                <button class="btn btn-dark" onclick="song_ranking()">رتبه بندی آهنگ</button>
+                <button class="btn btn-dark" onclick="type_ranking()">رتبه بندی متن</button>
             </div>
 
 
