@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/normal_result.css"/>
+
+    <title>Result</title>
 </head>
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+    </div>
+</header>
+
 <body>
 
+
+<div class="container result-container">
+    <div class="row">
+        <div class="col-md-6 result-form">
+            <h3>Result
+
+            </h3>
+
+            <center><span class="badge badge-pill badge-info">امتیاز :{{song_score}}</span></center>
+            <center><span class="badge badge-pill badge-info">خطا: </span></center>
+            {% if user.is_authenticated %}
+            <div class="result-table">
+                <table class="table table-dark" id="type-table">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">Text Type Ranking</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Scores</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for user in rank_array %}
+                    <tr>
+                        <th scope="row">{{ user.profile.get_song_rank }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.profile.song_score }}</td>
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+            {% endif %}
+            <center><div class="restart_btn">
+                <a href="{% url 'type:song_type' %}">
+                <button class="btn btn-dark px-5 py-2 primary-btn">
+                    Restart
+                </button>
+            </a>
+            </div></center>
+
+
+
+        </div>
+    </div>
+</div>
+
 </body>
+
 </html>
