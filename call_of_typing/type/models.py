@@ -61,7 +61,7 @@ class OrdinaryText(models.Model):
 class Track(models.Model):
     track_title = models.CharField(max_length=500)
     Artist_name = models.CharField(max_length=500, null=True, blank=True)
-    song = models.FileField(upload_to='songs/files/')
+    song = models.FileField(upload_to='songs/files/', null=True)
 
     def __str__(self):
         return self.track_title
