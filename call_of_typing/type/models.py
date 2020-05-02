@@ -25,13 +25,15 @@ class Profile(models.Model):
         return self.user.username
 
     def get_text_rank(self):
-        scores = Profile.objects.all().values_list('text_score', flat=True)
-        scores = sorted(set(scores), reverse=True)
+        scores = list(Profile.objects.all().values_list('text_score', flat=True))
+        scores = sorted(scores, reverse=True)
+        # scores = sorted(set(scores), reverse=True)
         return scores.index(self.text_score) + 1
 
     def get_song_rank(self):
-        scores = Profile.objects.all().values_list('song_score', flat=True)
-        scores = sorted(set(scores), reverse=True)
+        scores = list(Profile.objects.all().values_list('song_score', flat=True))
+        scores = sorted(scores, reverse=True)
+        # scores = sorted(set(scores), reverse=True)
         return scores.index(self.song_score) + 1
 
 
