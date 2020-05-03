@@ -32,5 +32,6 @@ urlpatterns = [
     path('type/song/search', views.get_links, name='song_search'),
     path('type/group/', views.group_page, name='GroupPage'),
     path('type/group/create', views.creating_group, name='CreateGroup'),
+    path('type/song/favorite', views.get_to_favorite_song, name='favoriteSong'),
 
 ]

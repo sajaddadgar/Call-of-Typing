@@ -7,53 +7,59 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/upload_song.css">
+    <link rel="stylesheet" href="../../static/css/uploadSong.css">
 </head>
 <body>
-    <header>
-        <div class="container-fluid p-0">
-            <nav class="navbar navbar-expand-lg">
+<header>
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand myHover" href="{% url 'type:home' %}">Call Of Typing </a>
-            </nav>
-        </div>
-    </header>
-    <div class="container emp-profile">
-         <form action="{% url 'type:song_type_mode' %}" method="post">
-                {% csrf_token %}
-                <input type="radio" name="mode" id="random_song" value="random_song">
-                <label for="random_song" style="font-family: 'B Mehr'"> آهنگ رندوم </label> <br/>
-                <input type="radio" name="mode" id="favorite_song" value="favorite_song">
-                <label for="favorite_song" style="font-family: 'B Mehr'"> جستجو آهنگ </label> <br/>
-                <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Let's Go">
-         </form>
-        {% if spotify %}
-        <p>
-            <b> Artist: </b> {{Artist_name}} <br/>
-            <b> Track: </b> {{track_title}} <br/>
-            <b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>
-            <br/>
-            <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>
-            <p id="timer" > </p>
-                <form action="{% url 'type:song_type_random' %}">
-                    {% csrf_token %}
-                    <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">
-                </form>
-         </p>
-        <script>
-            let time = new Date().getTime() + 30000;
-            let x = setInterval(function(){
-                var now = new Date().getTime();
-                var distance = time - now;
-                var seconds = Math.floor(distance/1000);
-                document.getElementById("timer").innerHTML= seconds + 's';
-                if(distance < 0){
-                    clearInterval(x);
-                    window.location.href="{% url 'type:song_type_random' %}";
-                }
-            })
-        </script>
-        {% endif %}
+        </nav>
     </div>
+</header>
+<div class="container emp-profile">
+    <a href="{% url 'type:favoriteSong' %}">
+        <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ رندوم</button>
+    </a>
+    <a href="{% url 'type:favoriteSong' %}">
+        <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ مورد آهنگ</button>
+    </a>
+    <form action="{% url 'type:song_type_mode' %}" method="post">
+        {% csrf_token %}
+        <input type="radio" name="mode" id="random_song" value="random_song">
+        <label for="random_song" style="font-family: 'B Mehr'"> آهنگ رندوم </label> <br/>
+        <input type="radio" name="mode" id="favorite_song" value="favorite_song">
+        <label for="favorite_song" style="font-family: 'B Mehr'"> جستجو آهنگ </label> <br/>
+        <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Let's Go">
+    </form>
+    {% if spotify %}
+    <p>
+        <b> Artist: </b> {{Artist_name}} <br/>
+        <b> Track: </b> {{track_title}} <br/>
+        <b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>
+        <br/>
+        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>
+    <p id="timer"></p>
+    <form action="{% url 'type:song_type_random' %}">
+        {% csrf_token %}
+        <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">
+    </form>
+    </p>
+    <script>
+        let time = new Date().getTime() + 30000;
+        let x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = time - now;
+            var seconds = Math.floor(distance / 1000);
+            document.getElementById("timer").innerHTML = seconds + 's';
+            if (distance < 0) {
+                clearInterval(x);
+                window.location.href = "{% url 'type:song_type_random' %}";
+            }
+        })
+    </script>
+    {% endif %}
+</div>
 
 </body>
 </html>

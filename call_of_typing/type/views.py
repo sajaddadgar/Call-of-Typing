@@ -11,10 +11,10 @@ from django.db import IntegrityError
 from random import randint
 from django.contrib.auth.models import Group
 import re
+from .song import *
 
 # import soundcloud
 
-from .song import *
 
 # Get authenticated user: request.user
 # Get profile of user: request.user.profile.max_point
@@ -395,3 +395,7 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     links = [spotify_link, soundcloud_link]
     return links
+
+
+def get_to_favorite_song(request):
+    return render(request, 'type/favoriteSongType.html')

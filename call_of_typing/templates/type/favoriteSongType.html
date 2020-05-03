@@ -1,0 +1,111 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            background: -webkit-linear-gradient(bottom, #016d84, #06252b);
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 5px;
+        }
+
+        .row {
+            margin-top: 150px;
+            margin-left: 25%;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .slideimage {
+            opacity: 0.5;
+        }
+
+        .bottom-left {
+            font-family: "B Mehr";
+            color: white;
+            position: absolute;
+            bottom: 430px;
+            left: 605px;
+        }
+
+        .bottom-left-text {
+            font-family: "B Mehr";
+            font-size: 14px;
+            color: white;
+            position: absolute;
+            bottom: 380px;
+            left: 450px;
+            border-bottom: 1px solid white;
+        }
+
+        .bottom-right {
+            font-family: "B Mehr";
+            color: white;
+            position: absolute;
+            bottom: 430px;
+            left: 922px;
+        }
+
+        .bottom-right-text {
+            font-family: "B Mehr";
+            font-size: 14px;
+            color: white;
+            position: absolute;
+            bottom: 380px;
+            left: 795px;
+            border-bottom: 1px solid white;
+        }
+
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 500px) {
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--<h2>Responsive "Side-by-Side" Images</h2>-->
+<!--<p>How to create side-by-side images with the CSS float property. On screens that are 500px wide or less, the images will stack on top of each other instead of next to each other:</p>-->
+<!--<p>Resize the browser window to see the effect.</p>-->
+<div class="row">
+    <div class="column">
+        <img class="slideimage" src="../../static/img/spotify.jpg" alt="Snow"
+                         style="width:100%; border: 5px solid black" height="300px">
+    </div>
+    <a href="#"><button class="bottom-left btn btn-primary">Spotify</button></a>
+    <p class="bottom-left-text">آهنگ مورد علاقتو از اسپوتیفای انتخاب کن</p>
+
+    <div class="column">
+        <img class="slideimage" src="../../static/img/soundcloud.jpg" alt="Mountains"
+                         style="width:100%;border: 5px solid black" height="300px">
+    </div>
+    <a href="#"><button class="bottom-right btn btn-primary">Soundcloud</button></a>
+    <p class="bottom-right-text">آهنگ مورد علاقتو از ساوندکلاود انتخاب کن</p>
+</div>
+
+</body>
+</html>
