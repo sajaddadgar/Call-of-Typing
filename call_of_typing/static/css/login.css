@@ -1,46 +1,84 @@
 .login-container {
     margin-top: 1%;
     margin-bottom: 5%;
-
 }
-
 
 .login-form {
     padding: 5%;
-    background: -webkit-linear-gradient(bottom, #016d84, #06252b);
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     margin-left: 23%;
-
 }
 
 .login-form h3 {
     text-align: center;
-    color: #c3ecff;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-size: 40px;
 }
 
 .login-container form {
     padding: 10%;
 }
 
-.btnSubmit {
-    width: 50%;
-    border-radius: 1rem;
-    margin-top: 5px;
-    padding: 1.5%;
+.test-input {
+
+    width: 90%;
+    /* padding: 15px 22px; */
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: #CAE4DB;
     border: none;
+    border-bottom: 4px solid #DCAE1D;
+    text-align: right;
+    padding: 2%;
+    color: #00303F;
+    font-family: 'B Mehr';
+}
+
+
+.test-input:focus {
+    background-color: #DCAE1D;
+    border: none;
+    width: 100%;
+}
+
+::placeholder {
+    margin-right: 4px;
+    color: #00303F;
+    font-family: 'B Mehr';
+
+}
+
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
     cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
 }
 
-.login-form .btnSubmit {
+.nav-link{
+    color:  #00303F;
+    font-family:'B Mehr';
     font-weight: 600;
-    color: #c3ecff;
-    background-color: #013d53;
+}
+.login-error{
+    color: #750000;
+    font-family:'B Mehr';
+    font-size: 17px;
 }
 
-.login-form .ForgetPwd {
 
-    color: #9dd9ff;
+.forget-link {
+    color: #00303F;
+    font-family: 'B Mehr';
     font-weight: 600;
-    text-decoration: none;
-
 }

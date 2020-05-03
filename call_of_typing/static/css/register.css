@@ -1,29 +1,59 @@
 .note {
-    margin-top: 5%;
+    margin-top: 1%;
     text-align: center;
     height: 80px;
-    background: #3405db;
+    background: #00303F;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    color: #fff;
+    color: #CAE4DB;
     font-weight: bold;
     line-height: 80px;
+    border: none;
+    padding: 5%;
 }
 
+.note h3 {
+    text-align: center;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-size: 40px;
+}
+.register-form{
+     margin-right: 1px;
+}
 .test-input {
 
-    background-color: #013d53;
+    width: 90%;
+    /* padding: 15px 22px; */
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: #CAE4DB;
+    border: none;
+    border-bottom: 4px solid #DCAE1D;
+    text-align: right;
+    padding: 2%;
+    color: #00303F;
+    font-family: 'B Mehr';
+}
+
+.test-input:focus {
+    background-color: #DCAE1D;
+    border: none;
+    width: 100%;
+}
+
+::placeholder {
+    margin-right: 4px;
+    color: #00303F;
+    font-family: 'B Mehr';
+
 }
 
 .form-content {
-
     padding: 5%;
-    border: 1px solid #ced4da;
+    border: none;
     margin-bottom: 2%;
-    /* margin-left: 24%; */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    background: -webkit-linear-gradient(bottom, #016d84, #06252b);
-
-
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
 }
 
 .form-control {
@@ -34,10 +64,20 @@
     border: none;
     border-radius: 1.5rem;
     padding: 1%;
-    width: 20%;
+    width: 25%;
     cursor: pointer;
-    background: #0062cc;
-    color: #fff;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+
+.nav-link{
+    color:  #00303F;
+    font-family:'B Mehr';
+    font-weight: 600;
 }
 
 .col-md-6 {

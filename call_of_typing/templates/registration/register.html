@@ -11,7 +11,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/new_register.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/register.css?version=51">
 
     <title>Register</title>
     <style>
@@ -52,15 +52,15 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color:  #00303F; font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
     </div>
 </header>
 
-<div class="container register-form" style="margin-right: 1px">
+<div class="container register-form">
     <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
-            <h3 style=" font-family:'B Mehr' ; font-size: 40px">ثبت نام</h3>
+            <h3>ثبت نام</h3>
 
         </div>
 
@@ -69,11 +69,11 @@
 
                 {% if error %}
                 <div class="form-control alert alert-danger" role="alert">
-                    <center style="color: red; font-family: 'B Mehr'">خطایی وجود دارد</center>
+                    <center style="color: #750000; font-family: 'B Mehr'">خطایی وجود دارد</center>
                 </div>
                 {% else %} {% if integrity_error %}
                 <div class="form-control alert alert-danger" role="alert">
-                    <center style="color: red; font-family: 'B Mehr'">نام کاربری تکرای است</center>
+                    <center style="color: #750000; font-family: 'B Mehr'">نام کاربری تکرای است</center>
                 </div>
                 {% endif %} {% endif %}
                 <div class="col-md-6">

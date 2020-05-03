@@ -10,13 +10,23 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/new_login.css" />
+
+<link rel="stylesheet" type="text/css" href="../../static/css/login.css?version=51">
+
 
     <title>login</title>
     <style>
-        input[type='text']::placeholder{ text-align:right; font-family: 'B Mehr'}
-        input[type='password']::placeholder{ text-align: right; font-family: 'B Mehr'}
-        body{
+        input[type='text']::placeholder {
+            text-align: right;
+            font-family: 'B Mehr'
+        }
+
+        input[type='password']::placeholder {
+            text-align: right;
+            font-family: 'B Mehr'
+        }
+
+        body {
             background-image: url("../../static/img/LOGINBAKC.jpg");
             background-repeat: no-repeat;
             background-size: cover;
@@ -27,40 +37,39 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color:  #06252b; font-family:'B Mehr';font-weight: 600;">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}"
+           >صفحه اصلی</a>
     </div>
 </header>
 
 <body>
 
-    <div class="container login-container">
-        <div class="row">
-            <div class="col-md-6 login-form">
-                <h3 style=" font-family:'B Mehr' ; font-size: 40px" >ورود</h3>
-                <form method="post" action="{% url 'type:signin' %}">
-                    {% csrf_token %}
-                    {% if error %}
-                    <div class="form-control alert alert-danger" role="alert">
-                        <center style="color: red; font-family:'B Mehr'; font-size: 17px">نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</center>
-                    </div>
-                    {% endif %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder=" نام کاربری" name="username" value="">
-                    </div>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form">
+            <h3 >ورود</h3>
+            <form method="post" action="{% url 'type:signin' %}">
+                {% csrf_token %}
+                {% if error %}
+                <center   > <p class="login-error" style="color: #750000;
+    font-family:'B Mehr';
+    font-size: 17px;">نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</p></center>
 
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder=" رمز عبور" name="password" value="">
-                    </div>
+                {% endif %}
+                <input type="text" class="test-input" placeholder=" نام کاربری" name="username" value="">
 
-                    <div class="form-group">
-                        <center><input type="submit" style="font-family:'B Mehr'; font-size:18px" class="btnSubmit" value="ورود"></center>
-                    </div>
-                    <center><a href="{% url 'reset_password' %}" style="color:  #c3ecff; font-family:'B Mehr';font-weight: 600;">فراموشی رمز عبور</a></center>
+                <input type="password" class="test-input" placeholder=" رمز عبور" name="password" value="">
 
-                </form>
-            </div>
+
+                <center><input type="submit" class="btnSubmit"
+                               value="ورود"></center>
+                <center><a class="forget-link" href="{% url 'reset_password' %}"
+                           >فراموشی رمز عبور</a></center>
+
+            </form>
         </div>
     </div>
+</div>
 
 </body>
 
