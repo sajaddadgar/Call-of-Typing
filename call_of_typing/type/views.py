@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from random import randint
 from django.contrib.auth.models import Group
+import re
 
 # import soundcloud
 
@@ -271,8 +272,6 @@ def change_max_point(request):
 
     if current_user.is_authenticated:
         calculate_text_score(current_user)
-    else:
-        text_score = word_per_min * word_count
 
     return HttpResponse('success')
 
@@ -305,10 +304,11 @@ def normal_result(request):
 def calculate_text_score(user):
     global word_per_min
     global word_count
-    curr_point = word_per_min * word_count
-    user.profile.text_score += curr_point
-    if curr_point > user.profile.text_max_point:
-        user.profile.text_max_point = curr_point
+    global text_score
+    text_score = word_per_min * word_count
+    user.profile.text_score += text_score
+    if text_score > user.profile.text_max_point:
+        user.profile.text_max_point = text_score
     user.save()
 
 
@@ -318,8 +318,24 @@ def createTextType(request):
 
 def add_new_text(request):
     if request.method == 'POST':
-        OrdinaryText.objects.create(content=request.POST['content'], user=request.user)
+        new_text = request.POST['content']
+        if text_in_persian(new_text):
+            OrdinaryText.objects.create(content=new_text, user=request.user)
+        else:
+            stuff_for_front = {
+                'language_error': 'error'
+            }
+            return render(request, 'type/create.html', stuff_for_front)
+
         return redirect('type:createTextType')
+
+
+
+def text_in_persian(text):
+    pattern = r'^([آ-ی]|\s)+$'
+    if re.search(pattern, text):
+        return True
+    return False
 
 
 def group_page(request):
