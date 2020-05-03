@@ -30,10 +30,10 @@
 
 <header>
     <div align="right">
-        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white; font-family: 'B Mehr'">صفحه اصلی</a>
         {% csrf_token %}
-        <a class="profile-edit-btn" href="{% url 'type:change_password'%}" style="color: white">تغییر رمز</a>
-        <a class="profile-edit-btn" href="{% url 'type:change_image'%}" style="color: white">تغییر عکس پروفایل</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_password'%}" style="color: white; font-family: 'B Mehr'">تغییر رمز</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_image'%}" style="color: white; font-family: 'B Mehr'">تغییر عکس پروفایل</a>
         <a class="profile-edit-btn" href="{% url 'type:createTextType'%}" style="color: white">ایجاد تست</a>
     </div>
 
@@ -62,25 +62,25 @@
                         {{user.first_name}} {{user.last_name}}
                     </h5>
                     <p>
-                        <span class="proile-rating" style="margin-left: 190px "> رتبه فعلی(متن) : <span>{{user.profile.get_text_rank}}  </span> </span>
-                        <span class="proile-rating" style="padding-right: 20px">رتبه فعلی(آهنگ) : <span>{{user.profile.get_song_rank}} </span> </span>
+                        <span class="proile-rating" style="margin-left: 190px; font-family: 'B Mehr' "> رتبه فعلی(متن) : <span>{{user.profile.get_text_rank}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px; font-family: 'B Mehr'">رتبه فعلی(آهنگ) : <span>{{user.profile.get_song_rank}} </span> </span>
                     </p>
 
                     <p>
-                        <span class="proile-rating" style="margin-left: 145px"> بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}  </span> </span>
-                        <span class="proile-rating" style="padding-right: 20px">مجموع امتیازات(متن) : <span>{{user.profile.text_score}} </span> </span>
+                        <span class="proile-rating" style="margin-left: 145px; font-family: 'B Mehr'"> بهترین امتیاز(متن) : <span>{{user.profile.text_max_point}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px; font-family: 'B Mehr'">مجموع امتیازات(متن) : <span>{{user.profile.text_score}} </span> </span>
                     </p>
 
                     <p>
-                        <span class="proile-rating" style="margin-left: 145px"> بهترین امتیاز(آهنگ) : <span>{{user.profile.song_max_point}}  </span> </span>
-                        <span class="proile-rating" style="padding-right: 20px">مجموع امتیازات(آهنگ) : <span>{{user.profile.song_score}} </span> </span>
+                        <span class="proile-rating" style="margin-left: 145px; font-family: 'B Mehr'"> بهترین امتیاز(آهنگ) : <span>{{user.profile.song_max_point}}  </span> </span>
+                        <span class="proile-rating" style="padding-right: 20px; font-family: 'B Mehr'">مجموع امتیازات(آهنگ) : <span>{{user.profile.song_score}} </span> </span>
                     </p>
 
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                               aria-controls="home" aria-selected="true">اطلاعات</a>
+                               aria-controls="home" aria-selected="true" style="font-family: 'B Mehr'">اطلاعات</a>
                         </li>
                         <!--                                <li class="nav-item">-->
                         <!--                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>-->
@@ -90,7 +90,7 @@
             </div>
             {% csrf_token %}
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات" style="font-family: 'B Mehr'"/>
             </div>
         </div>
         <div class="row">
@@ -114,23 +114,23 @@
                                 <p>{{user.username}}</p>
                             </div>
                             <div class="col-md-6">
-                                <label>نام کاربری</label>
+                                <label style="font-family: 'B Mehr'">نام کاربری</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" value="{{user.first_name}}" name="firstName">
+                                <input style="font-family: 'B Mehr'; text-align: right" type="text" value="{{user.first_name}}" name="firstName">
                             </div>
                             <div class="col-md-6">
-                                <label>نام</label>
+                                <label style="font-family: 'B Mehr'">نام</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" value="{{ user.last_name }}" name="lastName">
+                                <input style="font-family: 'B Mehr'; text-align: right" type="text" value="{{ user.last_name }}" name="lastName">
                             </div>
                             <div class="col-md-6">
-                                <label>نام خانوادگی</label>
+                                <label style="font-family: 'B Mehr'">نام خانوادگی</label>
                             </div>
                         </div>
                         <div class="row">

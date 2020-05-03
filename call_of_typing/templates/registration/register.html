@@ -15,11 +15,11 @@
 
     <title>Register</title>
     <style>
-        input[type="text"]::placeholder{ text-align: right; font-family: "2  Koodak" }
-        input[type="password"]::placeholder{ text-align: right; font-family: "2  Koodak"}
-        input[type="email"]::placeholder{text-align: right; font-family: "2  Koodak"}
-        input[type='text']::placeholder{ text-align:right; font-family: "2  Koodak"}
-        input[type='password']::placeholder{ text-align: right; font-family: "2  Koodak"}
+        input[type="text"]::placeholder{ text-align: right; font-family: "B Mehr" }
+        input[type="password"]::placeholder{ text-align: right; font-family: "B Mehr"}
+        input[type="email"]::placeholder{text-align: right; font-family: "B Mehr"}
+        input[type='text']::placeholder{ text-align:right; font-family: "B Mehr"}
+        input[type='password']::placeholder{ text-align: right; font-family: "B Mehr"}
         body{
             background-image: url("../../static/img/register_back.jpg");
             background-repeat: no-repeat;
@@ -32,7 +32,7 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue; font-family: 'B Mehr'">صفحه اصلی</a>
     </div>
 </header>
 
@@ -40,7 +40,7 @@
     <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
-            <p style="font-family: '2  Koodak'; font-size: 40px">ثبت نام</p>
+            <p style="font-family: 'B Mehr'; font-size: 40px">ثبت نام</p>
         </div>
 
         <div class=" col-md-6 form-content">
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <center>
-                <button id="submit_btn" type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 13px; margin-bottom: 3px">عضویت</button>
+                <button id="submit_btn" type="submit" class="btnSubmit" style="font-family: 'B Mehr';margin-top: 13px; margin-bottom: 3px">عضویت</button>
             </center>
         </div>
     </form>

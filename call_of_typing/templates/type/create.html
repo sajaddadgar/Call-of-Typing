@@ -8,21 +8,21 @@
 <body>
 <header>
     <div align="right">
-        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white; font-family: 'B Mehr'">صفحه اصلی</a>
         {% csrf_token %}
-        <a class="profile-edit-btn" href="{% url 'type:profile'%}" style="color: white">پروفایل</a>
+        <a class="profile-edit-btn" href="{% url 'type:profile'%}" style="color: white; font-family: 'B Mehr'">پروفایل</a>
     </div>
 
 </header>
 {% if language_error %}
-    <p style="font-family: '2  Koodak'"> متن وارد شده مناسب نیست </p>
+    <p style="font-family: 'B Mehr'"> متن وارد شده مناسب نیست </p>
 {% endif %}
 <form action="{% url 'type:add_new_text' %}" method="post">
     {% csrf_token %}
-    <textarea class="newText" name="content" rows="10" cols="33" placeholder="...متنت رو اینجا بنویس"></textarea>
+    <textarea class="newText" name="content" rows="10" cols="33" placeholder="...متنت رو اینجا بنویس" style="font-family: 'B Mehr'"></textarea>
     <br/>
 
-    <input class="profile-edit-btn" type="submit" value="create"/>
+    <input class="profile-edit-btn" type="submit" value="!تایید"/>
 </form>
 </body>
 </html>
