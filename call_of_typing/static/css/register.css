@@ -9,6 +9,11 @@
     line-height: 80px;
 }
 
+.test-input {
+
+    background-color: #013d53;
+}
+
 .form-content {
 
     padding: 5%;
@@ -16,8 +21,9 @@
     margin-bottom: 2%;
     /* margin-left: 24%; */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    background: -webkit-linear-gradient(bottom, #08d7e6, #3405db);
-    
+    background: -webkit-linear-gradient(bottom, #016d84, #06252b);
+
+
 }
 
 .form-control {
@@ -30,12 +36,14 @@
     padding: 1%;
     width: 20%;
     cursor: pointer;
-    background: #0062cc ;
-    color:#fff;
+    background: #0062cc;
+    color: #fff;
 }
+
 .col-md-6 {
     margin-left: 24%;
 }
-.alter-danger{
+
+.alter-danger {
     margin-top: 2%;
 }
