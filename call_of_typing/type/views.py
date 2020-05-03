@@ -43,6 +43,17 @@ def ranking(request):
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
     song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
 
+    if text_rank_array[len(text_rank_array)-1].profile.text_score == 0:
+        for i in range(len(text_rank_array)):
+            if text_rank_array[i].profile.text_score == 0:
+                text_rank_array = text_rank_array[0:i]
+                break
+    if song_rank_array[len(text_rank_array) - 1].profile.song_score == 0:
+        for i in range(len(song_rank_array)):
+            if song_rank_array[i].profile.song_score == 0:
+                song_rank_array = song_rank_array[0:i]
+                break
+
     stuff_for_front = {
         'text_rank_array': text_rank_array,
         'song_rank_array': song_rank_array
