@@ -35,3 +35,5 @@ urlpatterns = [
     path('type/group/create', views.creating_group, name='CreateGroup'),
 
 ]
+
+handler404 = 'type.views.error_404'

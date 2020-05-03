@@ -292,7 +292,6 @@ def normal_result(request):
     if current_user.is_authenticated:
         rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
 
-
     stuff_for_front = {
 
         'error_count': error_count,
@@ -388,3 +387,5 @@ def get_links_2(singer_name, song_title):
     return links
 
 
+def error_404(request, exception):
+    return render(request, '404.html')

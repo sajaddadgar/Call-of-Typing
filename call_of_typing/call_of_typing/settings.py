@@ -7,9 +7,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = ')bz=h&!hpa%06g99bf=k=1c-wb##p$$78ljg)#n(8ar_b+^0b&'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'type/media')
@@ -119,5 +119,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = EMAIL_HOST
-EMAIL_HOST_PASSWORD = EMAIL_PASS
+EMAIL_HOST_USER = 'call.of.typing@gmail.com'
+EMAIL_HOST_PASSWORD = 'se project 2020'
