@@ -37,6 +37,8 @@ class Profile(models.Model):
         return scores.index(self.song_score) + 1
 
 
+
+
 class GroupMembers(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

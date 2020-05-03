@@ -10,7 +10,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/login.css" />
+    <link rel="stylesheet" href="../../static/css/new_login.css" />
 
     <title>login</title>
     <style>
@@ -27,7 +27,7 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue; font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" style="color:  #06252b; font-family:'B Mehr';font-weight: 600;">صفحه اصلی</a>
     </div>
 </header>
 
@@ -35,8 +35,8 @@
 
     <div class="container login-container">
         <div class="row">
-            <div class="col-md-6 login-form-2">
-                <h3 style="font-family:'B Mehr' ; font-size: 40px" >ورود</h3>
+            <div class="col-md-6 login-form">
+                <h3 style=" font-family:'B Mehr' ; font-size: 40px" >ورود</h3>
                 <form method="post" action="{% url 'type:signin' %}">
                     {% csrf_token %}
                     {% if error %}
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <center><input type="submit" style="font-family:'B Mehr'; font-size:18px" class="btnSubmit" value="ورود"></center>
                     </div>
-                    <center><a href="{% url 'reset_password' %}" style="color: white; font-family:'B Mehr' ">فراموشی رمز عبور</a></center>
+                    <center><a href="{% url 'reset_password' %}" style="color:  #c3ecff; font-family:'B Mehr';font-weight: 600;">فراموشی رمز عبور</a></center>
 
                 </form>
             </div>
