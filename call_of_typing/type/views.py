@@ -330,7 +330,6 @@ def add_new_text(request):
         return redirect('type:createTextType')
 
 
-
 def text_in_persian(text):
     pattern = r'^([آ-ی]|\s)+$'
     if re.search(pattern, text):
@@ -401,7 +400,3 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     links = [spotify_link, soundcloud_link]
     return links
-
-
-def error_404(request, exception):
-    return render(request, '404.html')
