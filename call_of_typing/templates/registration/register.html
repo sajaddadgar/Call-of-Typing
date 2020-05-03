@@ -18,6 +18,14 @@
         input[type="text"]::placeholder{ text-align: right; font-family: "2  Koodak" }
         input[type="password"]::placeholder{ text-align: right; font-family: "2  Koodak"}
         input[type="email"]::placeholder{text-align: right; font-family: "2  Koodak"}
+        input[type='text']::placeholder{ text-align:right; font-family: "2  Koodak"}
+        input[type='password']::placeholder{ text-align: right; font-family: "2  Koodak"}
+        body{
+            background-image: url("../../static/img/register_back.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
     </style>
 </head>
 
@@ -28,7 +36,7 @@
     </div>
 </header>
 
-<div class="container register-form">
+<div class="container register-form" style="margin-right: 1px">
     <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
