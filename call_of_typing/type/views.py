@@ -263,15 +263,13 @@ def change_max_point(request):
     global error_count
     global word_count
     global word_per_min
-    global text_score
 
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
     word_count = int(request.POST['word_count'])
     current_user = request.user
 
-    if current_user.is_authenticated:
-        calculate_text_score(current_user)
+    calculate_text_score(current_user)
 
     return HttpResponse('success')
 
@@ -306,10 +304,11 @@ def calculate_text_score(user):
     global word_count
     global text_score
     text_score = word_per_min * word_count
-    user.profile.text_score += text_score
-    if text_score > user.profile.text_max_point:
-        user.profile.text_max_point = text_score
-    user.save()
+    if user.is_authenticated:
+        user.profile.text_score += text_score
+        if text_score > user.profile.text_max_point:
+            user.profile.text_max_point = text_score
+        user.save()
 
 
 def createTextType(request):
@@ -331,7 +330,7 @@ def add_new_text(request):
 
 
 def text_in_persian(text):
-    pattern = r'^([آ-ی]|\s)+$'
+    pattern = r'^[آ-ی]([آ-ی]|\s)+$'
     if re.search(pattern, text):
         return True
     return False

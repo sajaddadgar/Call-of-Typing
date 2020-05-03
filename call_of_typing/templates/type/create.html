@@ -15,7 +15,7 @@
 
 </header>
 {% if language_error %}
-    <p style="font-family: '2  Koodak'"> زبان متن وارد شده مناسب نیست </p>
+    <p style="font-family: '2  Koodak'"> متن وارد شده مناسب نیست </p>
 {% endif %}
 <form action="{% url 'type:add_new_text' %}" method="post">
     {% csrf_token %}
