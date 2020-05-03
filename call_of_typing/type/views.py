@@ -408,5 +408,8 @@ def get_links_2(singer_name, song_title):
     return links
 
 
-def get_to_favorite_song(request):
+def go_to_favorite_song(request):
     return render(request, 'type/favoriteSongType.html')
+
+def go_to_soundcloud_search(request):
+    return render(request, 'type/soundcloudSearch.html')
