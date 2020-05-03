@@ -38,10 +38,6 @@ def home(request):
     return render(request, 'index.html')
 
 
-def about(request):
-    return render(request, 'about.html')
-
-
 def ranking(request):
     all_users = User.objects.filter(is_superuser=0)
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]

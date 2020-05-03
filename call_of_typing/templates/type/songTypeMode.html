@@ -21,9 +21,9 @@
          <form action="{% url 'type:song_type_mode' %}" method="post">
                 {% csrf_token %}
                 <input type="radio" name="mode" id="random_song" value="random_song">
-                <label for="random_song"> play a random song </label> <br/>
+                <label for="random_song" style="font-family: 'B Mehr'"> آهنگ رندوم </label> <br/>
                 <input type="radio" name="mode" id="favorite_song" value="favorite_song">
-                <label for="favorite_song"> play your favorite song </label> <br/>
+                <label for="favorite_song" style="font-family: 'B Mehr'"> جستجو آهنگ </label> <br/>
                 <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Let's Go">
          </form>
         {% if spotify %}
