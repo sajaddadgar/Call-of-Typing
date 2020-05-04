@@ -50,13 +50,13 @@
     </form>
 
     {% if spotify %}
-    <p style="margin-left: 300px">
+    <p style="margin-left: 350px">
         <b> Artist: </b> {{Artist_name}} <br/>
         <b> Track: </b> {{track_title}} <br/>
         <b>Spotify:</b> <a href="{{ spotify }}" target="_blank" style="color: black">{{spotify}}</a>
         <br/>
         <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank" style="color: black">{{soundcloud.url}}</a>
-        <p id="timer" style="margin-left: 320px"></p>
+        <p id="timer" style="margin-left: 350px"></p>
         <form action="{% url 'type:song_type_random' %}">
         {% csrf_token %}
             <div class="col-md-6 button">
