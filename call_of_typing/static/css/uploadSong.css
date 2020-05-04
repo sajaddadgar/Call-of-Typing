@@ -1,10 +1,11 @@
 body {
 
     /*Temp photo change it */
-    background-image: url("../img/register_back.jpg");
+    background-image: url("../img/songtypemode_back.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    overflow: hidden;
 }
 
 .nav-link {
@@ -40,7 +41,8 @@ body {
 }
 
 .choose-mode-form {
-    margin-right: 1px;
+    margin-right: -90px;
+    margin-top: 50px;
 }
 
 
