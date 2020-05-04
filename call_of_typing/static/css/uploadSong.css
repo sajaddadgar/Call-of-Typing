@@ -1,16 +1,55 @@
 body {
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+
+    /*Temp photo change it */
+    background-image: url("../img/register_back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.nav-link {
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+.label{
+    font-family: 'B Mehr';
+    padding: 2%;
+    color: #CAE4DB;
 }
 
 .note {
-    margin-top: 5%;
+    margin-top: 1%;
     text-align: center;
     height: 80px;
-    background: #3405db;
+    background: #00303F;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    color: #fff;
+    color: #CAE4DB;
     font-weight: bold;
     line-height: 80px;
+    border: none;
+    padding: 5%;
+}
+
+.note h3 {
+    text-align: center;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-size: 40px;
+}
+
+.choose-mode-form {
+    margin-right: 1px;
+}
+
+
+.form-content {
+    padding: 5%;
+    border: none;
+    margin-bottom: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
 }
 
 :root {
@@ -19,35 +58,23 @@ body {
     --Patua: "Patua One", cursive;
     --Lobster: "lobster", cursive;
     --light-black: #2e2c2caf;
-    --bggradient: linear-gradient(90deg, rgba(26,65,73,1) 0%, rgba(35,163,204,1) 100%);
+    --bggradient: linear-gradient(90deg, rgba(26, 65, 73, 1) 0%, rgba(35, 163, 204, 1) 100%);
     --light-gray: rgba(255, 255, 255, 0.877);
 }
 
-.emp-profile {
-    padding: 5%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: 0.5rem;
-    background: #fff;
-}
-
-.form-control {
-    border-radius: 1.5rem;
-}
-
-col-md-6 {
-    margin-left: 24%;
+.col-md-6 {
+    margin-left: 23%;
 }
 
 header a {
     font-family: var(--Sniglet-font);
     font-size: 1em;
     font-weight: bold;
-    color: whitesmoke;
+    color: #00303F;
 }
 
 header a:hover {
-    color: white;
+    color: #DCAE1D;
 }
 
 header .container .col-md-7 {
@@ -57,9 +84,13 @@ header .container .col-md-7 {
 .btnSubmit {
     border: none;
     border-radius: 1.5rem;
-    padding: 1%;
-    width: 20%;
+    padding: 2%;
+    width: 60%;
     cursor: pointer;
-    background: #0062cc ;
-    color:#fff;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
 }

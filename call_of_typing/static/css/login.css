@@ -1,3 +1,10 @@
+body {
+    background-image: url("../img/LOGINBAKC.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 .login-container {
     margin-top: 1%;
     margin-bottom: 5%;
@@ -33,7 +40,7 @@
     text-align: right;
     padding: 2%;
     color: #00303F;
-    font-family: 'B Mehr';
+    font-family: Calibri, serif;
 }
 
 
@@ -65,14 +72,15 @@
     font-size: 18px;
 }
 
-.nav-link{
-    color:  #00303F;
-    font-family:'B Mehr';
+.nav-link {
+    color: #00303F;
+    font-family: 'B Mehr';
     font-weight: 600;
 }
-.login-error{
+
+.login-error {
     color: #750000;
-    font-family:'B Mehr';
+    font-family: 'B Mehr';
     font-size: 17px;
 }
 
