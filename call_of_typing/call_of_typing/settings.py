@@ -1,7 +1,5 @@
 import os
 
-from .secrets import *
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
@@ -63,9 +61,9 @@ WSGI_APPLICATION = 'call_of_typing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': DATABASE_NAME,
+        'NAME': 'cot',
         'USER': 'root',
-        'PASSWORD': SQL_PASS,
+        'PASSWORD': 'java123',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

@@ -1,0 +1,24 @@
+body {
+    background-image: url("../../static/img/soundcloud-search.jpg");
+    background-size: auto;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.emp-profile {
+    margin-left: 50%;
+    margin-top: 17%;
+}
+
+.input-search {
+    width: 500px;
+    font-family: "B Mehr";
+    text-align: right;
+}
+
+.button-search {
+    margin-left: 160px;
+    width: 200px;
+    font-family: 'B Mehr'
+}
+

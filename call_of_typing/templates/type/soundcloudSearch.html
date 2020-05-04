@@ -1,40 +1,41 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+
     <style>
-        body {
-            background-image: url("../../static/img/soundcloud-search.jpg");
-            background-size: auto;
-            background-repeat: no-repeat;
-            overflow: hidden;
+        .song-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #013d53;
+            margin-left: 20px;
         }
 
-        .emp-profile {
-            margin-left: 50%;
-            margin-top: 17%;
-        }
-
-        .input-search {
-            width: 500px;
+        .song-link {
+            color: white;
             font-family: "B Mehr";
-            text-align: right;
         }
 
-        .button-search {
-            margin-left: 160px;
-            width: 200px;
-            font-family: 'B Mehr'
+        .song-link:hover {
+            color: orangered;
         }
 
+        .search-result {
+            margin-left: 60px;
+        }
+
+        .start-test {
+            font-family: "B Mehr";
+        }
     </style>
 </head>
 <body>
 <div class="container emp-profile">
-    <form action="{% url 'type:song_search' %}" method="post">
+    <form action="{% url 'type:soundcloudLinks' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
             <div class="col-md-6" style="padding-bottom:10px">
@@ -47,18 +48,16 @@
         <input type="submit" class="btn btn-primary button-search" value="!سرچ کن">
     </form>
 
-    <!--{% if spotify %}-->
-    <!--<p>-->
-    <!--<b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>-->
-    <!--<br/>-->
-    <!--<b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>-->
+    {% if song_url %}
+    <div class="search-result">
+        <a href="{% url 'type:song_type' %}">
+            <button class="btn btn-primary start-test">شروع آهنگ</button>
+        </a>
+        <a href="{{song_url}}" target="_blank" class="song-link">برای پخش آهنگ اینجا رو بزن</a>
+        <img src="{{song_image}}" class="song-image">
+    </div>
 
-    <!--<form action="{% url 'type:song_type' %}">-->
-    <!--{% csrf_token %}-->
-    <!--<input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">-->
-    <!--</form>-->
-    <!--</p>-->
-    <!--{% endif %}-->
+    {% endif %}
 </div>
 </body>
 </html>

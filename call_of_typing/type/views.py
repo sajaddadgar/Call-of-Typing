@@ -393,6 +393,20 @@ def get_links(request):
     else:
         return render(request, 'type/searchSong.html')
 
+def get_soundcloud_links(request):
+    singer_name = request.POST.get('singer')
+    song_title = request.POST.get('song')
+    soundcloud = SoundCloud(singer_name, song_title)
+    songs = soundcloud.get_songs_list()
+    url = songs.get('url')
+    image_url = soundcloud.get_song_image(url)
+    stuff_for_front = {
+        'song_url': url,
+        'song_image': image_url
+    }
+    return render(request, 'type/soundcloudSearch.html', stuff_for_front)
+
+
 
 def get_links_2(singer_name, song_title):
     spotify = Spotify(singer_name, song_title)

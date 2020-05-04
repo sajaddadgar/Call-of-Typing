@@ -1,10 +1,17 @@
 import requests
 from requests.compat import quote_plus
 from bs4 import BeautifulSoup
-from .token import *
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import lyricsgenius as genius
+
+SPOTIFY_CLIENT_ID = 'cb988d2a4c7c4409aa077596eead42b4'
+SPOTIFY_CLIENT_SECRET = 'd8eff5cdd2164cf5adc415a8ce198313'
+SOUNDCLOUD_URL = 'https://soundcloud.com'
+SOUNDCLOUD_SEARCH_URL = 'https://soundcloud.com/search?q={}'
+artworks = 'https://i1.sndcdn.com/artworks-'
+GENIUS_TOKEN = 'BF_5GVO5sHZnYAficrrnbdNtV4a8mU7cskyag4e9TyssyZ_OgDd72wypnpwzNgWH'
+
 
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
@@ -43,6 +50,10 @@ class SoundCloud:
         result = data[data.index(artworks):]
         image_url = result.split('"')[0]
         return image_url
+
+# s = SoundCloud('eminem', 'stan')
+# a = s.get_songs_list()
+# print(a.get('url'))
 
 
 class Spotify:

@@ -34,4 +34,5 @@ urlpatterns = [
     path('type/group/create', views.creating_group, name='CreateGroup'),
     path('type/song/favorite', views.go_to_favorite_song, name='favoriteSong'),
     path('type/song/soundcloud', views.go_to_soundcloud_search, name='soundcloudSearch'),
+    path('type/song/soundcloud/result', views.get_soundcloud_links, name='soundcloudLinks'),
 ]
