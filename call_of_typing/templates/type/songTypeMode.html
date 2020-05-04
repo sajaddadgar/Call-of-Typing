@@ -25,13 +25,7 @@
         </div>
         <div class="col-md-6 form-content">
             <div class="row">
-                <!--                <a href="{% url 'type:favoriteSong' %}">-->
-                <!--                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ رندوم</button>-->
-                <!--                </a>-->
-                <!--                <a href="{% url 'type:favoriteSong' %}">-->
-                <!--                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ مورد آهنگ</button>-->
-                <!--                </a>-->
-                <div class="col-md-6 ">
+               <div class="col-md-6 ">
                     <center>
                     <input type="radio" name="mode" id="random_song" value="random_song">
                     <label for="random_song" class="label"> آهنگ رندوم </label> <br/>
@@ -53,22 +47,24 @@
 
         </div>
 
-
     </form>
 
     {% if spotify %}
-    <p>
+    <p style="margin-left: 300px">
         <b> Artist: </b> {{Artist_name}} <br/>
         <b> Track: </b> {{track_title}} <br/>
-        <b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>
+        <b>Spotify:</b> <a href="{{ spotify }}" target="_blank" style="color: black">{{spotify}}</a>
         <br/>
-        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>
-    <p id="timer"></p>
-    <form action="{% url 'type:song_type_random' %}">
+        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank" style="color: black">{{soundcloud.url}}</a>
+        <p id="timer" style="margin-left: 320px"></p>
+        <form action="{% url 'type:song_type_random' %}">
         {% csrf_token %}
-        <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">
+            <div class="col-md-6 button">
+                <input type="submit" style="margin-left: 200px; margin-top: 30px" class=btnSubmit value="شروع">
+            </div>
 
-    </form>
+
+        </form>
     </p>
     <script>
         let time = new Date().getTime() + 30000;
@@ -96,10 +92,10 @@
 <!--        <form action="{% url 'type:song_type_mode' %}" method="post" class="col-md-6 emp-profile">-->
 <!--            <div class="row content">-->
 <!--                {% csrf_token %}-->
-<!--                &lt;!&ndash;                <a href="{% url 'type:favoriteSong' %}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <a href="">&ndash;&gt;-->
 <!--                &lt;!&ndash;                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ رندوم</button>&ndash;&gt;-->
 <!--                &lt;!&ndash;                </a>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <a href="{% url 'type:favoriteSong' %}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <a href="">&ndash;&gt;-->
 <!--                &lt;!&ndash;                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ مورد آهنگ</button>&ndash;&gt;-->
 <!--                &lt;!&ndash;                </a>&ndash;&gt;-->
 <!--                <div class="options-form">-->
