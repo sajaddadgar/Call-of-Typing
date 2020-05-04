@@ -12,8 +12,11 @@ body {
 
 .input-search {
     width: 500px;
+    /*
     font-family: "B Mehr";
     text-align: right;
+    */
+
 }
 
 .button-search {

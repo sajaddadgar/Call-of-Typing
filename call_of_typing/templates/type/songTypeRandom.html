@@ -50,7 +50,7 @@
             }
          });
         function finish(){
-           $.post("{%url 'type:change_song_score' %}",{
+           $.post("{% url 'type:change_song_score' %}",{
                 csrfmiddlewaretoken: '{{ csrf_token }}',
                 user_typed_string: typed_string
             },function(response){

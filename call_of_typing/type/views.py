@@ -207,7 +207,7 @@ def song_type_mode(request):
             return render(request, 'type/songTypeMode.html', stuff_for_front)
 
         elif mode == 'favorite_song':
-            return render(request, 'type/searchSong.html')
+            return render(request, 'type/favoriteSongType.html')
 
     return render(request, 'type/songTypeMode.html')
 
@@ -393,19 +393,26 @@ def get_links(request):
     else:
         return render(request, 'type/searchSong.html')
 
+
 def get_soundcloud_links(request):
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
+    data = get_links_2(singer_name, song_title)
+    '''
     soundcloud = SoundCloud(singer_name, song_title)
     songs = soundcloud.get_songs_list()
     url = songs.get('url')
     image_url = soundcloud.get_song_image(url)
+    genius_obj = Genius(singer_name, song_title)
+    global lyrics
+    lyrics = genius_obj.get_lyrics()
+    '''
+    url, image_url = data[2], data[3]
     stuff_for_front = {
         'song_url': url,
         'song_image': image_url
     }
     return render(request, 'type/soundcloudSearch.html', stuff_for_front)
-
 
 
 def get_links_2(singer_name, song_title):
@@ -415,15 +422,19 @@ def get_links_2(singer_name, song_title):
     soundcloud = SoundCloud(singer_name, song_title)
     spotify_link = spotify.get_song_url()
     soundcloud_link = soundcloud.get_songs_list()
+    url = soundcloud_link.get('url')
+    image_url = soundcloud.get_song_image(url)
     genius_obj = Genius(singer_name, song_title)
     global lyrics
     lyrics = genius_obj.get_lyrics()
-    links = [spotify_link, soundcloud_link]
-    return links
+    data = [spotify_link, soundcloud_link, url, image_url]
+    return data
 
-
+'''
 def go_to_favorite_song(request):
     return render(request, 'type/favoriteSongType.html')
+'''
+
 
 def go_to_soundcloud_search(request):
     return render(request, 'type/soundcloudSearch.html')
