@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="{% static 'css/normal.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+
 
 </head>
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
+    </div>
+</header>
 <body>
     <div id="your-attempt" class="mono your-attempt"></div>
     <input class="profile-edit-btn" type="submit" value="submit" onclick="finish()"/>

@@ -14,7 +14,9 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/profile.css"/>
+    <link rel="stylesheet" href="../../static/css/profile.css?version=51"/>
+    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+
     <style>
         .emp-profile {
             left: 50%;
@@ -33,9 +35,9 @@
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: white; font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
         {% csrf_token %}
-        <a class="nav-link" href="{% url 'type:profile'%}" style="color: white; font-family: 'B Mehr'">پروفایل</a>
+        <a class="nav-link" href="{% url 'type:profile'%}" >پروفایل</a>
     </div>
 </header>
 <body>
@@ -43,7 +45,8 @@
     <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" style="margin-left: 50px; font-family: 'B Mehr'" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+        <input type="submit" style="margin-left: 50px; font-family: 'B Mehr'" class="profile-edit-btn" name="btnAddMore"
+               value="ثبت تغییرات"/>
     </form>
 </div>
 </body>

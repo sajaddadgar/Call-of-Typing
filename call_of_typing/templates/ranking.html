@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../static/css/ranking.css" />
+    <link rel="stylesheet" href="../static/css/ranking.css?version=51" />
+    <link rel="stylesheet" href="../static/css/basics.css?version=51"/>
 
 
     <title>Ranking</title>
@@ -26,7 +27,7 @@
 </head>
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
     </div>
 </header>
 
@@ -99,7 +100,7 @@
             </div>
 
 
-            <div class="flex-box-buttons" style="font-family: '2  Koodak'">
+            <div class="flex-box-buttons" >
 <!--                <button class="btn btn-dark" onclick="total_ranking()">رتبه بندی کلی</button>-->
 <!--                <button class="btn btn-dark" onclick="group_ranking()">رتبه بندی گروه ها</button>-->
                 <button class="btn btn-dark" onclick="song_ranking()">رتبه بندی آهنگ</button>

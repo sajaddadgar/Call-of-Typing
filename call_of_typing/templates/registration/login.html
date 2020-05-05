@@ -11,7 +11,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="../../static/css/login.css?version=51">
+    <link rel="stylesheet" type="text/css" href="../../static/css/login.css?version=51">
 
 
     <title>login</title>
@@ -21,7 +21,7 @@
 <header>
     <div align="right">
         <a class="nav-link" href="{% url 'type:home' %}"
-           >صفحه اصلی</a>
+        >صفحه اصلی</a>
     </div>
 </header>
 
@@ -30,11 +30,11 @@
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form">
-            <h3 >ورود</h3>
+            <h3>ورود</h3>
             <form method="post" action="{% url 'type:signin' %}">
                 {% csrf_token %}
                 {% if error %}
-                <center   > <p class="login-error" style="color: #750000;
+                <center><p class="login-error" style="color: #750000;
     font-family:'B Mehr';
     font-size: 17px;">نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</p></center>
 
@@ -47,7 +47,7 @@
                 <center><input type="submit" class="btnSubmit"
                                value="ورود"></center>
                 <center><a class="forget-link" href="{% url 'reset_password' %}"
-                           >فراموشی رمز عبور</a></center>
+                >فراموشی رمز عبور</a></center>
 
             </form>
         </div>

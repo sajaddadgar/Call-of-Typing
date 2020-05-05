@@ -8,13 +8,23 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/normal_result.css"/>
+    <link rel="stylesheet" href="../../static/css/normal_result.css?version=51"/>
+    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+
 
     <title>Result</title>
     <style>
-        input[type='text']::placeholder{ text-align:right; font-family: "B Mehr"}
-        input[type='password']::placeholder{ text-align: right; font-family: 'B Mehr'}
-        body{
+        input[type='text']::placeholder {
+            text-align: right;
+            font-family: "B Mehr"
+        }
+
+        input[type='password']::placeholder {
+            text-align: right;
+            font-family: 'B Mehr'
+        }
+
+        body {
             background-image: url("../../static/img/resultt.jpg");
             background-repeat: no-repeat;
             background-size: cover;
@@ -24,7 +34,7 @@
 </head>
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue; font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی</a>
     </div>
 </header>
 
@@ -38,16 +48,19 @@
 
             </h3>
 
-            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">کلمه/دقیقه :{{word_per_min}}</span></center>
-            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">خطا: {{error_count}}</span></center>
-            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">امتیاز: {{text_score}}</span></center>
+            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">کلمه/دقیقه :{{word_per_min}}</span>
+            </center>
+            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">خطا: {{error_count}}</span>
+            </center>
+            <center><span style="font-family: 'B Mehr'; font-size: 15px" class="badge badge-pill badge-info">امتیاز: {{text_score}}</span>
+            </center>
             {% if user.is_authenticated %}
             <div class="result-table">
                 <table class="table table-dark" id="type-table">
 
                     <thead>
                     <tr>
-                        <th scope="col"  style="font-family: 'B Mehr'">رتبه بندی تایپ متن</th>
+                        <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ متن</th>
                     </tr>
                     <tr>
                         <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
@@ -70,14 +83,15 @@
                 </table>
             </div>
             {% endif %}
-            <center><div class="restart_btn">
-                <a href="{% url 'type:ord_type' %}">
-                <button class="btn btn-dark px-5 py-2 primary-btn" style="font-family: 'B Mehr'">
-                    دوباره
-                </button>
-            </a>
-            </div></center>
-
+            <center>
+                <div class="restart_btn">
+                    <a href="{% url 'type:ord_type' %}">
+                        <button class="btn btn-dark px-5 py-2 primary-btn" style="font-family: 'B Mehr'">
+                            دوباره
+                        </button>
+                    </a>
+                </div>
+            </center>
 
 
         </div>
