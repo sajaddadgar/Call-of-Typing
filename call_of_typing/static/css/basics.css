@@ -1,0 +1,8 @@
+.nav-link {
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+header a:hover {
+    color: #DCAE1D;
+}

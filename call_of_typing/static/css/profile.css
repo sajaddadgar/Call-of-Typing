@@ -46,12 +46,14 @@ body {
 }
 
 .profile-edit-btn {
+
     border: none;
     border-radius: 1.5rem;
     width: 70%;
     padding: 2%;
+    color: #00303F;
+    font-family: 'B Mehr';
     font-weight: 600;
-    color: #6c757d;
     cursor: pointer;
 }
 

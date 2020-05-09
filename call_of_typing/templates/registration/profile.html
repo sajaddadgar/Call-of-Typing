@@ -14,15 +14,18 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/profile.css"/>
+    <link rel="stylesheet" href="../../static/css/profile.css?version=51"/>
+    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+
 
     <style>
-        body{
+        body {
             background-image: url("../../static/img/profile.jpg");
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
         }
+
         .profile_image_border {
             border-style: solid;
             border-width: 5px;
@@ -35,11 +38,14 @@
 
 <header>
     <div align="right">
-        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white; font-family: 'B Mehr'">صفحه اصلی</a>
+        <a class="profile-edit-btn" href="{% url 'type:home' %}" >صفحه
+            اصلی</a>
         {% csrf_token %}
-        <a class="profile-edit-btn" href="{% url 'type:change_password'%}" style="color: white; font-family: 'B Mehr'">تغییر رمز</a>
-        <a class="profile-edit-btn" href="{% url 'type:change_image'%}" style="color: white; font-family: 'B Mehr'">تغییر عکس پروفایل</a>
-        <a class="profile-edit-btn" href="{% url 'type:createTextType'%}" style="color: white">ایجاد تست</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_password'%}" >تغییر
+            رمز</a>
+        <a class="profile-edit-btn" href="{% url 'type:change_image'%}" >تغییر
+            عکس پروفایل</a>
+        <a class="profile-edit-btn" href="{% url 'type:createTextType'%}" >ایجاد تست</a>
     </div>
 
 </header>
@@ -95,7 +101,8 @@
             </div>
             {% csrf_token %}
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات" style="font-family: 'B Mehr'"/>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"
+                       style="font-family: 'B Mehr'"/>
             </div>
         </div>
         <div class="row">
@@ -124,7 +131,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input style="font-family: 'B Mehr'; text-align: right" type="text" value="{{user.first_name}}" name="firstName">
+                                <input style="font-family: 'B Mehr'; text-align: right" type="text"
+                                       value="{{user.first_name}}" name="firstName">
                             </div>
                             <div class="col-md-6">
                                 <label style="font-family: 'B Mehr'">نام</label>
@@ -132,7 +140,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input style="font-family: 'B Mehr'; text-align: right" type="text" value="{{ user.last_name }}" name="lastName">
+                                <input style="font-family: 'B Mehr'; text-align: right" type="text"
+                                       value="{{ user.last_name }}" name="lastName">
                             </div>
                             <div class="col-md-6">
                                 <label style="font-family: 'B Mehr'">نام خانوادگی</label>
