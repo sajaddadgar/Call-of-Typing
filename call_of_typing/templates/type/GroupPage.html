@@ -5,13 +5,16 @@
     <title>Group Page</title>
 </head>
 <body>
-        <form method="post" action="{% url 'type:CreateGroup' %}">
-                {% csrf_token %}
-            <div class="form-group">
-                        <input type="text" class="form-control" placeholder="نام گروه" name="name" value="">
-            </div>
-            <button type="submit" class="btnSubmit"  style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">create</button>
-        </form>
-
+<form method="post" action="{% url 'type:AddMember' %}">
+    {% csrf_token %}
+    <p>add group member</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="username" name="member" value="">
+    </div>
+    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
+        add
+    </button>
+</form>
+</form>
 </body>
 </html>

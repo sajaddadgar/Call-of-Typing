@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Group creation</title>
+</head>
+<body>
+<form method="post" action="{% url 'type:CreateGroup' %}">
+    {% csrf_token %}
+    <p>craete group</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="نام گروه" name="name" value="">
+    </div>
+    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
+        create
+    </button>
+</form>
+<form method="post" action="{% url 'type:JoinGroup' %}">
+    {% csrf_token %}
+    <p>Join group</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="group id" name="id" value="">
+    </div>
+    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
+        create
+    </button>
+</body>
+</html>

@@ -43,7 +43,7 @@ def ranking(request):
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
     song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
 
-    if text_rank_array[len(text_rank_array)-1].profile.text_score == 0:
+    if text_rank_array[len(text_rank_array) - 1].profile.text_score == 0:
         for i in range(len(text_rank_array)):
             if text_rank_array[i].profile.text_score == 0:
                 text_rank_array = text_rank_array[0:i]
@@ -345,19 +345,107 @@ def text_in_persian(text):
 
 def group_page(request):
     user = request.user
+    all_members = GroupMembers.objects.all()
+    check = False
+
+    for member in all_members:
+        if member.user.username == user.username:
+            check = True
+            break
+
+
     stuff_for_front = {
         'user': user
     }
-    return render(request, 'type/GroupPage.html', stuff_for_front)
+
+
+    if check:
+        return render(request, 'type/GroupPage.html', stuff_for_front)
+    else:
+        return render(request, 'type/GroupCreation.html', stuff_for_front)
 
 
 def creating_group(request):
     user = request.user
+
     new_group = Group.objects.create(name=request.POST['name'])
     new_group.user_set.add(user)
-    GroupAdmin.group = new_group
-    GroupAdmin.admin = user
-    user.save()
+
+    admin = GroupAdmin()
+    admin.group = new_group
+    admin.admin = user
+    admin.save()
+
+    member = GroupMembers()
+    member.user = user
+    member.group = new_group
+    member.save()
+
+    return HttpResponseRedirect(reverse('type:home'))
+
+
+def join_group(request):
+    user = request.user
+    member = None
+    all_groups = Group.objects.all()
+    all_members = GroupMembers.objects.all()
+    check = False
+
+    for member in all_members:
+        if member.user.username == user.username:
+            check = True
+            break
+
+    for group in all_groups:
+        if group.id == request.POST['id']:
+            group.user_set.add(user)
+            if member in all_members:
+                member.user = user
+                member.group = group
+                member.save()
+            else:
+                member = GroupMembers()
+                member.user = user
+                member.group = group
+                member.save()
+
+    return HttpResponseRedirect(reverse('type:home'))
+
+
+def group_member_adding(request):
+    all_users = User.objects.all()
+    all_members = GroupMembers.objects.all()
+    admin = request.user
+    member = None
+    group = None
+
+    for user in all_users:
+        if request.POST['member'] == user.username:
+            member = user
+            break
+
+    for user in all_members:
+        if admin == user.user:
+            group = user.group
+
+    group.user_set.add(member)
+
+    return render(request, 'type/GroupPage.html')
+
+
+def leave_group(request):
+    user = request.user
+    all_members = GroupMembers.objects.all()
+    group = None
+
+    for member in all_members:
+        if user == member.user:
+            group = member.group
+            member.group = None
+
+    group.user_set.remove(user)
+
+
     return HttpResponseRedirect(reverse('type:home'))
 
 
@@ -429,6 +517,7 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     data = [spotify_link, soundcloud_link, url, image_url]
     return data
+
 
 '''
 def go_to_favorite_song(request):
