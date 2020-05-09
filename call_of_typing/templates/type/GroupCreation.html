@@ -5,6 +5,17 @@
     <title>Group creation</title>
 </head>
 <body>
+{% if group_name_is_not_exists %}
+    <p> Group with this name is not exists.</p>
+{% else %}
+        {% if join_error %}
+            <p> you are in this group </p>
+        {% endif %}
+        {% if admin_error %}
+            <p> you are admin of the group </p>
+        {% endif %}
+{% endif %}
+
 <form method="post" action="{% url 'type:CreateGroup' %}">
     {% csrf_token %}
     <p>craete group</p>
@@ -19,10 +30,10 @@
     {% csrf_token %}
     <p>Join group</p>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="group id" name="id" value="">
+        <input type="text" class="form-control" placeholder="group name" name="id" value="">
     </div>
     <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
-        create
+        Join
     </button>
 </body>
 </html>

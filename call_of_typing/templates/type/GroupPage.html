@@ -6,6 +6,7 @@
 </head>
 <body>
 <form method="post" action="{% url 'type:AddMember' %}">
+
     {% csrf_token %}
     <p>add group member</p>
     <div class="form-group">

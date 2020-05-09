@@ -30,12 +30,12 @@ urlpatterns = [
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
     path('type/music/', views.music_upload, name='UploadMusic'),
     path('type/song/search', views.get_links, name='song_search'),
+    path('type/group/Mygroups', views.my_groups, name='my_groups'),
     path('type/group/', views.group_page, name='GroupPage'),
     path('type/group/create', views.creating_group, name='CreateGroup'),
     path('type/group/join', views.join_group, name='JoinGroup'),
     path('type/group/add_member', views.group_member_adding, name='AddMember'),
     path('type/group/leave', views.leave_group, name='LeaveGroup'),
-    # path('type/song/favorite', views.go_to_favorite_song, name='favoriteSong'),
     path('type/song/soundcloud', views.go_to_soundcloud_search, name='soundcloudSearch'),
     path('type/song/soundcloud/result', views.get_soundcloud_links, name='soundcloudLinks'),
 ]

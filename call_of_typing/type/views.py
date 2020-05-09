@@ -343,11 +343,20 @@ def text_in_persian(text):
     return False
 
 
+def my_groups(request):
+    user = request.user
+    groups = GroupMembers.objects.filter(user=user)
+    stuff_for_front = {
+        'groups': groups
+    }
+    return render(request, 'type/my_groups.html', stuff_for_front)
+
+
 def group_page(request):
     user = request.user
     all_members = GroupMembers.objects.all()
     check = False
-
+    
     for member in all_members:
         if member.user.username == user.username:
             check = True
@@ -366,11 +375,16 @@ def group_page(request):
 
 
 def creating_group(request):
-    user = request.user
+    if request.method == 'POST':
+        admin = request.user
+        new_group = Group.objects.create(name=request.POST['name'])
+        new_group.user_set.add(admin)
+        GroupAdmin.objects.create(group=new_group, admin=admin)
+        return HttpResponseRedirect(reverse('type:home'))
 
-    new_group = Group.objects.create(name=request.POST['name'])
-    new_group.user_set.add(user)
+    return render(request, 'type/GroupCreation.html')
 
+    '''
     admin = GroupAdmin()
     admin.group = new_group
     admin.admin = user
@@ -380,17 +394,43 @@ def creating_group(request):
     member.user = user
     member.group = new_group
     member.save()
-
-    return HttpResponseRedirect(reverse('type:home'))
+    '''
 
 
 def join_group(request):
     user = request.user
+    '''
     member = None
     all_groups = Group.objects.all()
     all_members = GroupMembers.objects.all()
     check = False
+    '''
+    try:
+        group = Group.objects.filter(name=request.POST['id'])[0]
+        user_groups = GroupMembers.objects.filter(user=user)
+        user_groups_name = [g.group.name for g in user_groups]
+        if group.name in user_groups_name:
+            stuff_for_front = {
+                'join_error': 'error'
+            }
+            return render(request, 'type/GroupCreation.html', stuff_for_front)
 
+        g = GroupAdmin.objects.get(group=group)
+        if user == g.admin:
+            stuff_for_front = {
+                'admin_error': 'error'
+            }
+            return render(request, 'type/GroupCreation.html', stuff_for_front)
+
+        group.user_set.add(user)
+        GroupMembers.objects.create(group=group, user=user)
+
+    except (AttributeError, IndexError):
+        stuff_for_front = {
+            'group_name_is_not_exists': 'error'
+        }
+        return render(request, 'type/GroupCreation.html', stuff_for_front)
+    '''
     for member in all_members:
         if member.user.username == user.username:
             check = True
@@ -408,7 +448,7 @@ def join_group(request):
                 member.user = user
                 member.group = group
                 member.save()
-
+    '''
     return HttpResponseRedirect(reverse('type:home'))
 
 
@@ -444,7 +484,6 @@ def leave_group(request):
             member.group = None
 
     group.user_set.remove(user)
-
 
     return HttpResponseRedirect(reverse('type:home'))
 
@@ -486,15 +525,6 @@ def get_soundcloud_links(request):
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
     data = get_links_2(singer_name, song_title)
-    '''
-    soundcloud = SoundCloud(singer_name, song_title)
-    songs = soundcloud.get_songs_list()
-    url = songs.get('url')
-    image_url = soundcloud.get_song_image(url)
-    genius_obj = Genius(singer_name, song_title)
-    global lyrics
-    lyrics = genius_obj.get_lyrics()
-    '''
     url, image_url = data[2], data[3]
     stuff_for_front = {
         'song_url': url,
@@ -518,11 +548,6 @@ def get_links_2(singer_name, song_title):
     data = [spotify_link, soundcloud_link, url, image_url]
     return data
 
-
-'''
-def go_to_favorite_song(request):
-    return render(request, 'type/favoriteSongType.html')
-'''
 
 
 def go_to_soundcloud_search(request):

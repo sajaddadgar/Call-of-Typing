@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if groups %}
+    <p>My Groups: </p>
+    {% for g in groups %}
+        {{ g.group.name }}
+        <br/>
+    {% endfor %}
+{% endif %}
+<form action="{% url 'type:CreateGroup'%}">
+    <button> Create a group </button>
+</form>
+</body>
+</html>
