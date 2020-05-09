@@ -15,6 +15,11 @@
         add
     </button>
 </form>
+<form method="post" action="{% url 'type:LeaveGroup' %}">
+    {% csrf_token %}
+    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
+        leave
+    </button>
 </form>
 </body>
 </html>
