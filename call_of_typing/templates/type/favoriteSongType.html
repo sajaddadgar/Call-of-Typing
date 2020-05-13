@@ -93,17 +93,21 @@
 <!--<p>Resize the browser window to see the effect.</p>-->
 <div class="row">
     <div class="column">
-        <img class="slideimage" src="../../static/img/spotify.jpg" alt="Snow"
+        <img class="slideimage" src="{% static 'img/spotify.jpg'%}" alt="Snow"
                          style="width:100%; border: 5px solid black" height="300px">
     </div>
     <a href="#"><button class="bottom-left btn btn-primary">Spotify</button></a>
     <p class="bottom-left-text">آهنگ مورد علاقتو از اسپوتیفای انتخاب کن</p>
 
     <div class="column">
-        <img class="slideimage" src="../../static/img/soundcloud.jpg" alt="Mountains"
+        <img class="slideimage" src="{% static 'img/soundcloud.jpg'%}" alt="Mountains"
                          style="width:100%;border: 5px solid black" height="300px">
     </div>
+    {% if Group_id %}
+    <a href="{% url 'type:group_song_soundcloud' group_id=Group_id %}"><button class="bottom-right btn btn-primary">Soundcloud</button></a>
+    {% else %}
     <a href="{% url 'type:soundcloudSearch' %}"><button class="bottom-right btn btn-primary">Soundcloud</button></a>
+    {% endif %}
     <p class="bottom-right-text">آهنگ مورد علاقتو از ساوندکلاود انتخاب کن</p>
 </div>
 

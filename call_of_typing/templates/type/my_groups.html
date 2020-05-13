@@ -8,7 +8,7 @@
 {% if groups %}
     <p>My Groups: </p>
     {% for g in groups %}
-        {{ g.group.name }}
+    <a href="{% url 'type:GroupPage' group_id=g.group.id %}">{{ g.group.name }} </a>
         <br/>
     {% endfor %}
 {% endif %}

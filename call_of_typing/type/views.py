@@ -276,7 +276,7 @@ def change_max_point(request):
     word_count = int(request.POST['word_count'])
     current_user = request.user
 
-    calculate_text_score(current_user)
+    calculate_text_score(current_user, None)
 
     return HttpResponse('success')
 
@@ -306,7 +306,7 @@ def normal_result(request):
     return render(request, 'type/normal_result.html', stuff_for_front)
 
 
-def calculate_text_score(user):
+def calculate_text_score(user, group_id):
     global word_per_min
     global word_count
     global text_score
@@ -316,6 +316,14 @@ def calculate_text_score(user):
         if text_score > user.profile.text_max_point:
             user.profile.text_max_point = text_score
         user.save()
+
+        if group_id:
+            g = GroupMembers.objects.get(group=group_id, user=user.id)
+            ga = GroupAdmin.objects.get(group=group_id)
+            ga.group_text_score += text_score
+            g.user_text_score += text_score
+            ga.save()
+            g.save()
 
 
 def createTextType(request):
@@ -352,26 +360,130 @@ def my_groups(request):
     return render(request, 'type/my_groups.html', stuff_for_front)
 
 
-def group_page(request):
+def group_page(request, group_id):
+    current_group = Group.objects.get(id=group_id)
     user = request.user
-    all_members = GroupMembers.objects.all()
-    check = False
-    
-    for member in all_members:
-        if member.user.username == user.username:
-            check = True
-            break
+    stuff_for_front = {
+        'current_group': current_group
+    }
+    return render(request, 'type/GroupPage.html', stuff_for_front)
 
+
+def group_normal_type(request, group_id):
+    IDs = OrdinaryText.objects.all().values_list('id', flat=True)
+    text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs) - 1)])
+    stuff_for_stuff = {
+        'group': Group.objects.get(id=group_id),
+        'text': text_obj.content
+     }
+    return render(request, 'type/group_type/group_normal_type.html', stuff_for_stuff)
+
+
+def group_change_normal_type_score(request, group_id):
+    global word_per_min
+    global error_count
+    global word_count
+    word_per_min = int(request.POST['word_per_min'])
+    error_count = int(request.POST['error_count'])
+    word_count = int(request.POST['word_count'])
+    calculate_text_score(request.user, group_id)
+    return HttpResponse('success')
+
+
+def group_normal_result(request, group_id):
+    stuff_for_front = {
+        'Group_id': group_id,
+        'error_count': error_count,
+        'word_per_min': word_per_min,
+        'text_score': text_score,
+     }
+
+    return render(request, 'type/normal_result.html', stuff_for_front)
+
+
+def group_song_mode(request, group_id):
+    stuff_for_front = {
+        'Group_id': group_id
+    }
+    if request.method == 'POST':
+        mode = request.POST['mode']
+        if mode == 'random_song':
+            IDs = Track.objects.all().values_list('id', flat=True)
+            track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
+            links = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            stuff_for_front = {
+                'Group_id': group_id,
+                'Artist_name': track_obj.Artist_name,
+                'track_title': track_obj.track_title,
+                'spotify': links[0],
+                'soundcloud': links[1]
+            }
+            return render(request, 'type/songTypeMode.html', stuff_for_front)
+
+        elif mode == 'favorite_song':
+            return render(request, 'type/favoriteSongType.html', stuff_for_front)
+
+    return render(request, 'type/songTypeMode.html', stuff_for_front)
+
+
+def group_song_type(request, group_id):
+    global lyrics
+    stuff_for_front = {
+        'Group_id': group_id,
+        'lyrics_length': len(lyrics)
+    }
+    return render(request, 'type/group_type/group_songType.html', stuff_for_front)
+
+
+def group_song_soundcloud(request, group_id):
+    stuff_for_front = {
+        'Group_id': group_id
+    }
+    return render(request, 'type/soundcloudSearch.html', stuff_for_front)
+
+
+def group_get_soundcloud_links(request, group_id):
+    singer_name = request.POST.get('singer')
+    song_title = request.POST.get('song')
+    data = get_links_2(singer_name, song_title)
+    url, image_url = data[2], data[3]
+    stuff_for_front = {
+        'Group_id': group_id,
+        'song_url': url,
+        'song_image': image_url
+    }
+    return render(request, 'type/soundcloudSearch.html', stuff_for_front)
+
+
+def group_change_song_score(request, group_id):
+    global lyrics
+    global song_score
+    current_user = request.user
+    string = request.POST['user_typed_string']
+    song_score = LCS(lyrics, string)
+    if current_user.is_authenticated:
+        if song_score > current_user.profile.song_max_point:
+            current_user.profile.song_max_point = song_score
+        current_user.profile.song_score += song_score
+        current_user.save()
+        g = GroupMembers.objects.get(group=group_id, user=current_user)
+        ga = GroupAdmin.objects.get(group=group_id)
+        g.user_song_score += song_score
+        ga.group_song_score += song_score
+        g.save()
+        ga.save()
+    return HttpResponse('success')
+
+
+def group_song_result(request, group_id):
+    global song_score
+    user = request.user
 
     stuff_for_front = {
-        'user': user
-    }
-
-
-    if check:
-        return render(request, 'type/GroupPage.html', stuff_for_front)
-    else:
-        return render(request, 'type/GroupCreation.html', stuff_for_front)
+        'song_score': song_score,
+        'Group_id': group_id
+     }
+    return render(request, 'type/song_result.html', stuff_for_front)
 
 
 def creating_group(request):
@@ -380,31 +492,14 @@ def creating_group(request):
         new_group = Group.objects.create(name=request.POST['name'])
         new_group.user_set.add(admin)
         GroupAdmin.objects.create(group=new_group, admin=admin)
+        GroupMembers.objects.create(group=new_group, user=admin)
         return HttpResponseRedirect(reverse('type:home'))
 
     return render(request, 'type/GroupCreation.html')
 
-    '''
-    admin = GroupAdmin()
-    admin.group = new_group
-    admin.admin = user
-    admin.save()
-
-    member = GroupMembers()
-    member.user = user
-    member.group = new_group
-    member.save()
-    '''
-
 
 def join_group(request):
     user = request.user
-    '''
-    member = None
-    all_groups = Group.objects.all()
-    all_members = GroupMembers.objects.all()
-    check = False
-    '''
     try:
         group = Group.objects.filter(name=request.POST['id'])[0]
         user_groups = GroupMembers.objects.filter(user=user)
@@ -430,25 +525,6 @@ def join_group(request):
             'group_name_is_not_exists': 'error'
         }
         return render(request, 'type/GroupCreation.html', stuff_for_front)
-    '''
-    for member in all_members:
-        if member.user.username == user.username:
-            check = True
-            break
-
-    for group in all_groups:
-        if group.id == request.POST['id']:
-            group.user_set.add(user)
-            if member in all_members:
-                member.user = user
-                member.group = group
-                member.save()
-            else:
-                member = GroupMembers()
-                member.user = user
-                member.group = group
-                member.save()
-    '''
     return HttpResponseRedirect(reverse('type:home'))
 
 
@@ -547,7 +623,6 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     data = [spotify_link, soundcloud_link, url, image_url]
     return data
-
 
 
 def go_to_soundcloud_search(request):

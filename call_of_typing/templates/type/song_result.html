@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -8,9 +9,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/normal_result.css?version=51"/>
-    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
-
+    <link rel="stylesheet" href="{% static 'css/normal_result.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/basics.css' %}">
 
     <title>Result</title>
 </head>
@@ -38,7 +38,7 @@
 
                     <thead>
                     <tr>
-                        <th scope="col">Text Type Ranking</th>
+                        <th scope="col">Song Type Ranking</th>
                     </tr>
                     <tr>
                         <th scope="col">Rank</th>
@@ -69,6 +69,15 @@
                         </button>
                     </a>
                 </div>
+                {% if Group_id %}
+                    <div class="restart_btn">
+                    <a href="{% url 'type:GroupPage' group_id=Group_id %}">
+                        <button class="btn btn-dark px-5 py-2 primary-btn" style="font-family: 'B Mehr'">
+                            بازگشت به گروه
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
             </center>
 
 

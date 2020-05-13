@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing speed test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{% static 'css/normal.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+    <div id="your-attempt" class="mono your-attempt"></div>
+    <input class="profile-edit-btn" type="submit" value="submit" onclick="finish()"/>
+    <p id="score"> </p>
+    <script>
+        let typed_string = "";
+        let typed_string_with_blank = "";
+        var lyrics_length = '{{lyrics_length}}';
+        $(window).keypress(function (evt) {
+            evt = evt || window.event;
+            var charCode = evt.which || evt.keyCode;
+            var charTyped = String.fromCharCode(charCode);
+            typed_string += (charTyped);
+            typed_string_with_blank += (charTyped);
+            if(typed_string.length > lyrics_length + 100)
+            {
+                finish();
+            }
+            if (typed_string.length % 60 == 0) {
+                typed_string_with_blank += '\n';
+            }
+            $("#your-attempt").text(typed_string_with_blank + '|');
+
+        });
+        function finish(){
+           $.post("{%url 'type:group_change_song_score' group_id=Group_id %}",{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                user_typed_string: typed_string
+            },function(response){
+               document.onkeydown = function (e) {
+                    return false;
+               };
+               window.location.href = "{% url 'type:group_song_result' group_id=Group_id %}";
+           });
+
+        }
+    </script>
+</body>
+</html>

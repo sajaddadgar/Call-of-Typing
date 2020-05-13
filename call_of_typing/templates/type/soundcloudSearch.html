@@ -41,6 +41,20 @@
 </head>
 <body>
 <div class="container emp-profile">
+    {% if Group_id %}
+    <form action="{% url 'type:group_get_soundcloud_links' group_id=Group_id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
+                <input type="text" class="form-control input-search" placeholder="نام خواننده" name="singer" style="text-align: left">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-search" placeholder="نام آهنگ" name="song" style="text-align: left">
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary button-search" value="جستجو">
+    </form>
+    {% else %}
     <form action="{% url 'type:soundcloudLinks' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -53,12 +67,19 @@
         </div>
         <input type="submit" class="btn btn-primary button-search" value="جستجو">
     </form>
+    {% endif %}
 
     {% if song_url %}
     <div class="search-result">
+        {% if Group_id %}
+        <a href="{% url 'type:group_song_type' group_id=Group_id %}">
+            <button class="btn btn-primary start-test">شروع</button>
+        </a>
+        {% else %}
         <a href="{% url 'type:song_type' %}">
             <button class="btn btn-primary start-test">شروع</button>
         </a>
+        {% endif %}
         <a href="{{song_url}}" target="_blank" class="song-link">برای پخش آهنگ اینجا رو بزن</a>
         <img src="{{song_image}}" class="song-image">
     </div>

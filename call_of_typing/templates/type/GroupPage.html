@@ -5,6 +5,7 @@
     <title>Group Page</title>
 </head>
 <body>
+<p>Group name: {{current_group.name}}</p>
 <form method="post" action="{% url 'type:AddMember' %}">
 
     {% csrf_token %}
@@ -22,5 +23,7 @@
         leave
     </button>
 </form>
+<a href="{% url 'type:group_normal_type' group_id=current_group.id %}"> تایپ متن</a>
+<a href="{% url 'type:group_song_mode' group_id=current_group.id %}"> تایپ آهنگ</a>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +9,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/uploadSong.css?version=51">
-    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+    <link rel="stylesheet" href="{% static 'css/UploadSong.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basics.css' %}">
 </head>
 <body>
 <header>
@@ -19,7 +20,8 @@
 </header>
 
 <div class="container choose-mode-form">
-    <form method="post" action="{% url 'type:song_type_mode' %}">
+    {% if Group_id %}
+    <form method="post" action="{% url 'type:group_song_mode' group_id=Group_id %}">
         {% csrf_token %}
         <div class="col-md-6 note">
             <h3>نوع انتخاب آهنگ</h3>
@@ -47,8 +49,38 @@
 
 
         </div>
-
     </form>
+    {% else %}
+        <form method="post" action="{% url 'type:song_type_mode' %}">
+        {% csrf_token %}
+        <div class="col-md-6 note">
+            <h3>نوع انتخاب آهنگ</h3>
+        </div>
+        <div class="col-md-6 form-content">
+            <div class="row">
+               <div class="col-md-6 ">
+                    <center>
+                    <input type="radio" name="mode" id="random_song" value="random_song">
+                    <label for="random_song" class="label"> آهنگ رندوم </label> <br/>
+                    </center>
+
+                    <center>
+                    <input type="radio" name="mode" id="favorite_song" value="favorite_song">
+                    <label for="favorite_song" class="label"> جستجو آهنگ </label> <br/>
+                    </center>
+
+                </div>
+                <div class="col-md-6 button">
+                    <center>
+                    <input type="submit" class=btnSubmit value="شروع">
+                    </center>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+    {% endif %}
 
     {% if spotify %}
     <p style="margin-left: 350px">
