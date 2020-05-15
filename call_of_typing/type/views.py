@@ -306,7 +306,7 @@ def normal_result(request):
     return render(request, 'type/normal_result.html', stuff_for_front)
 
 
-def calculate_text_score(user):
+def calculate_text_score(user, group_id):
     global word_per_min
     global word_count
     global text_score
@@ -370,7 +370,6 @@ def group_page(request, group_id):
         if member.user.username == user.username:
             check = True
             break
-
 
     stuff_for_front = {
         'current_group': current_group
@@ -570,11 +569,12 @@ def group_member_adding(request):
     return render(request, 'type/GroupPage.html')
 
 
-def leave_group(request):
+def leave_group(request, group_id):
     user = request.user
-    all_members = GroupMembers.objects.all()
-    group = None
-
+    group = Group.objects.get(id=group_id)
+    GroupMembers.objects.filter(group=group_id, user=user.id).delete()
+    group.user_set.remove(user)
+    '''
     for member in all_members:
         if user == member.user:
             group = member.group
@@ -583,9 +583,7 @@ def leave_group(request):
                     if group == groups:
                         Group.objects.filter(id = group.id).delete()
             GroupMembers.objects.filter(id = member.id).delete()
-
-    group.user_set.remove(user)
-
+    '''
     return HttpResponseRedirect(reverse('type:home'))
 
 

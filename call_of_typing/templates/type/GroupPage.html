@@ -17,7 +17,7 @@
         add
     </button>
 </form>
-<form method="post" action="{% url 'type:LeaveGroup' %}">
+<form method="post" action="{% url 'type:LeaveGroup' group_id=current_group.id%}">
     {% csrf_token %}
     <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
         leave

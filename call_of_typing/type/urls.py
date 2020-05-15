@@ -48,6 +48,6 @@ urlpatterns = [
     path('type/group/song/type/<int:group_id>/', views.group_song_type, name='group_song_type'),
     path('type/group/song/change_score/<int:group_id>', views.group_change_song_score, name='group_change_song_score'),
     path('type/group/song/result/<int:group_id>', views.group_song_result, name='group_song_result'),
-    path('type/group/leave', views.leave_group, name='LeaveGroup'),
+    path('type/group/leave/<int:group_id>', views.leave_group, name='LeaveGroup'),
 
 ]
