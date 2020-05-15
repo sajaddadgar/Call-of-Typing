@@ -306,7 +306,7 @@ def normal_result(request):
     return render(request, 'type/normal_result.html', stuff_for_front)
 
 
-def calculate_text_score(user, group_id):
+def calculate_text_score(user):
     global word_per_min
     global word_count
     global text_score
@@ -363,6 +363,15 @@ def my_groups(request):
 def group_page(request, group_id):
     current_group = Group.objects.get(id=group_id)
     user = request.user
+    all_members = GroupMembers.objects.all()
+    check = False
+    
+    for member in all_members:
+        if member.user.username == user.username:
+            check = True
+            break
+
+
     stuff_for_front = {
         'current_group': current_group
     }
@@ -497,6 +506,18 @@ def creating_group(request):
 
     return render(request, 'type/GroupCreation.html')
 
+    '''
+    admin = GroupAdmin()
+    admin.group = new_group
+    admin.admin = user
+    admin.save()
+
+    member = GroupMembers()
+    member.user = user
+    member.group = new_group
+    member.save()
+    '''
+
 
 def join_group(request):
     user = request.user
@@ -557,7 +578,11 @@ def leave_group(request):
     for member in all_members:
         if user == member.user:
             group = member.group
-            member.group = None
+            if len(group.user_set.all()) == 1:
+                for groups in Group.objects.all():
+                    if group == groups:
+                        Group.objects.filter(id = group.id).delete()
+            GroupMembers.objects.filter(id = member.id).delete()
 
     group.user_set.remove(user)
 
@@ -623,6 +648,7 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     data = [spotify_link, soundcloud_link, url, image_url]
     return data
+
 
 
 def go_to_soundcloud_search(request):
