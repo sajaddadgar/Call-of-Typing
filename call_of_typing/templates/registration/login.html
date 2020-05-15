@@ -34,10 +34,9 @@
             <form method="post" action="{% url 'type:signin' %}">
                 {% csrf_token %}
                 {% if error %}
-                <center><p class="login-error" style="color: #750000;
-    font-family:'B Mehr';
-    font-size: 17px;">نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</p></center>
-
+                <div class="form-control alert alert-danger" role="alert">
+                <center><p class="login-error" style="font-size: 15px"> نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</p></center>
+                </div>
                 {% endif %}
                 <input type="text" class="test-input" placeholder=" نام کاربری" name="username" value="">
 

@@ -90,3 +90,18 @@ body {
     font-family: 'B Mehr';
     font-weight: 600;
 }
+.form-content {
+    padding: 5%;
+    border: none;
+    margin-bottom: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
+}
+
+.form-control {
+    border-radius: 1.5rem;
+}
+
+.alter-danger {
+    margin-top: 2%;
+}
