@@ -43,6 +43,12 @@ class GroupMembers(models.Model):
     user_text_score = models.IntegerField(default=0)
     user_song_score = models.IntegerField(default=0)
 
+    def is_admin(self):
+        ga = GroupAdmin.objects.get(group=self.group.id)
+        if ga.admin.id == self.user.id:
+            return True
+        return False
+
 
 class GroupAdmin(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, primary_key=True)

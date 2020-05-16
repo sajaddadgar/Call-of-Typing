@@ -38,7 +38,7 @@ urlpatterns = [
     path('type/group/<int:group_id>/', views.group_page, name='GroupPage'),
     path('type/group/create', views.creating_group, name='CreateGroup'),
     path('type/group/join', views.join_group, name='JoinGroup'),
-    path('type/group/add_member', views.group_member_adding, name='AddMember'),
+    path('type/group/add_member/<int:group_id>/', views.group_member_adding, name='AddMember'),
     path('type/group/group_normal_type/<int:group_id>/', views.group_normal_type, name='group_normal_type'),
     path('type/group/group_normal_result/<int:group_id>', views.group_normal_result, name='group_normal_result'),
     path('type/group/group_change_normal_type_score/<int:group_id>', views.group_change_normal_type_score, name='group_change_normal_type_score'),
@@ -49,5 +49,6 @@ urlpatterns = [
     path('type/group/song/change_score/<int:group_id>', views.group_change_song_score, name='group_change_song_score'),
     path('type/group/song/result/<int:group_id>', views.group_song_result, name='group_song_result'),
     path('type/group/leave/<int:group_id>', views.leave_group, name='LeaveGroup'),
+    path('type/group/delete/<int:group_id>', views.delete_group, name='DeleteGroup')
 
 ]

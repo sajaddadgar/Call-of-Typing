@@ -363,16 +363,10 @@ def my_groups(request):
 def group_page(request, group_id):
     current_group = Group.objects.get(id=group_id)
     user = request.user
-    all_members = GroupMembers.objects.all()
-    check = False
-    
-    for member in all_members:
-        if member.user.username == user.username:
-            check = True
-            break
-
+    member = GroupMembers.objects.get(group=group_id, user=user.id)
     stuff_for_front = {
-        'current_group': current_group
+        'current_group': current_group,
+        'member': member
     }
     return render(request, 'type/GroupPage.html', stuff_for_front)
 
@@ -501,21 +495,9 @@ def creating_group(request):
         new_group.user_set.add(admin)
         GroupAdmin.objects.create(group=new_group, admin=admin)
         GroupMembers.objects.create(group=new_group, user=admin)
-        return HttpResponseRedirect(reverse('type:home'))
+        return HttpResponseRedirect(reverse('type:my_groups'))
 
     return render(request, 'type/GroupCreation.html')
-
-    '''
-    admin = GroupAdmin()
-    admin.group = new_group
-    admin.admin = user
-    admin.save()
-
-    member = GroupMembers()
-    member.user = user
-    member.group = new_group
-    member.save()
-    '''
 
 
 def join_group(request):
@@ -548,13 +530,17 @@ def join_group(request):
     return HttpResponseRedirect(reverse('type:home'))
 
 
-def group_member_adding(request):
-    all_users = User.objects.all()
-    all_members = GroupMembers.objects.all()
-    admin = request.user
-    member = None
-    group = None
+def group_member_adding(request, group_id):
+    user = User.objects.get(username=request.POST['member'])
+    current_group = Group.objects.get(id=group_id)
+    if user.id in GroupMembers.objects.all().values_list('user', flat=True):
+        stuff_for_front = {
+            'Group_id': group_id
+        }
+        return render(request, 'type/add_member_error.html', stuff_for_front)
 
+    GroupMembers.objects.create(group=current_group, user=user)
+    '''
     for user in all_users:
         if request.POST['member'] == user.username:
             member = user
@@ -565,26 +551,23 @@ def group_member_adding(request):
             group = user.group
 
     group.user_set.add(member)
-
-    return render(request, 'type/GroupPage.html')
+    '''
+    return HttpResponseRedirect(reverse('type:GroupPage', args=(group_id,)))
 
 
 def leave_group(request, group_id):
     user = request.user
     group = Group.objects.get(id=group_id)
     GroupMembers.objects.filter(group=group_id, user=user.id).delete()
-    group.user_set.remove(user)
-    '''
-    for member in all_members:
-        if user == member.user:
-            group = member.group
-            if len(group.user_set.all()) == 1:
-                for groups in Group.objects.all():
-                    if group == groups:
-                        Group.objects.filter(id = group.id).delete()
-            GroupMembers.objects.filter(id = member.id).delete()
-    '''
+    #group.user_set.remove(user)
     return HttpResponseRedirect(reverse('type:home'))
+
+
+def delete_group(request, group_id):
+    Group.objects.filter(id=group_id).delete()
+    GroupMembers.objects.filter(group=group_id).delete()
+    GroupAdmin.objects.filter(group=group_id).delete()
+    return render(request, 'type/GroupCreation.html')
 
 
 def LCS(S1, S2):
