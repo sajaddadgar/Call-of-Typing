@@ -57,6 +57,11 @@ class GroupAdmin(models.Model):
     group_song_score = models.IntegerField(default=0)
 
 
+class GroupTextSets(models.Model):
+    content = models.CharField(max_length=1000)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+
 class OrdinaryText(models.Model):
     content = models.CharField(max_length=1000, null=True,)
     creation_date = models.DateField(auto_now=True)

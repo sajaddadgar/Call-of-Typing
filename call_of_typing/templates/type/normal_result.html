@@ -88,7 +88,18 @@
                 </table>
             </div>
             {% endif %}
+            {% if Group_id %}
             <center>
+                <div class="restart_btn">
+                    <a href="{% url 'type:group_normal_type' group_id=Group_id %}">
+                        <button class="btn btn-dark px-5 py-2 primary-btn" style="font-family: 'B Mehr'">
+                            دوباره
+                        </button>
+                    </a>
+                </div>
+             </center>
+            {% else %}
+                <center>
                 <div class="restart_btn">
                     <a href="{% url 'type:ord_type' %}">
                         <button class="btn btn-dark px-5 py-2 primary-btn" style="font-family: 'B Mehr'">
@@ -97,6 +108,7 @@
                     </a>
                 </div>
              </center>
+            {% endif %}
             {% if Group_id %}
             <center>
                     <div class="restart_btn">

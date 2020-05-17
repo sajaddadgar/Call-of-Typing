@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ایجاد تست</title>
+    <link rel="stylesheet" href="../../../static/css/add_new_text.css"/>
+</head>
+<body>
+<header>
+    <div align="right">
+        <a class="profile-edit-btn" href="{% url 'type:home' %}" style="color: white; font-family: 'B Mehr'">صفحه اصلی</a>
+        {% csrf_token %}
+        <a class="profile-edit-btn" href="{% url 'type:profile'%}" style="color: white; font-family: 'B Mehr'">پروفایل</a>
+    </div>
+
+</header>
+{% if language_error %}
+    <p style="font-family: 'B Mehr'"> متن وارد شده مناسب نیست </p>
+{% endif %}
+<form action="{% url 'type:group_add_text' group_id=Group_id %}" method="post">
+    {% csrf_token %}
+    <textarea class="newText" name="content" rows="10" cols="33" placeholder="...متنت رو اینجا بنویس" style="font-family: 'B Mehr'"></textarea>
+    <br/>
+
+    <input class="profile-edit-btn" type="submit" value="!تایید"/>
+</form>
+</body>
+</html>

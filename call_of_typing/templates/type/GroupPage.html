@@ -9,7 +9,6 @@
 <p>Group name: {{current_group.name}}</p>
 {% if member.is_admin %}
 <form method="post" action="{% url 'type:AddMember' group_id=current_group.id %}">
-
     {% csrf_token %}
     <p>add group member</p>
     <div class="form-group">
@@ -33,6 +32,11 @@
 </form>
 {% endif %}
 <a href="{% url 'type:group_normal_type' group_id=current_group.id %}"> تایپ متن</a>
+<br/>
 <a href="{% url 'type:group_song_mode' group_id=current_group.id %}"> تایپ آهنگ</a>
+<br/>
+{% if member.is_admin %}
+<a href="{% url 'type:group_new_text' group_id=current_group.id %}"> اضافه کردن متن</a>
+{% endif %}
 </body>
 </html>

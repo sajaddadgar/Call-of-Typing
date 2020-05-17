@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from .form import ProfileForm
 from .form import SongForm
-from .models import Profile, OrdinaryText, Track, GroupAdmin, GroupMembers
+from .models import Profile, OrdinaryText, Track, GroupAdmin, GroupMembers, GroupTextSets
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -372,13 +372,34 @@ def group_page(request, group_id):
 
 
 def group_normal_type(request, group_id):
-    IDs = OrdinaryText.objects.all().values_list('id', flat=True)
-    text_obj = OrdinaryText.objects.get(id=IDs[randint(0, len(IDs) - 1)])
+    IDs = GroupTextSets.objects.filter(group=group_id).values_list('id', flat=True)
+    text_obj = GroupTextSets.objects.get(id=IDs[randint(0, len(IDs) - 1)])
     stuff_for_stuff = {
         'group': Group.objects.get(id=group_id),
         'text': text_obj.content
      }
     return render(request, 'type/group_type/group_normal_type.html', stuff_for_stuff)
+
+
+def group_add_text(request, group_id):
+    content = request.POST['content']
+    if text_in_persian(content):
+        group = Group.objects.get(id=group_id)
+        GroupTextSets.objects.create(group=group, content=content)
+        return HttpResponseRedirect(reverse('type:GroupPage', args=(group_id,)))
+
+    stuff_for_front = {
+        'Group_id': group_id,
+        'language_error': 'error'
+    }
+    return render(request, 'type/group_type/group_add_text.html', stuff_for_front)
+
+
+def group_new_text(request, group_id):
+    stuff_for_front = {
+        'Group_id': group_id
+    }
+    return render(request, 'type/group_type/group_add_text.html', stuff_for_front)
 
 
 def group_change_normal_type_score(request, group_id):
@@ -557,17 +578,17 @@ def group_member_adding(request, group_id):
 
 def leave_group(request, group_id):
     user = request.user
-    group = Group.objects.get(id=group_id)
     GroupMembers.objects.filter(group=group_id, user=user.id).delete()
     #group.user_set.remove(user)
-    return HttpResponseRedirect(reverse('type:home'))
+    return HttpResponseRedirect(reverse('type:my_groups'))
 
 
 def delete_group(request, group_id):
     Group.objects.filter(id=group_id).delete()
     GroupMembers.objects.filter(group=group_id).delete()
     GroupAdmin.objects.filter(group=group_id).delete()
-    return render(request, 'type/GroupCreation.html')
+    GroupTextSets.objects.filter(group=group_id).delete()
+    return render(request, 'type/my_groups.html')
 
 
 def LCS(S1, S2):
@@ -629,7 +650,6 @@ def get_links_2(singer_name, song_title):
     lyrics = genius_obj.get_lyrics()
     data = [spotify_link, soundcloud_link, url, image_url]
     return data
-
 
 
 def go_to_soundcloud_search(request):
