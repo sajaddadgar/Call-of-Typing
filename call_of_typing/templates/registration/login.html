@@ -9,7 +9,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" type="text/css" href="../../static/css/login.css?version=51">
 
@@ -34,9 +34,10 @@
             <form method="post" action="{% url 'type:signin' %}">
                 {% csrf_token %}
                 {% if error %}
-                <div class="form-control alert alert-danger" role="alert">
-                <center><p class="login-error" style="font-size: 15px"> نام کاربری یا رمز عبور اشتباه است، دوباره سعی کنید</p></center>
-                </div>
+                    <div class="form-control alert alert-danger" role="alert">
+                        <center><p class="login-error" style="font-size: 15px"> نام کاربری یا رمز عبور اشتباه است،
+                            دوباره سعی کنید</p></center>
+                    </div>
                 {% endif %}
                 <input type="text" class="test-input" placeholder=" نام کاربری" name="username" value="">
 

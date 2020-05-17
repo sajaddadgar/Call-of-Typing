@@ -12,7 +12,6 @@ SOUNDCLOUD_SEARCH_URL = 'https://soundcloud.com/search?q={}'
 artworks = 'https://i1.sndcdn.com/artworks-'
 GENIUS_TOKEN = 'BF_5GVO5sHZnYAficrrnbdNtV4a8mU7cskyag4e9TyssyZ_OgDd72wypnpwzNgWH'
 
-
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
         client_id=SPOTIFY_CLIENT_ID,
@@ -51,10 +50,6 @@ class SoundCloud:
         image_url = result.split('"')[0]
         return image_url
 
-# s = SoundCloud('eminem', 'stan')
-# a = s.get_songs_list()
-# print(a.get('url'))
-
 
 class Spotify:
 
@@ -68,19 +63,17 @@ class Spotify:
         return results['tracks']['items'][0]['duration_ms']
 
     def get_song_url(self):
-        # todo: get url from spotify api not genius api
-        data = genius.search_song(self.song, self.artist)
+        query = self.artist + ' ' + self.song
         try:
-            spotify_url = data.media[1]['url']
+            results = spotify.search(q=query, type='artist,track')
+            spotify_url = results['tracks']['items'][0]['album']['external_urls']['spotify']
         except:
-            spotify_url = False
+            spotify_url = 'not found!'
         return spotify_url
 
     def get_image_url(self):
         data = genius.search_song(self.song, self.artist)
         return data.song_art_image_url
-
-
 
 
 class Genius:
@@ -92,4 +85,3 @@ class Genius:
     def get_lyrics(self):
         data = genius.search_song(self.song, self.artist)
         return data.lyrics
-
