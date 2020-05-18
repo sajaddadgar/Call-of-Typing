@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from .type import calculate_text_score, get_links_2, LCS, text_in_persian
+from .type import get_links_2, LCS, text_in_persian
 from ..models import Track, GroupAdmin, GroupMembers, GroupTextSets
 from django.contrib.auth.models import User
 from random import randint
@@ -73,8 +73,24 @@ def group_change_normal_type_score(request, group_id):
     word_per_min = int(request.POST['word_per_min'])
     error_count = int(request.POST['error_count'])
     word_count = int(request.POST['word_count'])
-    calculate_text_score(request.user, group_id)
+    group_calculate_text_score(request.user, group_id)
     return HttpResponse('success')
+
+
+def group_calculate_text_score(user, group_id):
+    global word_per_min
+    global word_count
+    global text_score
+    text_score = word_per_min * word_count
+    if text_score > user.profile.text_max_point:
+        user.profile.text_max_point = text_score
+    user.save()
+    g = GroupMembers.objects.get(group=group_id, user=user.id)
+    ga = GroupAdmin.objects.get(group=group_id)
+    ga.group_text_score += text_score
+    g.user_text_score += text_score
+    ga.save()
+    g.save()
 
 
 def group_normal_result(request, group_id):
@@ -89,6 +105,7 @@ def group_normal_result(request, group_id):
 
 
 def group_song_mode(request, group_id):
+    global lyrics
     stuff_for_front = {
         'Group_id': group_id
     }
@@ -97,13 +114,14 @@ def group_song_mode(request, group_id):
         if mode == 'random_song':
             IDs = Track.objects.all().values_list('id', flat=True)
             track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
-            links = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            data = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            lyrics = data[4]
             stuff_for_front = {
                 'Group_id': group_id,
                 'Artist_name': track_obj.Artist_name,
                 'track_title': track_obj.track_title,
-                'spotify': links[0],
-                'soundcloud': links[1]
+                'spotify': data[0],
+                'soundcloud': data[1]
             }
             return render(request, 'type/songTypeMode.html', stuff_for_front)
 
@@ -130,9 +148,11 @@ def group_song_soundcloud(request, group_id):
 
 
 def group_get_soundcloud_links(request, group_id):
+    global lyrics
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
     data = get_links_2(singer_name, song_title)
+    lyrics = data[4]
     url, image_url = data[2], data[3]
     stuff_for_front = {
         'Group_id': group_id,
@@ -147,18 +167,19 @@ def group_change_song_score(request, group_id):
     global song_score
     current_user = request.user
     string = request.POST['user_typed_string']
+
     song_score = LCS(lyrics, string)
-    if current_user.is_authenticated:
-        if song_score > current_user.profile.song_max_point:
-            current_user.profile.song_max_point = song_score
-        current_user.profile.song_score += song_score
-        current_user.save()
-        g = GroupMembers.objects.get(group=group_id, user=current_user)
-        ga = GroupAdmin.objects.get(group=group_id)
-        g.user_song_score += song_score
-        ga.group_song_score += song_score
-        g.save()
-        ga.save()
+
+    if song_score > current_user.profile.song_max_point:
+        current_user.profile.song_max_point = song_score
+
+    current_user.save()
+    g = GroupMembers.objects.get(group=group_id, user=current_user)
+    ga = GroupAdmin.objects.get(group=group_id)
+    g.user_song_score += song_score
+    ga.group_song_score += song_score
+    g.save()
+    ga.save()
     return HttpResponse('success')
 
 
@@ -225,18 +246,6 @@ def group_member_adding(request, group_id):
         return render(request, 'type/add_member_error.html', stuff_for_front)
 
     GroupMembers.objects.create(group=current_group, user=user)
-    '''
-    for user in all_users:
-        if request.POST['member'] == user.username:
-            member = user
-            break
-
-    for user in all_members:
-        if admin == user.user:
-            group = user.group
-
-    group.user_set.add(member)
-    '''
     return HttpResponseRedirect(reverse('type:GroupPage', args=(group_id,)))
 
 

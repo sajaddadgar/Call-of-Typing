@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ..form import SongForm
-from ..models import OrdinaryText, Track, GroupAdmin, GroupMembers, GroupTextSets
+from ..models import OrdinaryText, Track
 from django.contrib.auth.models import User
 from random import randint
 import re
@@ -26,7 +26,7 @@ def ranking(request):
             if text_rank_array[i].profile.text_score == 0:
                 text_rank_array = text_rank_array[0:i]
                 break
-    if song_rank_array[len(text_rank_array) - 1].profile.song_score == 0:
+    if song_rank_array[len(song_rank_array) - 1].profile.song_score == 0:
         for i in range(len(song_rank_array)):
             if song_rank_array[i].profile.song_score == 0:
                 song_rank_array = song_rank_array[0:i]
@@ -81,8 +81,17 @@ def get_links_2(singer_name, song_title):
     genius_obj = Genius(singer_name, song_title)
     global lyrics
     lyrics = genius_obj.get_lyrics()
-    data = [spotify_link, soundcloud_link, url, image_url]
+    lyrics = pre_process_lyrics(lyrics)
+    data = [spotify_link, soundcloud_link, url, image_url, lyrics, duration_ms]
     return data
+
+
+def pre_process_lyrics(S):
+    pattern = r'\[.*\]'
+    S = re.sub(pattern, '', S)
+    S = re.sub(r'(\s)+', ' ', S)
+    S = S[1:]
+    return S
 
 
 def song_type(request):
@@ -167,12 +176,12 @@ def change_max_point(request):
     word_count = int(request.POST['word_count'])
     current_user = request.user
 
-    calculate_text_score(current_user, None)
+    calculate_text_score(current_user)
 
     return HttpResponse('success')
 
 
-def calculate_text_score(user, group_id):
+def calculate_text_score(user):
     global word_per_min
     global word_count
     global text_score
@@ -182,14 +191,6 @@ def calculate_text_score(user, group_id):
         if text_score > user.profile.text_max_point:
             user.profile.text_max_point = text_score
         user.save()
-
-        if group_id:
-            g = GroupMembers.objects.get(group=group_id, user=user.id)
-            ga = GroupAdmin.objects.get(group=group_id)
-            ga.group_text_score += text_score
-            g.user_text_score += text_score
-            ga.save()
-            g.save()
 
 
 def normal_result(request):
@@ -256,6 +257,7 @@ def get_soundcloud_links(request):
 
 def go_to_soundcloud_search(request):
     return render(request, 'type/soundcloudSearch.html')
+
 
 def get_links(request):
     singer_name = request.POST.get('singer')

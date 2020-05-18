@@ -1,25 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, authenticate, login
 from ..form import ProfileForm
-from ..form import SongForm
-from ..models import Profile, OrdinaryText, Track, GroupAdmin, GroupMembers, GroupTextSets
+from ..models import Profile
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from random import randint
-from django.contrib.auth.models import Group
-import re
-from ..song import *
-
-duration_ms = 0
-lyrics = ""
-word_per_min = 0
-error_count = 0
-word_count = 0
-text_score = 0
-song_score = 0
 
 
 def home(request):
