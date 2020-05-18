@@ -9,9 +9,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'type/media')
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,15 +52,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'call_of_typing.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cot',
         'USER': 'root',
-        'PASSWORD': 'mmm1298',
+        'PASSWORD': 'java123',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -72,9 +66,6 @@ DATABASES = {
         }
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
