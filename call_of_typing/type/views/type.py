@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ..form import SongForm
-from ..models import OrdinaryText, Track
+from ..models import OrdinaryText, Track, GroupAdmin
 from django.contrib.auth.models import User
 from random import randint
 import re
@@ -18,8 +18,11 @@ song_score = 0
 
 def ranking(request):
     all_users = User.objects.filter(is_superuser=0)
+    all_groups = GroupAdmin.objects.all()
     text_rank_array = sorted(all_users, key=lambda x: x.profile.text_score, reverse=True)[0:10]
     song_rank_array = sorted(all_users, key=lambda x: x.profile.song_score, reverse=True)[0:10]
+    group_text_rank_array = sorted(all_groups, key=lambda x: x.get_group_text_score(), reverse=True)[0:10]
+    group_song_rank_array = sorted(all_groups, key=lambda x: x.get_group_song_score(), reverse=True)[0:10]
 
     if text_rank_array[len(text_rank_array) - 1].profile.text_score == 0:
         for i in range(len(text_rank_array)):
@@ -34,7 +37,9 @@ def ranking(request):
 
     stuff_for_front = {
         'text_rank_array': text_rank_array,
-        'song_rank_array': song_rank_array
+        'song_rank_array': song_rank_array,
+        'group_text_rank_array': group_text_rank_array,
+        'group_song_rank_array': group_song_rank_array
     }
     return render(request, 'ranking.html', stuff_for_front)
 
@@ -116,10 +121,13 @@ def change_song_score(request):
     string = request.POST['user_typed_string']
     song_score = LCS(lyrics, string)
     if current_user.is_authenticated:
+        current_user.profile.save_song_score(song_score)
+        '''
         if song_score > current_user.profile.song_max_point:
             current_user.profile.song_max_point = song_score
         current_user.profile.song_score += song_score
         current_user.save()
+        '''
     return HttpResponse('success')
 
 
@@ -187,10 +195,13 @@ def calculate_text_score(user):
     global text_score
     text_score = word_per_min * word_count
     if user.is_authenticated:
+        user.profile.save_text_score(text_score)
+        '''
         user.profile.text_score += text_score
         if text_score > user.profile.text_max_point:
             user.profile.text_max_point = text_score
         user.save()
+        '''
 
 
 def normal_result(request):

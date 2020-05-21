@@ -82,6 +82,9 @@ def group_calculate_text_score(user, group_id):
     global word_count
     global text_score
     text_score = word_per_min * word_count
+    g = GroupMembers.objects.get(group=group_id, user=user.id)
+    g.member_save_text_score(text_score)
+    '''
     if text_score > user.profile.text_max_point:
         user.profile.text_max_point = text_score
     user.save()
@@ -91,6 +94,7 @@ def group_calculate_text_score(user, group_id):
     g.user_text_score += text_score
     ga.save()
     g.save()
+    '''
 
 
 def group_normal_result(request, group_id):
@@ -167,9 +171,10 @@ def group_change_song_score(request, group_id):
     global song_score
     current_user = request.user
     string = request.POST['user_typed_string']
-
     song_score = LCS(lyrics, string)
-
+    g = GroupMembers.objects.get(group=group_id, user=current_user)
+    g.member_save_song_score(song_score)
+    '''
     if song_score > current_user.profile.song_max_point:
         current_user.profile.song_max_point = song_score
 
@@ -180,6 +185,7 @@ def group_change_song_score(request, group_id):
     ga.group_song_score += song_score
     g.save()
     ga.save()
+    '''
     return HttpResponse('success')
 
 
@@ -233,7 +239,7 @@ def join_group(request):
             'group_name_is_not_exists': 'error'
         }
         return render(request, 'type/GroupCreation.html', stuff_for_front)
-    return HttpResponseRedirect(reverse('type:home'))
+    return HttpResponseRedirect(reverse('type:my_groups'))
 
 
 def group_member_adding(request, group_id):

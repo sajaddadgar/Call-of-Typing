@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
+from django.db.models import Sum
 
 
 class Profile(models.Model):
@@ -27,14 +28,24 @@ class Profile(models.Model):
     def get_text_rank(self):
         scores = list(Profile.objects.all().values_list('text_score', flat=True))
         scores = sorted(scores, reverse=True)
-        # scores = sorted(set(scores), reverse=True)
         return scores.index(self.text_score) + 1
 
     def get_song_rank(self):
         scores = list(Profile.objects.all().values_list('song_score', flat=True))
         scores = sorted(scores, reverse=True)
-        # scores = sorted(set(scores), reverse=True)
         return scores.index(self.song_score) + 1
+
+    def save_text_score(self, text_score):
+        self.text_score += text_score
+        if self.text_max_point < text_score:
+            self.text_max_point = text_score
+        self.save()
+
+    def save_song_score(self, song_score):
+        self.song_score += song_score
+        if self.song_max_point < song_score:
+            self.song_max_point = song_score
+        self.save()
 
 
 class GroupMembers(models.Model):
@@ -49,12 +60,36 @@ class GroupMembers(models.Model):
             return True
         return False
 
+    def member_save_text_score(self, text_score):
+        self.user_text_score += text_score
+        self.save()
+
+    def member_save_song_score(self, song_score):
+        self.user_song_score += song_score
+        self.save()
+
 
 class GroupAdmin(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, primary_key=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
-    group_text_score = models.IntegerField(default=0)
-    group_song_score = models.IntegerField(default=0)
+
+    def get_group_text_rank(self):
+        all_groups = list(GroupAdmin.objects.all())
+        current_group_score = self.get_group_text_score()
+        scores = [x.get_group_text_score() for x in all_groups]
+        return scores.index(current_group_score) + 1
+
+    def get_group_text_score(self):
+        return GroupMembers.objects.filter(group=self.group).aggregate(Sum('user_text_score'))['user_text_score__sum']
+
+    def get_group_song_rank(self):
+        all_groups = list(GroupAdmin.objects.all())
+        current_group_score = self.get_group_song_score()
+        scores = [x.get_group_song_score() for x in all_groups]
+        return scores.index(current_group_score) + 1
+
+    def get_group_song_score(self):
+        return GroupMembers.objects.filter(group=self.group).aggregate(Sum('user_song_score'))['user_song_score__sum']
 
 
 class GroupTextSets(models.Model):
