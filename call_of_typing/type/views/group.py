@@ -18,6 +18,9 @@ song_score = 0
 
 def my_groups(request):
     user = request.user
+    if not user.is_authenticated:
+        return render(request, 'type/group_type/my_groups_auth_error.html')
+
     groups = GroupMembers.objects.filter(user=user)
     stuff_for_front = {
         'groups': groups
@@ -29,9 +32,13 @@ def group_page(request, group_id):
     current_group = Group.objects.get(id=group_id)
     user = request.user
     member = GroupMembers.objects.get(group=group_id, user=user.id)
+    group_members = GroupMembers.objects.filter(group=group_id)
+    group_text_members_rank_array = sorted(group_members, key=lambda x: x.user_text_score, reverse=True)[0:10]
+    print(member.get_member_text_rank())
     stuff_for_front = {
         'current_group': current_group,
-        'member': member
+        'member': member,
+        'group_text_members_rank_array': group_text_members_rank_array
     }
     return render(request, 'type/GroupPage.html', stuff_for_front)
 
@@ -84,17 +91,6 @@ def group_calculate_text_score(user, group_id):
     text_score = word_per_min * word_count
     g = GroupMembers.objects.get(group=group_id, user=user.id)
     g.member_save_text_score(text_score)
-    '''
-    if text_score > user.profile.text_max_point:
-        user.profile.text_max_point = text_score
-    user.save()
-    g = GroupMembers.objects.get(group=group_id, user=user.id)
-    ga = GroupAdmin.objects.get(group=group_id)
-    ga.group_text_score += text_score
-    g.user_text_score += text_score
-    ga.save()
-    g.save()
-    '''
 
 
 def group_normal_result(request, group_id):
@@ -110,6 +106,7 @@ def group_normal_result(request, group_id):
 
 def group_song_mode(request, group_id):
     global lyrics
+    global duration_ms
     stuff_for_front = {
         'Group_id': group_id
     }
@@ -119,7 +116,7 @@ def group_song_mode(request, group_id):
             IDs = Track.objects.all().values_list('id', flat=True)
             track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
             data = get_links_2(track_obj.Artist_name, track_obj.track_title)
-            lyrics = data[4]
+            lyrics, duration_ms = data[4], data[5]
             stuff_for_front = {
                 'Group_id': group_id,
                 'Artist_name': track_obj.Artist_name,
@@ -142,6 +139,16 @@ def group_song_type(request, group_id):
         'lyrics_length': len(lyrics)
     }
     return render(request, 'type/group_type/group_songType.html', stuff_for_front)
+
+
+def group_song_type_random(request, group_id):
+    global duration_ms
+    global lyrics
+    stuff_for_front = {
+        'Group_id': group_id,
+        'duration_ms': duration_ms,
+    }
+    return render(request, 'type/group_type/group_songTypeRandom.html', stuff_for_front)
 
 
 def group_song_soundcloud(request, group_id):
@@ -174,25 +181,12 @@ def group_change_song_score(request, group_id):
     song_score = LCS(lyrics, string)
     g = GroupMembers.objects.get(group=group_id, user=current_user)
     g.member_save_song_score(song_score)
-    '''
-    if song_score > current_user.profile.song_max_point:
-        current_user.profile.song_max_point = song_score
-
-    current_user.save()
-    g = GroupMembers.objects.get(group=group_id, user=current_user)
-    ga = GroupAdmin.objects.get(group=group_id)
-    g.user_song_score += song_score
-    ga.group_song_score += song_score
-    g.save()
-    ga.save()
-    '''
     return HttpResponse('success')
 
 
 def group_song_result(request, group_id):
     global song_score
-    user = request.user
-
+    print('I am here and my group is:', group_id)
     stuff_for_front = {
         'song_score': song_score,
         'Group_id': group_id
@@ -258,7 +252,6 @@ def group_member_adding(request, group_id):
 def leave_group(request, group_id):
     user = request.user
     GroupMembers.objects.filter(group=group_id, user=user.id).delete()
-    # group.user_set.remove(user)
     return HttpResponseRedirect(reverse('type:my_groups'))
 
 

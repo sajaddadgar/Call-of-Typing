@@ -91,14 +91,37 @@
         <br/>
         <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank" style="color: black">{{soundcloud.url}}</a>
         <p id="timer" style="margin-left: 350px"></p>
+        {% if Group_id %}
+         <form action="{% url 'type:group_song_type_random' group_id=Group_id %}">
+        {% csrf_token %}
+            <div class="col-md-6 button">
+                <input type="submit" style="margin-left: 200px; margin-top: 30px" class=btnSubmit value="شروع">
+            </div>
+
+        </form>
+            </p>
+        <script>
+            let time = new Date().getTime() + 30000;
+            let x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = time - now;
+                var seconds = Math.floor(distance / 1000);
+                document.getElementById("timer").innerHTML = seconds + 's';
+                if (distance < 0) {
+                    clearInterval(x);
+                    window.location.href = "{% url 'type:group_song_type_random' group_id=Group_id %}";
+                }
+            })
+        </script>
+        {% else %}
         <form action="{% url 'type:song_type_random' %}">
         {% csrf_token %}
             <div class="col-md-6 button">
                 <input type="submit" style="margin-left: 200px; margin-top: 30px" class=btnSubmit value="شروع">
             </div>
 
-
         </form>
+
     </p>
     <script>
         let time = new Date().getTime() + 30000;
@@ -113,6 +136,7 @@
             }
         })
     </script>
+    {% endif %}
     {% endif %}
 
 

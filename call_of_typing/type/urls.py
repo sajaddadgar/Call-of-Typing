@@ -48,6 +48,7 @@ urlpatterns = [
     path('type/group/song/soundcloud/<int:group_id>', views.group_song_soundcloud, name='group_song_soundcloud'),
     path('type/group/song/soundcloud/result/<int:group_id>', views.group_get_soundcloud_links, name='group_get_soundcloud_links'),
     path('type/group/song/type/<int:group_id>/', views.group_song_type, name='group_song_type'),
+    path('type/group/song/type/random/<int:group_id>', views.group_song_type_random, name='group_song_type_random'),
     path('type/group/song/change_score/<int:group_id>', views.group_change_song_score, name='group_change_song_score'),
     path('type/group/song/result/<int:group_id>', views.group_song_result, name='group_song_result'),
     path('type/group/leave/<int:group_id>', views.leave_group, name='LeaveGroup'),

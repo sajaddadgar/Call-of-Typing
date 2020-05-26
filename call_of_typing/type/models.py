@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -67,6 +66,16 @@ class GroupMembers(models.Model):
     def member_save_song_score(self, song_score):
         self.user_song_score += song_score
         self.save()
+
+    def get_member_text_rank(self):
+        text_scores = list(GroupMembers.objects.filter(group=self.group).values_list('user_text_score', flat=True))
+        text_scores = sorted(text_scores, reverse=True)
+        return text_scores.index(self.user_text_score) + 1
+
+    def get_member_song_rank(self):
+        song_scores = list(GroupMembers.objects.filter(group=self.group).values_list('user_song_score', flat=True))
+        song_scores = sorted(song_scores, reverse=True)
+        return song_scores.index(self.user_song_score) + 1
 
 
 class GroupAdmin(models.Model):

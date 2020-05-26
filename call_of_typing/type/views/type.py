@@ -122,12 +122,7 @@ def change_song_score(request):
     song_score = LCS(lyrics, string)
     if current_user.is_authenticated:
         current_user.profile.save_song_score(song_score)
-        '''
-        if song_score > current_user.profile.song_max_point:
-            current_user.profile.song_max_point = song_score
-        current_user.profile.song_score += song_score
-        current_user.save()
-        '''
+
     return HttpResponse('success')
 
 
@@ -196,12 +191,6 @@ def calculate_text_score(user):
     text_score = word_per_min * word_count
     if user.is_authenticated:
         user.profile.save_text_score(text_score)
-        '''
-        user.profile.text_score += text_score
-        if text_score > user.profile.text_max_point:
-            user.profile.text_max_point = text_score
-        user.save()
-        '''
 
 
 def normal_result(request):
