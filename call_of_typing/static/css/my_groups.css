@@ -1,0 +1,68 @@
+.nav-link {
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+header a:hover {
+    color: #DCAE1D;
+}
+
+a {
+    font-family: Calibri;
+    font-weight: bold;
+    color: #246594;
+
+}
+
+a:hover {
+    color: #DCAE1D;
+}
+
+.groups {
+    margin-left: 20%;
+    height:250px;
+    width: 60%;
+    padding: 3%;
+    margin-top: 10%;
+
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #CAE4DB;
+    align-items: center;
+}
+
+body {
+    background-color: #00303F;
+    /*background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.row {
+    padding: 3px;
+    /*padding-left: 20%;*/
+}
+
+h5 {
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
+    cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}

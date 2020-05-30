@@ -2,19 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My Groups</title>
     <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/my_groups.css?version=51"/>
+
+
 </head>
+
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}"
+        >صفحه اصلی</a>
+    </div>
+</header>
 <body>
+
+
+{% if error %}
+<h2>Please Login First!!</h2>
+
+{% else %}
 {% if groups %}
-    <p>My Groups: </p>
-    {% for g in groups %}
-    <a href="{% url 'type:GroupPage' group_id=g.group.id %}">{{ g.group.name }} </a>
-        <br/>
-    {% endfor %}
+
+    <div class="container groups">
+        <div class="row">
+            <div class="col-md-6 create-group">
+                <form action="{% url 'type:CreateGroup'%}">
+                    <center>
+                        <button class="btnSubmit">ساخت گروه جدید</button></center>
+
+
+                </form>
+            </div>
+            <div class="col-6 my-group">
+                <center>
+                    <h5>
+                        لیست گروه های من
+                    </h5>
+                </center>
+
+                {% for g in groups %}
+                <center>
+                    <a href="{% url 'type:GroupPage' group_id=g.group.id %}">{{ g.group.name }} </a>
+                    <br/>
+                </center>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 {% endif %}
-<form action="{% url 'type:CreateGroup'%}">
-    <button> Create a group </button>
-</form>
+{% endif %}
 </body>
 </html>
