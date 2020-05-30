@@ -1,0 +1,61 @@
+.nav-link {
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+header a:hover {
+    color: #DCAE1D;
+}
+
+a {
+    font-family: Calibri;
+    font-weight: bold;
+    color: #246594;
+
+}
+
+a:hover {
+    color: #DCAE1D;
+}
+
+body {
+    background: #753b3d;
+    /*background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h2 {
+    color: #DCAE1D;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+.error {
+    margin-left: 20%;
+    height:200px;
+    width: 50%;
+    padding: 3%;
+    margin-top: 10%;
+
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #753b3d;
+    align-items: center;
+}
+
+
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
+    cursor: pointer;
+    background: rgba(220, 174, 29, 0.78);
+    color: #753b3d;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}

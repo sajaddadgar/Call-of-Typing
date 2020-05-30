@@ -3,40 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <title>Group Page</title>
-    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="../../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../../static/css/group_page.css?version=51"/>
 </head>
-<body>
-<p>Group name: {{current_group.name}}</p>
-{% if member.is_admin %}
-<form method="post" action="{% url 'type:AddMember' group_id=current_group.id %}">
-    {% csrf_token %}
-    <p>add group member</p>
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="username" name="member" value="">
+
+
+<header>
+
+
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-align-right text-light"></i>
+            </button>
+
+            {% if member.is_admin %}
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mr-auto"></div>
+                <ul class="navbar-nav">
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link nav_bar_content" href="{% url 'type:logout' %}">خروج</a>-->
+                    <!--                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'type:group_normal_type' group_id=current_group.id %}"> تایپ
+                            متن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'type:group_song_mode' group_id=current_group.id %}"> تایپ
+                            آهنگ</a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'type:group_new_text' group_id=current_group.id %}"> اضافه کردن
+                            متن</a>
+                    </li>
+
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            {% endif %}
+
+        </nav>
+
     </div>
-    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
-        add
-    </button>
-</form>
-<form action="{% url 'type:DeleteGroup' group_id=current_group.id %}">
-<button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px; padding:10px">
-        Delete group
-</button>
-</form>
-{% else %}
-<form method="post" action="{% url 'type:LeaveGroup' group_id=current_group.id%}">
-    {% csrf_token %}
-    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
-        leave
-    </button>
-</form>
-{% endif %}
-<a href="{% url 'type:group_normal_type' group_id=current_group.id %}"> تایپ متن</a>
-<br/>
-<a href="{% url 'type:group_song_mode' group_id=current_group.id %}"> تایپ آهنگ</a>
-<br/>
-{% if member.is_admin %}
-<a href="{% url 'type:group_new_text' group_id=current_group.id %}"> اضافه کردن متن</a>
-{% endif %}
+
+
+</header>
+
+
+<body>
+
+
+<div class="container group-page">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-dark">
+                <thead>
+                <tr align="right">
+                    <th></th>
+                    <th></th>
+                    <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ گروهی</th>
+                </tr>
+                <tr style="font-family: '2  Koodak'" align="right">
+                    <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
+                    <th scope="col" style="font-family: 'B Mehr'">کاربر</th>
+                    <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!--                {% for user in group_text_members_rank_array %}-->
+                <!--                <tr align="right">-->
+                <!--                    <th scope="row">{{ user.user_text_score }}</th>-->
+                <!--                    <td>{{ user.username }}</td>-->
+                <!--                    <td>{{ user.text_rank }}</td>-->
+                <!--                </tr>-->
+
+                <!--                {% endfor %}-->
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="col-md-6 " align="right">
+            <!--            <p>Group Admin: {{current_group.GroupAdmin}}</p>-->
+
+            <h5>
+                {{current_group.name}} :نام گروه
+            </h5>
+
+            {% if member.is_admin %}
+            <form method="post" action="{% url 'type:AddMember' group_id=current_group.id %}">
+                {% csrf_token %}
+
+                <div class="add-member">
+
+
+                    <center><h4>
+                        افزودن عضو به گروه
+                    </h4></center>
+
+
+                    <div class="item">
+                        <input type="text" class="input" placeholder="نام کاربری" name="member" value="">
+                    </div>
+
+                    <center>
+                        <button type="submit" class="btnSubmit">
+                            افزودن
+                        </button>
+                    </center>
+
+                </div>
+
+            </form>
+            <form action="{% url 'type:DeleteGroup' group_id=current_group.id %}">
+                <div class="item">
+                    <center>
+                        <button type="submit" class="btnSubmit">
+                            حذف گروه
+                        </button>
+                    </center>
+                </div>
+
+
+            </form>
+            {% else %}
+            <form method="post" action="{% url 'type:LeaveGroup' group_id=current_group.id%}">
+                {% csrf_token %}
+                <center>
+                    <button type="submit" class="btnSubmit">
+                        leave
+                    </button>
+                </center>
+
+            </form>
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
 </body>
 </html>
