@@ -237,7 +237,7 @@ def add_new_text(request):
 
 
 def text_in_persian(text):
-    pattern = r'^[آ-ی]([آ-ی]|\s)+$'
+    pattern = r'^[آ-ی]([آ-ی]| )+$'
     if re.search(pattern, text):
         return True
     return False

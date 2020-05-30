@@ -2,6 +2,7 @@ from django.test import TestCase
 from .views import register_validation, LCS, is_email_unique, text_in_persian
 from .models import OrdinaryText
 
+
 class TypeTest(TestCase):
 
     def test_register_validation(self):

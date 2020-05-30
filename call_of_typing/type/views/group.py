@@ -238,13 +238,13 @@ def join_group(request):
 
 def group_member_adding(request, group_id):
     user = User.objects.get(username=request.POST['member'])
-    current_group = Group.objects.get(id=group_id)
-    if user.id in GroupMembers.objects.all().values_list('user', flat=True):
+    group_member_IDS = GroupMembers.objects.filter(group=group_id).values_list('user', flat=True)
+    if user.id in group_member_IDS:
         stuff_for_front = {
             'Group_id': group_id
         }
         return render(request, 'type/add_member_error.html', stuff_for_front)
-
+    current_group = Group.objects.get(id=group_id)
     GroupMembers.objects.create(group=current_group, user=user)
     return HttpResponseRedirect(reverse('type:GroupPage', args=(group_id,)))
 
