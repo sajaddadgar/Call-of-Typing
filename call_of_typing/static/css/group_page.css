@@ -92,7 +92,7 @@ h4{
 .add-member{
 
     padding: 5%;
-
+    margin-top: 12%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 
 
@@ -111,5 +111,30 @@ h4{
     background-color: #CAE4DB;
     width: 222.067px;
     text-align: center;
+
+}
+
+
+.flex-box-buttons button{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 40%;
+    cursor: pointer;
+    background: #302f31;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+    /*margin:2px;*/
+}
+
+.flex-box-buttons{
+    display: flex;
+    padding: 4px;
+    flex-direction: row;
+    justify-content: space-evenly;
+
 
 }
