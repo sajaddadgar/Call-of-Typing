@@ -1,6 +1,5 @@
 function group_text_ranking() {
 
-    print('here');
     disappear_song_table();
     appear_text_table();
 
@@ -32,6 +31,7 @@ function appear_song_table() {
     table = document.querySelector("#group-song-table");
     table.style.display = '';
 }
+
 function disappear_song_table() {
 
     table = document.querySelector("#group-song-table");

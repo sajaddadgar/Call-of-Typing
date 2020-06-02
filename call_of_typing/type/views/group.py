@@ -24,7 +24,7 @@ def my_groups(request):
     groups = GroupMembers.objects.filter(user=user)
     stuff_for_front = {
         'groups': groups,
-        'user':user,
+
     }
     return render(request, 'type/my_groups.html', stuff_for_front)
 
