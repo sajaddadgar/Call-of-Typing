@@ -23,7 +23,8 @@ def my_groups(request):
 
     groups = GroupMembers.objects.filter(user=user)
     stuff_for_front = {
-        'groups': groups
+        'groups': groups,
+        'user':user,
     }
     return render(request, 'type/my_groups.html', stuff_for_front)
 
@@ -33,7 +34,9 @@ def group_page(request, group_id):
     user = request.user
     member = GroupMembers.objects.get(group=group_id, user=user.id)
     group_members = GroupMembers.objects.filter(group=group_id)
+
     group_text_members_rank_array = sorted(group_members, key=lambda x: x.user_text_score, reverse=True)[0:10]
+
     print(member.get_member_text_rank())
     stuff_for_front = {
         'current_group': current_group,

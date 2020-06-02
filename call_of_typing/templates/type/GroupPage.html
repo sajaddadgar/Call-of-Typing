@@ -115,14 +115,14 @@
                 </thead>
 
                 <tbody>
-                <!--                {% for user in group_text_members_rank_array %}-->
-                <!--                <tr align="right">-->
-                <!--                    <th scope="row">{{ user.user_text_score }}</th>-->
-                <!--                    <td>{{ user.username }}</td>-->
-                <!--                    <td>{{ user.text_rank }}</td>-->
-                <!--                </tr>-->
+                {% for user in group_text_members_rank_array %}
+                <tr align="right">
+                    <th scope="row">{{ user.user_text_score }}</th>
+                    <td>{{user}}</td>
+                    <td>{{ 1 }}</td>
+                </tr>
 
-                <!--                {% endfor %}-->
+                {% endfor %}
                 </tbody>
 
             </table>
