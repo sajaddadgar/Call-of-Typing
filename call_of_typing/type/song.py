@@ -85,3 +85,19 @@ class Genius:
     def get_lyrics(self):
         data = genius.search_song(self.song, self.artist)
         return data.lyrics
+
+
+class Song:
+    def get_data(self, singer_name, song_title):
+        spotify_obj = Spotify(singer_name, song_title)
+        duration_ms = spotify_obj.get_duration_ms()
+        soundcloud = SoundCloud(singer_name, song_title)
+        spotify_link = spotify_obj.get_song_url()
+        soundcloud_link = soundcloud.get_songs_list()
+        url = soundcloud_link.get('url')
+        image_url = soundcloud.get_song_image(url)
+        genius_obj = Genius(singer_name, song_title)
+        lyrics = genius_obj.get_lyrics()
+        #lyrics = pre_process_lyrics(lyrics)
+        data = [spotify_link, soundcloud_link, url, image_url, lyrics, duration_ms]
+        return data

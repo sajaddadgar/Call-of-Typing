@@ -5,7 +5,7 @@ from ..models import OrdinaryText, Track, GroupAdmin
 from django.contrib.auth.models import User
 from random import randint
 import re
-from ..song import *
+from ..song import Song
 
 duration_ms = 0
 lyrics = ""
@@ -54,17 +54,21 @@ def ord_type(request):
 
 
 def song_type_mode(request):
+    global lyrics, duration_ms
     if request.method == 'POST':
         mode = request.POST['mode']
         if mode == 'random_song':
             IDs = Track.objects.all().values_list('id', flat=True)
             track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
-            links = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            song_obj = Song()
+            data = song_obj.get_data(track_obj.Artist_name, track_obj.track_title)
+            lyrics, duration_ms = data[4], data[5]
+            lyrics = pre_process_lyrics(lyrics)
             stuff_for_front = {
                 'Artist_name': track_obj.Artist_name,
                 'track_title': track_obj.track_title,
-                'spotify': links[0],
-                'soundcloud': links[1]
+                'spotify': data[0],
+                'soundcloud': data[1]
             }
             return render(request, 'type/songTypeMode.html', stuff_for_front)
 
@@ -72,23 +76,6 @@ def song_type_mode(request):
             return render(request, 'type/favoriteSongType.html')
 
     return render(request, 'type/songTypeMode.html')
-
-
-def get_links_2(singer_name, song_title):
-    spotify = Spotify(singer_name, song_title)
-    global duration_ms
-    duration_ms = spotify.get_duration_ms()
-    soundcloud = SoundCloud(singer_name, song_title)
-    spotify_link = spotify.get_song_url()
-    soundcloud_link = soundcloud.get_songs_list()
-    url = soundcloud_link.get('url')
-    image_url = soundcloud.get_song_image(url)
-    genius_obj = Genius(singer_name, song_title)
-    global lyrics
-    lyrics = genius_obj.get_lyrics()
-    lyrics = pre_process_lyrics(lyrics)
-    data = [spotify_link, soundcloud_link, url, image_url, lyrics, duration_ms]
-    return data
 
 
 def pre_process_lyrics(S):
@@ -244,10 +231,14 @@ def text_in_persian(text):
 
 
 def get_soundcloud_links(request):
+    global lyrics
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
-    data = get_links_2(singer_name, song_title)
+    song_obj = Song()
+    data = song_obj.get_data(singer_name, song_title)
     url, image_url = data[2], data[3]
+    lyrics = data[4]
+    lyrics = pre_process_lyrics(lyrics)
     stuff_for_front = {
         'song_url': url,
         'song_image': image_url
@@ -258,17 +249,3 @@ def get_soundcloud_links(request):
 def go_to_soundcloud_search(request):
     return render(request, 'type/soundcloudSearch.html')
 
-
-def get_links(request):
-    singer_name = request.POST.get('singer')
-    song_title = request.POST.get('song')
-
-    if singer_name is not None and song_title is not None:
-        links = get_links_2(singer_name, song_title)
-        stuff_for_front = {
-            'spotify': links[0],
-            'soundcloud': links[1]
-        }
-        return render(request, 'type/searchSong.html', stuff_for_front)
-    else:
-        return render(request, 'type/searchSong.html')

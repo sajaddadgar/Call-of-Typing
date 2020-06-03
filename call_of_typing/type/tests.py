@@ -1,9 +1,16 @@
 from django.test import TestCase
 from .views import register_validation, LCS, is_email_unique, text_in_persian
 from .models import OrdinaryText
+from django.contrib.auth.models import User
 
 
 class TypeTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='kkkiii',
+                                        password='pppiii_987',
+                                        first_name='r',
+                                        last_name='e',
+                                        email='uuuttt@gmail.com')
 
     def test_register_validation(self):
         first_name = 'Jonathan'
@@ -33,3 +40,6 @@ class TypeTest(TestCase):
         new_text = "Hello I am here"
         text_obj = OrdinaryText.objects.create(content=new_text)
         self.assertEqual(text_obj.content, new_text)
+
+    def test_text_text_rank(self):
+        self.assertEqual(1, self.user.profile.get_text_rank())

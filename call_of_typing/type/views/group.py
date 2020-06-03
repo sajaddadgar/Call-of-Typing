@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from .type import get_links_2, LCS, text_in_persian
+from .type import LCS, text_in_persian
 from ..models import Track, GroupAdmin, GroupMembers, GroupTextSets
 from django.contrib.auth.models import User
 from random import randint
 from django.contrib.auth.models import Group
+from ..song import Song
 
 duration_ms = 0
 lyrics = ""
@@ -108,8 +109,7 @@ def group_normal_result(request, group_id):
 
 
 def group_song_mode(request, group_id):
-    global lyrics
-    global duration_ms
+    global lyrics, duration_ms
     stuff_for_front = {
         'Group_id': group_id
     }
@@ -118,7 +118,8 @@ def group_song_mode(request, group_id):
         if mode == 'random_song':
             IDs = Track.objects.all().values_list('id', flat=True)
             track_obj = Track.objects.get(id=IDs[randint(0, len(IDs) - 1)])
-            data = get_links_2(track_obj.Artist_name, track_obj.track_title)
+            song_obj = Song()
+            data = song_obj.get_data(track_obj.Artist_name, track_obj.track_title)
             lyrics, duration_ms = data[4], data[5]
             stuff_for_front = {
                 'Group_id': group_id,
@@ -165,7 +166,8 @@ def group_get_soundcloud_links(request, group_id):
     global lyrics
     singer_name = request.POST.get('singer')
     song_title = request.POST.get('song')
-    data = get_links_2(singer_name, song_title)
+    song_obj = Song()
+    data = song_obj.get_data(singer_name, song_title)
     lyrics = data[4]
     url, image_url = data[2], data[3]
     stuff_for_front = {
@@ -259,8 +261,8 @@ def leave_group(request, group_id):
 
 
 def delete_group(request, group_id):
-    Group.objects.filter(id=group_id).delete()
     GroupMembers.objects.filter(group=group_id).delete()
     GroupAdmin.objects.filter(group=group_id).delete()
     GroupTextSets.objects.filter(group=group_id).delete()
-    return render(request, 'type/my_groups.html')
+    Group.objects.filter(id=group_id).delete()
+    return HttpResponseRedirect(reverse('type:my_groups'))

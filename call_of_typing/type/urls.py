@@ -30,7 +30,6 @@ urlpatterns = [
     path('type/create/', views.createTextType, name='createTextType'),
     path('type/add_new_text/', views.add_new_text, name='add_new_text'),
     path('type/music/', views.music_upload, name='UploadMusic'),
-    path('type/song/search', views.get_links, name='song_search'),
     path('type/song/soundcloud', views.go_to_soundcloud_search, name='soundcloudSearch'),
     path('type/song/soundcloud/result', views.get_soundcloud_links, name='soundcloudLinks'),
 
