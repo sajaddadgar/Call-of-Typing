@@ -191,7 +191,6 @@ def group_change_song_score(request, group_id):
 
 def group_song_result(request, group_id):
     global song_score
-    print('I am here and my group is:', group_id)
     stuff_for_front = {
         'song_score': song_score,
         'Group_id': group_id
@@ -203,7 +202,6 @@ def creating_group(request):
     if request.method == 'POST':
         admin = request.user
         new_group = Group.objects.create(name=request.POST['name'])
-        new_group.user_set.add(admin)
         GroupAdmin.objects.create(group=new_group, admin=admin)
         GroupMembers.objects.create(group=new_group, user=admin)
         return HttpResponseRedirect(reverse('type:my_groups'))

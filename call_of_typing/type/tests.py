@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .views import register_validation, LCS, is_email_unique, text_in_persian
-from .models import OrdinaryText
-from django.contrib.auth.models import User
+from .models import OrdinaryText, GroupMembers, GroupAdmin
+from django.contrib.auth.models import User, Group
 
 
 class TypeTest(TestCase):
@@ -11,6 +11,10 @@ class TypeTest(TestCase):
                                         first_name='r',
                                         last_name='e',
                                         email='uuuttt@gmail.com')
+
+        self.group = Group.objects.create(name='Gang')
+        GroupAdmin.objects.create(group=self.group, admin=self.user)
+        GroupMembers.objects.create(group=self.group, user=self.user)
 
     def test_register_validation(self):
         first_name = 'Jonathan'
@@ -41,5 +45,23 @@ class TypeTest(TestCase):
         text_obj = OrdinaryText.objects.create(content=new_text)
         self.assertEqual(text_obj.content, new_text)
 
-    def test_text_text_rank(self):
+    def test_text_rank(self):
         self.assertEqual(1, self.user.profile.get_text_rank())
+
+    def test_song_rank(self):
+        self.assertEqual(1, self.user.profile.get_song_rank())
+
+    def test_score_fields(self):
+        self.assertEqual(0, self.user.profile.text_score)
+        self.assertEqual(0, self.user.profile.song_score)
+        self.user.profile.text_score = 20
+        self.user.profile.song_score = 30
+        self.user.save()
+        self.assertEqual(20, self.user.profile.text_score)
+        self.assertEqual(30, self.user.profile.song_score)
+
+    def test_group_text_rank(self):
+        ga = GroupAdmin.objects.get(group=self.group)
+        self.assertEqual(1, ga.get_group_text_rank())
+
+
