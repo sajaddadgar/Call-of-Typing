@@ -64,4 +64,34 @@ class TypeTest(TestCase):
         ga = GroupAdmin.objects.get(group=self.group)
         self.assertEqual(1, ga.get_group_text_rank())
 
+    def test_group_song_rank(self):
+        ga = GroupAdmin.objects.get(group=self.group)
+        self.assertEqual(1, ga.get_group_song_rank())
+
+    def test_group_member_score_fields(self):
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        self.assertEqual(0, g_member.user_text_score)
+        self.assertEqual(0, g_member.user_song_score)
+
+    def test_group_member_text_rank(self):
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        self.assertEqual(1, g_member.get_member_text_rank())
+
+    def test_group_member_song_rank(self):
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        self.assertEqual(1, g_member.get_member_song_rank())
+
+    def test_group_text_score(self):
+        ga = GroupAdmin.objects.get(group=self.group)
+        self.assertEqual(0, ga.get_group_text_score())
+
+    def test_group_song_score(self):
+        ga = GroupAdmin.objects.get(group=self.group)
+        self.assertEqual(0, ga.get_group_song_score())
+
+    def test_is_admin(self):
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        self.assertEqual(True, g_member.is_admin())
+
+
 
