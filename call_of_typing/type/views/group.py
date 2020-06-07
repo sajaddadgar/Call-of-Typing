@@ -36,9 +36,8 @@ def group_page(request, group_id):
     member = GroupMembers.objects.get(group=group_id, user=user.id)
     group_members = GroupMembers.objects.filter(group=group_id)
 
-    group_text_members_rank_array = sorted(group_members, key=lambda x: x.user_text_score, reverse=True)[0:10]
+    group_text_members_rank_array = sorted(group_members, key=lambda x: x.user_text_score, reverse=True)
 
-    print(member.get_member_text_rank())
     stuff_for_front = {
         'current_group': current_group,
         'member': member,
@@ -209,24 +208,28 @@ def creating_group(request):
     return render(request, 'type/GroupCreation.html')
 
 
+def init_join(request):
+    return render(request, 'type/JoinGroupPage.html')
+
+
 def join_group(request):
     user = request.user
     try:
-        group = Group.objects.filter(name=request.POST['id'])[0]
+        group = Group.objects.filter(name=request.POST['name'])[0]
         user_groups = GroupMembers.objects.filter(user=user)
         user_groups_name = [g.group.name for g in user_groups]
         if group.name in user_groups_name:
             stuff_for_front = {
                 'join_error': 'error'
             }
-            return render(request, 'type/GroupCreation.html', stuff_for_front)
+            return render(request, 'type/JoinGroupPage.html', stuff_for_front)
 
         g = GroupAdmin.objects.get(group=group)
         if user == g.admin:
             stuff_for_front = {
                 'admin_error': 'error'
             }
-            return render(request, 'type/GroupCreation.html', stuff_for_front)
+            return render(request, 'type/JoinGroupPage.html', stuff_for_front)
 
         group.user_set.add(user)
         GroupMembers.objects.create(group=group, user=user)
@@ -235,7 +238,7 @@ def join_group(request):
         stuff_for_front = {
             'group_name_is_not_exists': 'error'
         }
-        return render(request, 'type/GroupCreation.html', stuff_for_front)
+        return render(request, 'type/JoinGroupPage.html', stuff_for_front)
     return HttpResponseRedirect(reverse('type:my_groups'))
 
 

@@ -36,6 +36,7 @@ urlpatterns = [
     path('type/group/Mygroups', views.my_groups, name='my_groups'),
     path('type/group/<int:group_id>/', views.group_page, name='GroupPage'),
     path('type/group/create', views.creating_group, name='CreateGroup'),
+    path('type/group/init_join/', views.init_join, name='init_join'),
     path('type/group/join', views.join_group, name='JoinGroup'),
     path('type/group/add_member/<int:group_id>/', views.group_member_adding, name='AddMember'),
     path('type/group/group_normal_type/<int:group_id>/', views.group_normal_type, name='group_normal_type'),

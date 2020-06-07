@@ -84,10 +84,18 @@ class TypeTest(TestCase):
     def test_group_text_score(self):
         ga = GroupAdmin.objects.get(group=self.group)
         self.assertEqual(0, ga.get_group_text_score())
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        g_member.user_text_score = 360
+        g_member.save()
+        self.assertEqual(360, ga.get_group_text_score())
 
     def test_group_song_score(self):
         ga = GroupAdmin.objects.get(group=self.group)
         self.assertEqual(0, ga.get_group_song_score())
+        g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
+        g_member.user_song_score = 18
+        g_member.save()
+        self.assertEqual(18, ga.get_group_song_score())
 
     def test_is_admin(self):
         g_member = GroupMembers.objects.filter(group=self.group, user=self.user)[0]
