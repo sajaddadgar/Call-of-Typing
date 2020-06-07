@@ -3,27 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta charset="UTF-8">
+    <title>My Groups</title>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../../static/css/JoinGroupPage.css?version=51"/>
+
 </head>
-<body>
-{% if group_name_is_not_exists %}
-<p> Group with this name is not exists.</p>
-{% else %}
-{% if join_error %}
-<p> you are in this group </p>
-{% endif %}
-{% if admin_error %}
-<p> you are admin of the group </p>
-{% endif %}
-{% endif %}
-<form method="post" action="{%url 'type:JoinGroup'%}">
-    {% csrf_token %}
-    <div class="form-group">
-                    <input type="text" class="test-input" placeholder="نام گروه" name="name" value="">
+
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}"
+        >صفحه اصلی</a>
     </div>
-    <button type="submit" class="btnSubmit"
-    >
-                  join
-    </button>
-</form>
+</header>
+<body>
+
+<body>
+
+
+<div class="container join-group">
+    <form method="post" action="{%url 'type:JoinGroup'%}">
+        {% csrf_token %}
+        <center><h3> !! وارد گروه شو</h3></center>
+
+        <div class="form-group">
+            <input type="text" class="input" placeholder="نام گروه" name="name" value="">
+        </div>
+        <center>
+            <button type="submit" class="btnSubmit"
+            >
+                اضافه شدن
+            </button>
+        </center>
+
+    </form>
+
+    {% if group_name_is_not_exists %}
+    <!--    <p> Group with this name is not exists.</p>-->
+    <center><h5>☹☹ خطا: گروه با این اسم وجود نداره</h5></center>
+    {% else %}
+    {% if join_error %}
+    <!--    <p> you are in this group </p>-->
+    <center><h5> 😊😊!! از قبل توی این گروه بودی</h5></center>
+
+    {% endif %}
+    {% if admin_error %}
+    <!--    <p> you are admin of the group </p>-->
+    <center><h5>😊😊!! خطا: ادمین این گروهی</h5></center>
+
+    {% endif %}
+    {% endif %}
+
+</div>
 </body>
 </html>
