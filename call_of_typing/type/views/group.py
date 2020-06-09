@@ -224,14 +224,6 @@ def join_group(request):
             }
             return render(request, 'type/JoinGroupPage.html', stuff_for_front)
 
-        g = GroupAdmin.objects.get(group=group)
-        if user == g.admin:
-            stuff_for_front = {
-                'admin_error': 'error'
-            }
-            return render(request, 'type/JoinGroupPage.html', stuff_for_front)
-
-        group.user_set.add(user)
         GroupMembers.objects.create(group=group, user=user)
 
     except (AttributeError, IndexError):
