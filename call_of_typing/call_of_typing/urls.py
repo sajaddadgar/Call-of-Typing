@@ -20,5 +20,6 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_done.html"),
          name="password_reset_complete"),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.SONG_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -22,9 +22,9 @@
 <header>
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand myHover" href="#" >Call Of Typing</a>
+            <a class="navbar-brand myHover" href="#">Call Of Typing</a>
             {% if user.is_authenticated %}
-            <div style="color:white">@{{user.username}}</div>
+                <div style="color:white">@{{ user.username }}</div>
             {% endif %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false"
@@ -34,56 +34,56 @@
 
             {% if user.is_authenticated %}
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="mr-auto"></div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link nav_bar_content" href="{% url 'type:logout' %}" >خروج</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'type:UploadMusic' %}" >آپلود موسیقی</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about_section" >درباره ما</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'type:profile' %}" >پروفایل</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="mr-auto"></div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link nav_bar_content" href="{% url 'type:logout' %}">خروج</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'type:UploadMusic' %}">آپلود موسیقی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about_section">درباره ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'type:profile' %}">پروفایل</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
 
-                </ul>
-            </div>
-        </nav>
+                    </ul>
+                </div>
+                </nav>
 
-        {% else %}
+            {% else %}
 
-        <div class="collapse navbar-collapse" id="navbarNav2">
-            <div class="mr-auto"></div>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about_section" >درباره ما</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'type:signup' %}" >ثبت نام</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'type:user_auth' %}" >ورود</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
+                <div class="collapse navbar-collapse" id="navbarNav2">
+                    <div class="mr-auto"></div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about_section">درباره ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'type:signup' %}">ثبت نام</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'type:user_auth' %}">ورود</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
 
-            </ul>
-        </div>
-        </nav>
+                    </ul>
+                </div>
+                </nav>
 
-        {% endif %}
+            {% endif %}
 
     </div>
     <div class="container text-center">
@@ -128,7 +128,7 @@
                 </a>
             </div>
             <div class="column">
-                <a href="{% url 'type:my_groups'%}">
+                <a href="{% url 'type:my_groups' %}">
                     <img src="../static/img/group.jpg" alt="group" class="bluer_filter">
                 </a>
             </div>
@@ -152,17 +152,15 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <div class="panel text-left">
-                        <center><p>😊😊😊</p></center>
                         <h1 style="font-family: 'B Mehr'; text-align: right">درباره ما</h1>
-                        <p class="pt-4" style="font-family: 'B Mehr';text-align: right">
-                            یه توضیحاتی در مورد سایت بنویسید کافیه
+                        <p class="pt-4" style="text-align: center">
+                            Call of Typing
                         </p>
+                        <center><p>😊😊😊</p></center>
                         <p style="font-family: 'B Mehr'; text-align: right">
-                            ***********************************************************
-                            ***********************************************************
-                            ***********************************************************
-                            ***********************************************************
-                            ***********************************************************
+                            .یک وبسایتی در زمینه بازی و افزایش مهارت تایپ
+                            <br>
+                             تفاوتی نداره که یه تایپیست باشی یا یه برنامه نویس حرفه ای و یا حتی یه کاربر عادی، با استفاده از این وبسایت میتونی در کنار بازی و سرگرمی مهارت و سرعت تایپتو بهتر کنی و میتونی با ساختن گروه و اضافه کردن دوستات به گروه، یه رقابت هیجان انگیز داشته باشی
                         </p>
                     </div>
                 </div>
