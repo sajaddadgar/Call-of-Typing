@@ -89,7 +89,7 @@
         var letters = $("#input_text").val();
         var character_length = letters.length;
         var started = false;
-        var current_string = letters.substring(index, index + character_length);
+        var current_string = letters.substring(index, index + 45);
 
         var wordcount = 0;
 
@@ -112,7 +112,7 @@
                     $("#wordcount").text(wordcount);
                 }
                 index++;
-                current_string = letters.substring(index, index + character_length);
+                current_string = letters.substring(index, index + 45);
                 if (current_string[0] === ' ') {
                     current_string += ' ';
                 }
