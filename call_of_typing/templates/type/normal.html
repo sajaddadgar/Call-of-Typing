@@ -90,6 +90,10 @@
         var character_length = letters.length;
         var started = false;
         var current_string = letters.substring(index, index + 45);
+        if (current_string[current_string.length-1] == ' ')
+        {
+            current_string = current_string.substring(0, current_string.length-1)
+        }
 
         var wordcount = 0;
 
@@ -113,9 +117,13 @@
                 }
                 index++;
                 current_string = letters.substring(index, index + 45);
+                 if (current_string[current_string.length-1] == ' '){
+                    current_string = current_string.substring(0, current_string.length-1)
+                }
                 if (current_string[0] === ' ') {
                     current_string += ' ';
                 }
+
                 $("#target").text(current_string);
                 $("#your-attempt").append(charTyped);
                 if (index == letters.length) {
