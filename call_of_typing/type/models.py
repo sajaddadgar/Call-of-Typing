@@ -85,7 +85,7 @@ class GroupAdmin(models.Model):
     def get_group_text_rank(self):
         all_groups = list(GroupAdmin.objects.all())
         current_group_score = self.get_group_text_score()
-        scores = [x.get_group_text_score() for x in all_groups]
+        scores = sorted([x.get_group_text_score() for x in all_groups], reverse=True)
         return scores.index(current_group_score) + 1
 
     def get_group_text_score(self):
@@ -94,7 +94,7 @@ class GroupAdmin(models.Model):
     def get_group_song_rank(self):
         all_groups = list(GroupAdmin.objects.all())
         current_group_score = self.get_group_song_score()
-        scores = [x.get_group_song_score() for x in all_groups]
+        scores = sorted([x.get_group_song_score() for x in all_groups], reverse=True)
         return scores.index(current_group_score) + 1
 
     def get_group_song_score(self):
