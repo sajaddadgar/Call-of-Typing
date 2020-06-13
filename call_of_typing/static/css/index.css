@@ -17,7 +17,7 @@ section {
     --Patua: "Patua One", cursive;
     --Lobster: "lobster", cursive;
     --light-black: #2e2c2caf;
-    --bggradient: linear-gradient(90deg, rgba(45, 70, 138, 1) 0%, rgba(45, 70, 138, 1) 0%, rgba(0, 212, 255, 1) 72%, rgba(255, 255, 255, 1) 100%);
+    --bggradient: linear-gradient(90deg, rgba(26,65,73,1) 0%, rgba(35,163,204,1) 100%);
     --light-gray: rgba(255, 255, 255, 0.877);
 }
 
@@ -372,9 +372,27 @@ footer .column i + i {
 }
 
 .myHover:hover {
-    color: #1a1a3a;
+    color: white;
 }
 
 .centerButton {
     margin-top: 200px;
+}
+
+.column {
+  float: left;
+  width: 33%;
+  padding: 0;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.bluer_filter{
+  height: 400px;
+  filter: blur(2px);
+  width:100%;
 }

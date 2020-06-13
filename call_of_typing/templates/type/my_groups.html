@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Groups</title>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../../static/css/my_groups.css?version=51"/>
+
+
+</head>
+
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}"
+        >صفحه اصلی</a>
+    </div>
+</header>
+<body>
+
+
+{% if groups %}
+
+<div class="container groups">
+    <div class="row">
+        <div class="col-md-6 create-group">
+            <form action="{% url 'type:CreateGroup'%}">
+                <center>
+                    <button class="btnSubmit">ساخت گروه جدید</button>
+                </center>
+
+
+            </form>
+            <form action="{% url 'type:init_join'%}">
+            <center>
+                <button class="btnSubmit" style="margin-top: 38px">ملحق شدن به گروه جدید</button>
+            </center>
+
+            </form>
+        </div>
+
+        <div class="col-6 my-group">
+            <center>
+                <h5>
+                    لیست گروه های من
+                </h5>
+            </center>
+
+            {% for g in groups %}
+            {% if g.is_admin %}
+            <center>
+                <a href="{% url 'type:GroupPage' group_id=g.group.id %}">{{ g.group.name }} (Admin) </a>
+                <br/>
+            </center>
+            {% else %}
+            <center>
+                <a href="{% url 'type:GroupPage' group_id=g.group.id %}">{{ g.group.name }} (Member) </a>
+                <br/>
+            </center>
+            {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container groups">
+
+    <center><h2>☹☹!!هیچ گروهی نداری </h2></center>
+
+
+
+
+        <form action="{% url 'type:CreateGroup'%}">
+            <center>
+                <button class="btnSubmit" style="margin-top: 45px">ساخت گروه جدید</button>
+            </center>
+
+        </form>
+         <form action="{% url 'type:init_join'%}">
+            <center>
+                <button class="btnSubmit" style="margin-top: 10px">ملحق شدن به گروه جدید</button>
+            </center>
+
+        </form>
+
+
+</div>
+{% endif %}
+</body>
+</html>

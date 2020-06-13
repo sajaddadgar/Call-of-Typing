@@ -1,0 +1,28 @@
+.container{
+    margin-top: 5%;
+    margin-left: 23%;
+}
+
+.flex-box-buttons button{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 34%;
+    cursor: pointer;
+    background: #302f31;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    /*margin:2px;*/
+}
+
+.flex-box-buttons{
+    display: flex;
+    padding: 4px;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+} 

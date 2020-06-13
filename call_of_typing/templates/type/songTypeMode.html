@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Typing Mode</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+
+    <link rel="stylesheet" href="{% static 'css/uploadSong.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basics.css' %}">
+</head>
+<body>
+<header>
+     <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
+    </div>
+</header>
+
+<div class="container choose-mode-form">
+    {% if Group_id %}
+    <form method="post" action="{% url 'type:group_song_mode' group_id=Group_id %}">
+        {% csrf_token %}
+        <div class="col-md-6 note">
+            <h3>نوع انتخاب آهنگ</h3>
+        </div>
+        <div class="col-md-6 form-content">
+            <div class="row">
+               <div class="col-md-6 ">
+                    <center>
+                    <input type="radio" name="mode" id="random_song" value="random_song">
+                    <label for="random_song" class="label"> آهنگ رندوم </label> <br/>
+                    </center>
+
+                    <center>
+                    <input type="radio" name="mode" id="favorite_song" value="favorite_song">
+                    <label for="favorite_song" class="label"> جستجو آهنگ </label> <br/>
+                    </center>
+
+                </div>
+                <div class="col-md-6 button">
+                    <center>
+                    <input type="submit" class=btnSubmit value="شروع">
+                    </center>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+    {% else %}
+        <form method="post" action="{% url 'type:song_type_mode' %}">
+        {% csrf_token %}
+        <div class="col-md-6 note">
+            <h3>نوع انتخاب آهنگ</h3>
+        </div>
+        <div class="col-md-6 form-content">
+            <div class="row">
+               <div class="col-md-6 ">
+                    <center>
+                    <input type="radio" name="mode" id="random_song" value="random_song">
+                    <label for="random_song" class="label"> آهنگ رندوم </label> <br/>
+                    </center>
+
+                    <center>
+                    <input type="radio" name="mode" id="favorite_song" value="favorite_song">
+                    <label for="favorite_song" class="label"> جستجو آهنگ </label> <br/>
+                    </center>
+
+                </div>
+                <div class="col-md-6 button">
+                    <center>
+                    <input type="submit" class=btnSubmit value="شروع">
+                    </center>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+    {% endif %}
+
+    {% if spotify %}
+    <p style="margin-left: 350px">
+        <b> Artist: </b> {{Artist_name}} <br/>
+        <b> Track: </b> {{track_title}} <br/>
+        <b>Spotify:</b> <a href="{{ spotify }}" target="_blank" style="color: black">{{spotify}}</a>
+        <br/>
+        <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank" style="color: black">{{soundcloud.url}}</a>
+        <p id="timer" style="margin-left: 350px"></p>
+        {% if Group_id %}
+         <form action="{% url 'type:group_song_type_random' group_id=Group_id %}">
+        {% csrf_token %}
+            <div class="col-md-6 button">
+                <input type="submit" style="margin-left: 200px; margin-top: 30px" class=btnSubmit value="شروع">
+            </div>
+
+        </form>
+            </p>
+        <script>
+            let time = new Date().getTime() + 30000;
+            let x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = time - now;
+                var seconds = Math.floor(distance / 1000);
+                document.getElementById("timer").innerHTML = seconds + 's';
+                if (distance < 0) {
+                    clearInterval(x);
+                    window.location.href = "{% url 'type:group_song_type_random' group_id=Group_id %}";
+                }
+            })
+        </script>
+        {% else %}
+        <form action="{% url 'type:song_type_random' %}">
+        {% csrf_token %}
+            <div class="col-md-6 button">
+                <input type="submit" style="margin-left: 200px; margin-top: 30px" class=btnSubmit value="شروع">
+            </div>
+
+        </form>
+
+    </p>
+    <script>
+        let time = new Date().getTime() + 30000;
+        let x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = time - now;
+            var seconds = Math.floor(distance / 1000);
+            document.getElementById("timer").innerHTML = seconds + 's';
+            if (distance < 0) {
+                clearInterval(x);
+                window.location.href = "{% url 'type:song_type_random' %}";
+            }
+        })
+    </script>
+    {% endif %}
+    {% endif %}
+
+
+</div>
+
+
+<!--<div class="container ">-->
+<!--    &lt;!&ndash;    <div class="col-md-6 form-content">&ndash;&gt;-->
+<!--    <div class="row">-->
+
+<!--        <form action="{% url 'type:song_type_mode' %}" method="post" class="col-md-6 emp-profile">-->
+<!--            <div class="row content">-->
+<!--                {% csrf_token %}-->
+<!--                &lt;!&ndash;                <a href="">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ رندوم</button>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </a>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <a href="">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <button class="btn btn-primary" style="font-family: 'B Mehr'">آهنگ مورد آهنگ</button>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </a>&ndash;&gt;-->
+<!--                <div class="options-form">-->
+<!--&lt;!&ndash;                <input type="radio" name="mode" id="random_song" value="random_song">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label for="random_song" style="font-family: 'B Mehr'"> آهنگ رندوم </label> <br/>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                <input type="radio" name="mode" id="favorite_song" value="favorite_song"">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label for="favorite_song" style="font-family: 'B Mehr'"> جستجو آهنگ </label> <br/>&ndash;&gt;-->
+<!--                </div>-->
+<!--                <btn type="submit" class="btnSubmit">Let's Go</btn>-->
+<!--&lt;!&ndash;                <input type="submit" class=btnSubmit value="Let's Go">&ndash;&gt;-->
+<!--            </div>-->
+<!--        </form>-->
+<!--        {% if spotify %}-->
+<!--        <p>-->
+<!--            <b> Artist: </b> {{Artist_name}} <br/>-->
+<!--            <b> Track: </b> {{track_title}} <br/>-->
+<!--            <b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>-->
+<!--            <br/>-->
+<!--            <b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>-->
+<!--        <p id="timer"></p>-->
+<!--        <form action="{% url 'type:song_type_random' %}">-->
+<!--            {% csrf_token %}-->
+<!--            <input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">-->
+
+<!--        </form>-->
+<!--        </p>-->
+<!--        <script>-->
+<!--            let time = new Date().getTime() + 30000;-->
+<!--            let x = setInterval(function () {-->
+<!--                var now = new Date().getTime();-->
+<!--                var distance = time - now;-->
+<!--                var seconds = Math.floor(distance / 1000);-->
+<!--                document.getElementById("timer").innerHTML = seconds + 's';-->
+<!--                if (distance < 0) {-->
+<!--                    clearInterval(x);-->
+<!--                    window.location.href = "{% url 'type:song_type_random' %}";-->
+<!--                }-->
+<!--            })-->
+<!--        </script>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--</div>-->
+
+</body>
+</html>

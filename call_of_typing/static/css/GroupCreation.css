@@ -1,0 +1,108 @@
+.nav-link {
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+header a:hover {
+    color: #DCAE1D;
+}
+
+
+body {
+    background-color:#00303F ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.group-container {
+
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.group-form {
+    padding: 5%;
+    background:#CAE4DB;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 23%;
+}
+
+.group-form h3 {
+    text-align: center;
+        color: #00303F;
+
+    font-family: 'B Mehr';
+    font-size: 40px;
+}
+
+.group-container form {
+    padding: 10%;
+}
+
+.test-input {
+
+    width: 90%;
+    /* padding: 15px 22px; */
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: #CAE4DB;
+    border: none;
+    border-bottom: 4px solid #DCAE1D;
+    text-align: right;
+    padding: 2%;
+    color: #00303F;
+    font-family: Calibri, serif;
+}
+
+
+.test-input:focus {
+    background-color: #DCAE1D;
+    border: none;
+    width: 100%;
+}
+
+::placeholder {
+    margin-right: 4px;
+    color: #00303F;
+    font-family: 'B Mehr';
+
+}
+
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
+    cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+.login-error {
+    color: #750000;
+    font-family: 'B Mehr';
+    font-size: 17px;
+}
+
+
+
+.form-content {
+    padding: 5%;
+    border: none;
+    margin-bottom: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
+}
+
+.form-control {
+    border-radius: 1.5rem;
+}
+
+.alter-danger {
+    margin-top: 2%;
+}

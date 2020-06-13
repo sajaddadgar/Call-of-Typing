@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="../../../static/css/error.css?version=51"/>
+
+</head>
+
+
+<!--<header>-->
+<!--    <div align="right">-->
+<!--        <a class="nav-link" href="{% url 'type:home' %}"-->
+<!--        >صفحه اصلی</a>-->
+<!--    </div>-->
+<!--</header>-->
+<body>
+
+
+<div class="container error">
+    <div class="row">
+
+
+        <div class="col-6">
+            <center>
+                <h2>
+                   ☹☹ !!برای شرکت تو رقابت گروهی باید اول ثبت نام کنی
+                </h2>
+            </center>
+            <div class="col-md-6 ">
+                <div class="row">
+                    <form action="{% url 'type:signup' %}">
+                        <center>
+                            <button type="submit" class="btnSubmit">
+                                ثبت نام
+                            </button>
+                        </center>
+                    </form>
+
+                    <form action="{% url 'type:home' %}">
+                        <center>
+                            <button type="submit" class="btnSubmit">
+                                بازگشت به صفحه اصلی
+                            </button>
+                        </center>
+                    </form>
+                </div></div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+body {
+    background-color: #00303F;
+    /*background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.nav-link {
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+header a:hover {
+    color: #DCAE1D;
+}
+
+a {
+    font-family: Calibri;
+    font-weight: bold;
+    color: #246594;
+}
+
+
+.join-group {
+    margin-left: 30%;
+    height: 300px;
+    width: 40%;
+    padding: 3%;
+    margin-top: 10%;
+
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #CAE4DB;
+    align-items: center;
+}
+
+
+h3 {
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+
+.input {
+
+    width: 90%;
+    /* padding: 15px 22px; */
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: #CAE4DB;
+    border: none;
+    border-bottom: 4px solid #DCAE1D;
+    text-align: right;
+    padding: 2%;
+    color: #00303F;
+    font-family: Calibri, serif;
+    margin-top: 4%;
+}
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
+    cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+h5{
+    margin-top: 1%;
+    color: #761a34;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+
+

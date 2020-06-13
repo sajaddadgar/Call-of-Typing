@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <style>
+        body{
+            background-image: url("../../static/img/soundcloud-search.jpg");
+            background-size: auto;
+            background-repeat: no-repeat;
+        }
+
+        .emp-profile{
+            margin-left: 60%;
+            margin-top: 17%;
+        }
+
+        .input-search{
+            width: 500px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container emp-profile">
+    <form action="{% url 'type:song_search' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-md-6" style="padding-bottom:10px">
+                <input type="text" class="form-control input-search" placeholder="Artist name" name="singer">
+            </div>
+            <div class="col-md-6" >
+                <input type="text" class="form-control input-search" placeholder="Song name" name="song">
+            </div>
+        </div>
+        <input type="submit" style="margin-left:130px" class="btn btn-primary" value="Search">
+    </form>
+
+    <!--{% if spotify %}-->
+    <!--<p>-->
+        <!--<b>Spotify:</b> <a href="{{ spotify }}" target="_blank">{{spotify}}</a>-->
+        <!--<br/>-->
+        <!--<b>Soundcloud:</b> <a href="{{ soundcloud.url }}" target="_blank">{{soundcloud.url}}</a>-->
+
+            <!--<form action="{% url 'type:song_type' %}">-->
+                <!--{% csrf_token %}-->
+                <!--<input type="submit" style="margin-left: 400px; margin-top: 30px" class=btnSubmit value="Start">-->
+            <!--</form>-->
+    <!--</p>-->
+    <!--{% endif %}-->
+</div>
+</body>
+</html>

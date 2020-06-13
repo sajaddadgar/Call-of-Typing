@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div
 from django.forms import ModelForm
 from .models import Profile
+from .models import Track
 
 
 class ProfileForm(ModelForm):
@@ -23,7 +24,7 @@ class RegisterForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2', 'email')
 
     def __init__(self, *args, **kwargs):
-        super(RegisterForm,self).__init__(*args, **kwargs)
+        super(RegisterForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_id = 'id_register_form'
@@ -32,7 +33,7 @@ class RegisterForm(UserCreationForm):
         self.helper.layout = Layout(
             Div(
                 Div(
-                    Div('first_name', css_class="form-group" ),
+                    Div('first_name', css_class="form-group"),
                     Div('last_name', css_class="form-group"),
                     Div('username', css_class="form-group"),
                     Div('email', css_class="form-group"),
@@ -41,7 +42,14 @@ class RegisterForm(UserCreationForm):
                     Div('password1', css_class="form-group"),
                     Div('password2', css_class="form-group"),
                     css_class='col-md-6'),
-                 css_class='row'
+                css_class='row'
             )
         )
+
+
+class SongForm(forms.ModelForm):
+
+    class Meta:
+        model = Track
+        fields = ('track_title', 'Artist_name', 'song')
 

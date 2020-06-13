@@ -1,0 +1,98 @@
+body {
+
+    /*Temp photo change it */
+    background-image: url("../img/songtypemode_back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.nav-link {
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+
+.label{
+    font-family: 'B Mehr';
+    padding: 2%;
+    color: #CAE4DB;
+}
+
+.note {
+    margin-top: 1%;
+    text-align: center;
+    height: 80px;
+    background: #00303F;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    color: #CAE4DB;
+    font-weight: bold;
+    line-height: 80px;
+    border: none;
+    padding: 5%;
+}
+
+.note h3 {
+    text-align: center;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-size: 40px;
+}
+
+.choose-mode-form {
+    margin-right: -90px;
+    margin-top: 50px;
+}
+
+
+.form-content {
+    padding: 5%;
+    border: none;
+    margin-bottom: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);
+}
+
+:root {
+    --Sniglet-font: "Sniglet", cursive;
+    --Rubik: "Rubik", cursive;
+    --Patua: "Patua One", cursive;
+    --Lobster: "lobster", cursive;
+    --light-black: #2e2c2caf;
+    --bggradient: linear-gradient(90deg, rgba(26, 65, 73, 1) 0%, rgba(35, 163, 204, 1) 100%);
+    --light-gray: rgba(255, 255, 255, 0.877);
+}
+
+.col-md-6 {
+    margin-left: 23%;
+}
+
+header a {
+    font-family: var(--Sniglet-font);
+    font-size: 1em;
+    font-weight: bold;
+    color: #00303F;
+}
+
+header a:hover {
+    color: #DCAE1D;
+}
+
+header .container .col-md-7 {
+    font-family: "Rubik", sans-serif;
+}
+
+.btnSubmit {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}

@@ -14,43 +14,41 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/profile.css"/>
-<style>
+    <link rel="stylesheet" href="../../static/css/profile.css?version=51"/>
+    <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
 
-    .emp-profile {
-        left: 50%;
-        top: 50%;
-        width: 500px;
-        height: 200px;
-        padding: 3%;
-        margin-top: 3%;
-        margin-bottom: 3%;
-        border-radius: 0.5rem;
-        background: #fff;
-    }
-
-</style>
+    <style>
+        .emp-profile {
+            left: 50%;
+            top: 50%;
+            width: 500px;
+            height: 200px;
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: #fff;
+        }
+    </style>
 
 </head>
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: white">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
         {% csrf_token %}
-        <a class="nav-link" href="{% url 'type:profile'%}" style="color: white">پروفایل</a>
+        <a class="nav-link" href="{% url 'type:profile'%}" >پروفایل</a>
     </div>
-
 </header>
 <body>
-
 <div class="container emp-profile">
     <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" style="margin-left: 50px" class="profile-edit-btn" name="btnAddMore" value="ثبت تغییرات"/>
+        <input type="submit" style="margin-left: 50px; font-family: 'B Mehr'" class="profile-edit-btn" name="btnAddMore"
+               value="ثبت تغییرات"/>
     </form>
 </div>
-
-
 </body>
 </html>

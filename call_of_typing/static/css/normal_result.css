@@ -1,0 +1,64 @@
+.result-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
+
+.result-form {
+    padding: 5%;
+    background: -webkit-linear-gradient(bottom, #016d84, #06252b);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 23%;
+
+}
+
+.result-form span{
+    text-align: center;
+    padding: 5%;
+    margin-top: 4%;
+    width: 60%;
+    background-color: #26282b;
+}
+
+.result-table{
+    margin-top: 4%;
+    background-color: #06252b;
+
+}
+
+
+.result-form h3 {
+    text-align: center;
+    color: #fff;
+}
+
+.result-container form {
+    padding: 10%;
+}
+
+.restart_btn{
+    margin-top: 4%;
+    align-content: center;
+}
+.btnSubmit {
+    width: 50%;
+    border-radius: 1rem;
+    margin-top: 5px;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.result-form .btnSubmit {
+    font-weight: 600;
+    color: #0062cc;
+    background-color: #fff;
+}
+
+.result-form .ForgetPwd {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+
+}

@@ -11,20 +11,18 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="../../static/css/register.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/register.css?version=51">
+    <link rel="stylesheet" href="../static/css/basics.css?version=51"/>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
 
     <title>Register</title>
-    <style>
-        input[type="text"]::placeholder{ text-align: right; font-family: "2  Koodak" }
-        input[type="password"]::placeholder{ text-align: right; font-family: "2  Koodak"}
-        input[type="email"]::placeholder{text-align: right; font-family: "2  Koodak"}
-    </style>
+
 </head>
 
 
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" style="color: blue">صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
     </div>
 </header>
 
@@ -32,7 +30,8 @@
     <form method="post" action="{% url 'type:register' %}" class="form-group">
         {% csrf_token %}
         <div class="col-md-6 note">
-            <p style="font-family: '2  Koodak'; font-size: 40px">ثبت نام</p>
+            <h3>ثبت نام</h3>
+
         </div>
 
         <div class=" col-md-6 form-content">
@@ -40,38 +39,24 @@
 
                 {% if error %}
                 <div class="form-control alert alert-danger" role="alert">
-                    <center style="color: red; font-family: '2  Koodak'">خطایی وجود دارد</center>
+                    <center style="color: #750000; font-family: 'B Mehr'">خطایی وجود دارد</center>
                 </div>
-                {% endif %}
+                {% else %} {% if integrity_error %}
+                <div class="form-control alert alert-danger" role="alert">
+                    <center style="color: #750000; font-family: 'B Mehr'">نام کاربری تکرای است</center>
+                </div>
+                {% endif %} {% endif %}
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <input id="first_name" type="text" class="form-control" style="text-align: right" placeholder="* نام"
-                             value="" name="firstname" />
-                    </div>
-                    <div class="form-group">
-                        <input id="last_name" type="text" class="form-control" style="text-align: right" placeholder="* نام خانوادگی" value=""
-                            name="lastname" />
-                    </div>
-                    <div class="form-group">
-                        <input id="email" type="email" class="form-control" placeholder="* ایمیل" value=""
-                            name="email" />
-                    </div>
-                    <div class="form-group">
-                        <input id="username" type="text" class="form-control" placeholder="* نام کاربری" value=""
-                            name="username" />
-                    </div>
-                    <div class="form-group">
-                        <input id="password_1" type="password" class="form-control" placeholder="* رمز عبور"
-                            value="" name="pass"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه"/>
-                    </div>
-                    <div class="form-group">
-                        <input id="password_2" type="password" class="form-control" placeholder="* تکرار رمز عبور"
-                            value="" name="confpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه"/>
-                    </div>
+                        <input id="first_name" type="text" class="test-input"  placeholder="* نام" value="" name="firstname" />
+                        <input id="last_name" type="text" class="test-input" placeholder="* نام خانوادگی" value="" name="lastname" />
+                        <input id="email" type="email" class="test-input" placeholder="* ایمیل" value="" name="email" />
+                        <input id="username" type="text" class="test-input" placeholder="* نام کاربری" value="" name="username" />
+                        <input id="password_1" type="password" class="test-input" placeholder="* رمز عبور" value="" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه" />
+                        <input id="password_2" type="password" class="test-input" placeholder="* تکرار رمز عبور" value="" name="confpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="تعداد حروف باید از 8 تا بیشتر باشه، و شامل عدد و حروف کوچک و حروف بزرگ باشه" />
                 </div>
             </div>
             <center>
-                <button id="submit_btn" type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 13px; margin-bottom: 3px">عضویت</button>
+                <button id="submit_btn" type="submit" class="btnSubmit">عضویت</button>
             </center>
         </div>
     </form>

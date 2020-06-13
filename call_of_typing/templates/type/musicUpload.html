@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload music</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+
+    <link rel="stylesheet" href="../../static/css/uploadSong.css?version=51">
+        <link rel="stylesheet" href="../../static/css/basics.css?version=51">
+
+</head>
+<body>
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی</a>
+    </div>
+</header>
+<div class="container emp-profile" style="text-align: center;width: 500px">
+{% load crispy_forms_tags %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p style="margin-left: 120px; margin-bottom: 5px; margin-top: 15px; font-family: 'B Mehr'"> :نام آهنگ </p>
+        {{form.track_title}}
+        <p style="margin-left: 120px; margin-bottom: 5px; margin-top: 15px; font-family: 'B Mehr'"> :نام خواننده </p>
+        {{form.Artist_name}}
+        <p style="margin-left: 80px; margin-bottom: 5px; margin-top: 20px;font-family: 'B Mehr'"> :فایل را انتخاب کنید </p>
+        <div style="margin-left: 95px">
+            {{form.song}}
+        </div>
+        <center>
+            <button type="submit" class="btnSubmit"  style="font-family: 'B Mehr';margin-top: 30px; margin-bottom: -5px">آپلود</button>
+        </center>
+    </form>
+</div>
+</body>
+</html>

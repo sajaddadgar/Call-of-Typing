@@ -1,0 +1,140 @@
+body {
+    background-color: #00303F;
+    /*background: -webkit-linear-gradient(bottom, #7A9D96, #00303F);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.nav-link {
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    font-weight: 600;
+}
+header a:hover {
+    color: #DCAE1D;
+}
+
+h5{
+   color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+
+}
+h4{
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+    background-color: #7A9D96;
+    width: 272.067px;
+}
+
+
+.group-page {
+    margin-left: 16%;
+    height:420px;
+    width: 68%;
+    padding: 3%;
+    margin-top: 5%;
+
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #CAE4DB;
+    align-items: center;
+}
+
+.input {
+
+    width: 90%;
+    /* padding: 15px 22px; */
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: #CAE4DB;
+    border: none;
+    border-bottom: 4px solid #DCAE1D;
+    text-align: right;
+    padding: 2%;
+    color: #00303F;
+    font-family: Calibri, serif;
+}
+
+
+.input:focus {
+    background-color: #DCAE1D;
+    border: none;
+    width: 100%;
+}
+
+::placeholder {
+    margin-right: 4px;
+    color: #00303F;
+    font-family: 'B Mehr';
+
+}
+.item{
+    padding: 10px;
+    margin-top: 10px;
+}
+.btnSubmit {
+
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 25%;
+    cursor: pointer;
+    background: #00303F;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+
+.add-member{
+
+    padding: 5%;
+    margin-top: 12%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+
+
+
+    /*padding: 10px;*/
+    /*margin-top: 10px;*/
+    border: solid #7A9D96;
+}
+
+.add-member h4 {
+
+
+    color: #00303F;
+    font-family: 'B Mehr';
+    font-weight: 600;
+    background-color: #CAE4DB;
+    width: 222.067px;
+    text-align: center;
+
+}
+
+
+.flex-box-buttons button{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1%;
+    width: 40%;
+    cursor: pointer;
+    background: #302f31;
+    color: #CAE4DB;
+    font-family: 'B Mehr';
+    margin-top: 13px;
+    margin-bottom: 3px;
+    font-size: 18px;
+    /*margin:2px;*/
+}
+
+.flex-box-buttons{
+    display: flex;
+    padding: 4px;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+}

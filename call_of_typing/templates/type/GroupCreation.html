@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Group creation</title>
+    <link rel="icon" href="../../static/img/b.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="../../static/css/GroupCreation.css?version=51"/>
+
+</head>
+
+<header>
+    <div align="right">
+        <a class="nav-link" href="{% url 'type:home' %}"
+        >صفحه اصلی</a>
+    </div>
+</header>
+
+<body>
+{% if group_name_is_not_exists %}
+<p> Group with this name is not exists.</p>
+{% else %}
+{% if join_error %}
+<p> you are in this group </p>
+{% endif %}
+{% if admin_error %}
+<p> you are admin of the group </p>
+{% endif %}
+{% endif %}
+<div class="container group-container">
+
+    <div class="row">
+        <div class="col-md-6 group-form">
+            <h3>ساخت گروه</h3>
+            <form method="post" action="{% url 'type:CreateGroup' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="test-input" placeholder="نام گروه" name="name" value="">
+                </div>
+                <center>
+                    <button type="submit" class="btnSubmit"
+                            >
+                       ساختن
+                    </button>
+                </center>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--
+<form method="post" action="{% url 'type:JoinGroup' %}">
+    {% csrf_token %}
+    <p>Join group</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="group name" name="id" value="">
+    </div>
+    <button type="submit" class="btnSubmit" style="font-family: '2  Koodak';margin-top: 30px; margin-bottom: -5px">
+        Join
+    </button>
+</body>
+</html>
+-->
