@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="icon" href="../static/img/b.png" type="image/gif" sizes="16x16">
-    <link rel="stylesheet" href="../static/css/ranking.css?version=51" />
+    <link rel="stylesheet" href="../static/css/ranking.css?version=51"/>
     <link rel="stylesheet" href="../static/css/basics.css?version=51"/>
 
 
     <title>Ranking</title>
     <script type="text/javascript" src="../static/js/ranking.js"></script>
     <style>
-        body{
+        body {
             background-image: url("../static/img/Ranking_Back.jpg");
             background-repeat: no-repeat;
             background-size: cover;
@@ -27,89 +27,146 @@
 </head>
 <header>
     <div align="right">
-        <a class="nav-link" href="{% url 'type:home' %}" >صفحه اصلی</a>
+        <a class="nav-link" href="{% url 'type:home' %}">صفحه اصلی</a>
     </div>
 </header>
 
 <body>
 
 
-    <!-- to have all teh table in one page, by make them appear when the related bottom clicked,
-         you should change the other one display to 'none' and the selected one change it's display to 'table'
-        wont work properly, check it later -->
+<!-- to have all teh table in one page, by make them appear when the related bottom clicked,
+     you should change the other one display to 'none' and the selected one change it's display to 'table'
+    wont work properly, check it later -->
 
-        <div class="container col-md-6">
+<div class="container col-md-6">
 
-            <div id="tables">
+    <div id="tables">
 
-                <table class="table table-dark" id="type-table" align="right">
+        <table class="table table-dark" id="text-table" align="right">
 
-                    <thead>
-                        <tr align="right">
-                            <th></th>
-                            <th></th>
-                            <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ متن</th>
-                        </tr>
-                        <tr style="font-family: '2  Koodak'" align="right">
-                            <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
-                            <th scope="col" style="font-family: 'B Mehr'">کاربر</th>
-                            <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
-                        </tr>
+            <thead>
+            <tr align="right">
+                <th></th>
+                <th></th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ متن</th>
+            </tr>
+            <tr style="font-family: '2  Koodak'" align="right">
+                <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
+                <th scope="col" style="font-family: 'B Mehr'">کاربر</th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
+            </tr>
 
-                    </thead>
+            </thead>
 
-                    <tbody>
-                        {% for user in text_rank_array %}
-                        <tr align="right">
-                            <th scope="row">{{ user.profile.text_score }}</th>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.profile.get_text_rank }}</td>
-                        </tr>
+            <tbody>
+            {% for user in text_rank_array %}
+            <tr align="right">
+                <th scope="row">{{ user.profile.text_score }}</th>
+                <td>{{ user.username }}</td>
+                <td>{{ user.profile.get_text_rank }}</td>
+            </tr>
 
-                        {% endfor %}
-                    </tbody>
+            {% endfor %}
+            </tbody>
 
-                </table>
+        </table>
 
-                <table class="table table-dark" id="song-table" style="display: none;">
-                    <thead>
-                        <tr align="right">
-                            <th></th>
-                            <th></th>
-                            <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ آهنگ</th>
-                        </tr>
-                        <tr style="font-family: '2  Koodak'" align="right">
-                            <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
-                            <th scope="col" style="font-family: 'B Mehr'">کاربر</th>
-                            <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
-                        </tr>
-                    </thead>
+        <table class="table table-dark" id="song-table" style="display: none;">
+            <thead>
+            <tr align="right">
+                <th></th>
+                <th></th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ آهنگ</th>
+            </tr>
+            <tr style="font-family: '2  Koodak'" align="right">
+                <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
+                <th scope="col" style="font-family: 'B Mehr'">کاربر</th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
+            </tr>
+            </thead>
 
-                    <tbody>
-                        {% for user in song_rank_array %}
-                        <tr align="right">
-                            <th scope="row">{{ user.profile.song_score }}</th>
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.profile.get_song_rank }}</td>
-                        </tr>
+            <tbody>
+            {% for user in song_rank_array %}
+            <tr align="right">
+                <th scope="row">{{ user.profile.song_score }}</th>
+                <td>{{ user.username }}</td>
+                <td>{{ user.profile.get_song_rank }}</td>
+            </tr>
 
-                        {% endfor %}
-                    </tbody>
+            {% endfor %}
+            </tbody>
 
-                </table>
+        </table>
 
-            </div>
+        <table class="table table-dark" id="text-group-table" align="right" style="display: none">
+
+            <thead>
+            <tr align="right">
+                <th></th>
+                <th></th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ متن گروهی</th>
+            </tr>
+            <tr style="font-family: '2  Koodak'" align="right">
+                <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
+                <th scope="col" style="font-family: 'B Mehr'">گروه</th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+            {% for group in group_text_rank_array %}
+            <tr align="right">
+                <th scope="row">{{ group.get_group_text_score }}</th>
+                <td>{{ group.group.name }}</td>
+                <td>{{ group.get_group_text_rank }}</td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+        <table class="table table-dark" id="song-group-table" align="right" style="display: none">
+
+            <thead>
+            <tr align="right">
+                <th></th>
+                <th></th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه بندی تایپ آهنگ گروهی</th>
+            </tr>
+            <tr style="font-family: '2  Koodak'" align="right">
+                <th scope="col" style="font-family: 'B Mehr'">امتیاز</th>
+                <th scope="col" style="font-family: 'B Mehr'">گروه</th>
+                <th scope="col" style="font-family: 'B Mehr'">رتبه</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+            {% for group in group_song_rank_array %}
+            <tr align="right">
+                <th scope="row">{{ group.get_group_song_score }}</th>
+                <td>{{ group.group.name }}</td>
+                <td>{{ group.get_group_song_rank }}</td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
 
 
-            <div class="flex-box-buttons" >
-<!--                <button class="btn btn-dark" onclick="total_ranking()">رتبه بندی کلی</button>-->
-<!--                <button class="btn btn-dark" onclick="group_ranking()">رتبه بندی گروه ها</button>-->
-                <button class="btn btn-dark" onclick="song_ranking()">رتبه بندی آهنگ</button>
-                <button class="btn btn-dark" onclick="type_ranking()">رتبه بندی متن</button>
-            </div>
+    <div class="flex-box-buttons">
+        <button class="btn btn-dark" onclick="group_song_ranking()">رتبه بندی آهنگ گروهی</button>
+        <button class="btn btn-dark" onclick="group_text_ranking()">رتبه بندی متن گروهی</button>
+        <button class="btn btn-dark" onclick="song_ranking()">رتبه بندی آهنگ</button>
+        <button class="btn btn-dark" onclick="text_ranking()">رتبه بندی متن</button>
+    </div>
 
 
-        </div>
+</div>
 
 
 </body>
