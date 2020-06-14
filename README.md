@@ -1,5 +1,5 @@
 # Call of Typing
-![logo](https://gitlab.com/AUT_SE_98/se-project/-/raw/master/call_of_typing/static/img/b.png)
+![logo](https://github.com/sajaddadgar/Call-of-Typing/blob/master/call_of_typing/static/img/b.png?raw=true)
 ## User API
 
 ### Create Account
